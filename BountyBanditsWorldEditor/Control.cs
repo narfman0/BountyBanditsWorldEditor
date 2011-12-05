@@ -12,11 +12,7 @@ namespace BountyBanditsWorldEditor
 {
     public partial class Control : Form
     {
-        const string DEPTH_LABEL = "Start Depth / Width:";
-        const string ENEMIES_LABEL = "Enemy Count / Boss(es):";
-        const string RADIUS_LEVEL = "Radius:";
-        const string TYPE_LEVEL = "Type:";
-        Game1 gameref;
+        private Game1 gameref;
         public Control(Game1 gameref)
         {
             this.gameref = gameref;
@@ -120,36 +116,6 @@ namespace BountyBanditsWorldEditor
             gameref.switchState();
         }
 
-        private void spawnItemButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                GameItem item = new GameItem();
-                item.name = this.itemsDropBox.Text;
-                if (this.polygonType.SelectedText == "Circle")
-                {
-                    item.radius = this.radiusBox.Text;
-                    item.polygonType = GameItem.PhysicsPolygonType.Circle;
-                }
-                else
-                {
-                    String[] sideLengths = this.radiusBox.Text.Split(',');
-                    item.sideLengths = new Vector2(int.Parse(sideLengths[0]), int.Parse(sideLengths[1]));
-                    item.polygonType = GameItem.PhysicsPolygonType.Rectangle;
-                }
-                item.immovable = this.immovableBox.Checked;
-                item.startdepth = this.depthComboBox.Text;
-                item.weight = uint.Parse(this.weightBox.Text);
-                item.width = (uint)this.widthTrackBar.Value;
-                item.loc = gameref.loc + gameref.offset;
-                gameref.levels[gameref.selectedLevelIndex].items.Add(item);
-            }
-            catch (Exception exceptionSpawnItem)
-            {
-                Console.WriteLine(exceptionSpawnItem.StackTrace);
-            }
-        }
-
         private void saveButton_Click(object sender, EventArgs e)
         {
             SaveFileDialog openFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -160,23 +126,44 @@ namespace BountyBanditsWorldEditor
                 gameref.exportMap(openFileDialog1.FileName);
         }
 
-        private void itemsDropBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void enemySpawnButton_Click(object sender, EventArgs e)
         {
-            if (itemsDropBox.Text.Equals("enemies"))
+            GameItem item = new GameItem();
+            item.name = this.enemyTypeText.Text;
+            item.startdepth = this.enemyCountBox.Text;
+            item.weight = uint.Parse(this.enemyWeightBox.Text);
+            item.loc = gameref.loc + gameref.offset;
+            gameref.levels[gameref.selectedLevelIndex].items.Add(item);
+        }
+
+        private void itemSpawnButton_Click(object sender, EventArgs e)
+        {
+
+            try
             {
-                depthLabel.Text = ENEMIES_LABEL;
-                radiusLabel.Text = TYPE_LEVEL;
-                radiusBox.Text = "cow";
-                immovableBox.Enabled = false;
-                polygonType.Enabled = false;
+                GameItem item = new GameItem();
+                item.name = this.itemTextureText.Text;
+                if (this.itemPolygonType.SelectedText == "Circle")
+                {
+                    item.radius = this.itemRadiusText.Text;
+                    item.polygonType = GameItem.PhysicsPolygonType.Circle;
+                }
+                else
+                {
+                    String[] sideLengths = this.itemRadiusText.Text.Split(',');
+                    item.sideLengths = new Vector2(int.Parse(sideLengths[0]), int.Parse(sideLengths[1]));
+                    item.polygonType = GameItem.PhysicsPolygonType.Rectangle;
+                }
+                item.immovable = this.itemImmovableBox.Checked;
+                item.startdepth = this.itemDepthSlider.Text;
+                item.weight = uint.Parse(this.itemWeightBox.Text);
+                item.width = 1;
+                item.loc = gameref.loc + gameref.offset;
+                gameref.levels[gameref.selectedLevelIndex].items.Add(item);
             }
-            else
+            catch (Exception exceptionSpawnItem)
             {
-                depthLabel.Text = DEPTH_LABEL;
-                radiusLabel.Text = RADIUS_LEVEL;
-                radiusBox.Text = "30";
-                immovableBox.Enabled = true;
-                polygonType.Enabled = true;
+                MessageBox.Show("Exception from game item: " + exceptionSpawnItem.StackTrace);
             }
         }
     }

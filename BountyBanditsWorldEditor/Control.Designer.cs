@@ -46,32 +46,44 @@
             this.levelNameBox = new System.Windows.Forms.TextBox();
             this.selectedLevelLabel = new System.Windows.Forms.Label();
             this.levelEditorPanel = new System.Windows.Forms.Panel();
-            this.polygonTypeLabel = new System.Windows.Forms.Label();
-            this.polygonType = new System.Windows.Forms.ComboBox();
-            this.immovableBox = new System.Windows.Forms.CheckBox();
-            this.weightLabel = new System.Windows.Forms.Label();
-            this.weightBox = new System.Windows.Forms.TextBox();
-            this.radiusLabel = new System.Windows.Forms.Label();
-            this.radiusBox = new System.Windows.Forms.TextBox();
-            this.widthTrackBar = new System.Windows.Forms.TrackBar();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.enemyTab = new System.Windows.Forms.TabPage();
+            this.enemySpawnButton = new System.Windows.Forms.Button();
+            this.enemyTypeText = new System.Windows.Forms.TextBox();
+            this.enemyTypeLabel = new System.Windows.Forms.Label();
+            this.enemyWeightBox = new System.Windows.Forms.TextBox();
+            this.enemyWeightLabel = new System.Windows.Forms.Label();
+            this.itemTab = new System.Windows.Forms.TabPage();
+            this.itemDepthSlider = new System.Windows.Forms.TrackBar();
+            this.itemSpawnButton = new System.Windows.Forms.Button();
+            this.itemTextureText = new System.Windows.Forms.TextBox();
+            this.itemSpawnLabel = new System.Windows.Forms.Label();
             this.depthLabel = new System.Windows.Forms.Label();
-            this.depthComboBox = new System.Windows.Forms.ComboBox();
+            this.weightLabel = new System.Windows.Forms.Label();
+            this.itemWeightBox = new System.Windows.Forms.TextBox();
+            this.itemRadiusText = new System.Windows.Forms.TextBox();
+            this.itemRadiusLabel = new System.Windows.Forms.Label();
+            this.itemImmovableBox = new System.Windows.Forms.CheckBox();
+            this.polygonTypeLabel = new System.Windows.Forms.Label();
+            this.itemPolygonType = new System.Windows.Forms.ComboBox();
             this.maxOffsetBox = new System.Windows.Forms.TextBox();
             this.maxoffsetLabel = new System.Windows.Forms.Label();
             this.offsetSliderLabel = new System.Windows.Forms.Label();
             this.offsetTrackBar = new System.Windows.Forms.TrackBar();
-            this.spawnItemButton = new System.Windows.Forms.Button();
             this.acceptButton = new System.Windows.Forms.Button();
             this.currentPosTextLabel = new System.Windows.Forms.Label();
             this.backgroundPictureLabel = new System.Windows.Forms.Label();
             this.backgroundButton = new System.Windows.Forms.Button();
-            this.itemTextureLabel = new System.Windows.Forms.Label();
             this.currentPosLabel = new System.Windows.Forms.Label();
             this.leveEditorTitleLabel = new System.Windows.Forms.Label();
-            this.itemsDropBox = new System.Windows.Forms.ComboBox();
+            this.enemyCountBox = new System.Windows.Forms.TextBox();
+            this.enemyCountLabel = new System.Windows.Forms.Label();
             this.mapPanel.SuspendLayout();
             this.levelEditorPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.widthTrackBar)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.enemyTab.SuspendLayout();
+            this.itemTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemDepthSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.offsetTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -236,134 +248,227 @@
             // levelEditorPanel
             // 
             this.levelEditorPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.levelEditorPanel.Controls.Add(this.polygonTypeLabel);
-            this.levelEditorPanel.Controls.Add(this.polygonType);
-            this.levelEditorPanel.Controls.Add(this.immovableBox);
-            this.levelEditorPanel.Controls.Add(this.weightLabel);
-            this.levelEditorPanel.Controls.Add(this.weightBox);
-            this.levelEditorPanel.Controls.Add(this.radiusLabel);
-            this.levelEditorPanel.Controls.Add(this.radiusBox);
-            this.levelEditorPanel.Controls.Add(this.widthTrackBar);
-            this.levelEditorPanel.Controls.Add(this.depthLabel);
-            this.levelEditorPanel.Controls.Add(this.depthComboBox);
+            this.levelEditorPanel.Controls.Add(this.tabControl1);
             this.levelEditorPanel.Controls.Add(this.maxOffsetBox);
             this.levelEditorPanel.Controls.Add(this.maxoffsetLabel);
             this.levelEditorPanel.Controls.Add(this.offsetSliderLabel);
             this.levelEditorPanel.Controls.Add(this.offsetTrackBar);
-            this.levelEditorPanel.Controls.Add(this.spawnItemButton);
             this.levelEditorPanel.Controls.Add(this.acceptButton);
             this.levelEditorPanel.Controls.Add(this.currentPosTextLabel);
             this.levelEditorPanel.Controls.Add(this.backgroundPictureLabel);
             this.levelEditorPanel.Controls.Add(this.backgroundButton);
-            this.levelEditorPanel.Controls.Add(this.itemTextureLabel);
-            this.levelEditorPanel.Controls.Add(this.itemsDropBox);
             this.levelEditorPanel.Controls.Add(this.currentPosLabel);
             this.levelEditorPanel.Controls.Add(this.leveEditorTitleLabel);
             this.levelEditorPanel.Location = new System.Drawing.Point(13, 212);
             this.levelEditorPanel.Name = "levelEditorPanel";
-            this.levelEditorPanel.Size = new System.Drawing.Size(314, 329);
+            this.levelEditorPanel.Size = new System.Drawing.Size(314, 406);
             this.levelEditorPanel.TabIndex = 3;
             // 
-            // polygonTypeLabel
+            // tabControl1
             // 
-            this.polygonTypeLabel.AutoSize = true;
-            this.polygonTypeLabel.Location = new System.Drawing.Point(4, 140);
-            this.polygonTypeLabel.Name = "polygonTypeLabel";
-            this.polygonTypeLabel.Size = new System.Drawing.Size(75, 13);
-            this.polygonTypeLabel.TabIndex = 28;
-            this.polygonTypeLabel.Text = "Polygon Type:";
+            this.tabControl1.Controls.Add(this.enemyTab);
+            this.tabControl1.Controls.Add(this.itemTab);
+            this.tabControl1.Location = new System.Drawing.Point(17, 83);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(279, 257);
+            this.tabControl1.TabIndex = 17;
             // 
-            // polygonType
+            // enemyTab
             // 
-            this.polygonType.FormattingEnabled = true;
-            this.polygonType.Items.AddRange(new object[] {
-            "Rectangle",
-            "Circle"});
-            this.polygonType.Location = new System.Drawing.Point(140, 140);
-            this.polygonType.Name = "polygonType";
-            this.polygonType.Size = new System.Drawing.Size(84, 21);
-            this.polygonType.TabIndex = 27;
+            this.enemyTab.Controls.Add(this.enemyCountLabel);
+            this.enemyTab.Controls.Add(this.enemyCountBox);
+            this.enemyTab.Controls.Add(this.enemySpawnButton);
+            this.enemyTab.Controls.Add(this.enemyTypeText);
+            this.enemyTab.Controls.Add(this.enemyTypeLabel);
+            this.enemyTab.Controls.Add(this.enemyWeightBox);
+            this.enemyTab.Controls.Add(this.enemyWeightLabel);
+            this.enemyTab.Location = new System.Drawing.Point(4, 22);
+            this.enemyTab.Name = "enemyTab";
+            this.enemyTab.Padding = new System.Windows.Forms.Padding(3);
+            this.enemyTab.Size = new System.Drawing.Size(271, 231);
+            this.enemyTab.TabIndex = 0;
+            this.enemyTab.Text = "Enemies";
+            this.enemyTab.UseVisualStyleBackColor = true;
             // 
-            // immovableBox
+            // enemySpawnButton
             // 
-            this.immovableBox.AutoSize = true;
-            this.immovableBox.Location = new System.Drawing.Point(232, 170);
-            this.immovableBox.Name = "immovableBox";
-            this.immovableBox.Size = new System.Drawing.Size(77, 17);
-            this.immovableBox.TabIndex = 26;
-            this.immovableBox.Text = "Immovable";
-            this.immovableBox.UseVisualStyleBackColor = true;
+            this.enemySpawnButton.Location = new System.Drawing.Point(73, 85);
+            this.enemySpawnButton.Name = "enemySpawnButton";
+            this.enemySpawnButton.Size = new System.Drawing.Size(92, 23);
+            this.enemySpawnButton.TabIndex = 41;
+            this.enemySpawnButton.Text = "Spawn";
+            this.enemySpawnButton.UseVisualStyleBackColor = true;
+            this.enemySpawnButton.Click += new System.EventHandler(this.enemySpawnButton_Click);
             // 
-            // weightLabel
+            // enemyTypeText
             // 
-            this.weightLabel.AutoSize = true;
-            this.weightLabel.Location = new System.Drawing.Point(4, 167);
-            this.weightLabel.Name = "weightLabel";
-            this.weightLabel.Size = new System.Drawing.Size(44, 13);
-            this.weightLabel.TabIndex = 25;
-            this.weightLabel.Text = "Weight:";
+            this.enemyTypeText.Location = new System.Drawing.Point(73, 6);
+            this.enemyTypeText.Name = "enemyTypeText";
+            this.enemyTypeText.Size = new System.Drawing.Size(92, 20);
+            this.enemyTypeText.TabIndex = 29;
+            this.enemyTypeText.Text = "governator";
             // 
-            // weightBox
+            // enemyTypeLabel
             // 
-            this.weightBox.Location = new System.Drawing.Point(140, 167);
-            this.weightBox.Name = "weightBox";
-            this.weightBox.Size = new System.Drawing.Size(84, 20);
-            this.weightBox.TabIndex = 24;
-            this.weightBox.Text = "10";
+            this.enemyTypeLabel.AutoSize = true;
+            this.enemyTypeLabel.Location = new System.Drawing.Point(6, 9);
+            this.enemyTypeLabel.Name = "enemyTypeLabel";
+            this.enemyTypeLabel.Size = new System.Drawing.Size(37, 13);
+            this.enemyTypeLabel.TabIndex = 29;
+            this.enemyTypeLabel.Text = "Type: ";
             // 
-            // radiusLabel
+            // enemyWeightBox
             // 
-            this.radiusLabel.AutoSize = true;
-            this.radiusLabel.Location = new System.Drawing.Point(4, 193);
-            this.radiusLabel.Name = "radiusLabel";
-            this.radiusLabel.Size = new System.Drawing.Size(127, 13);
-            this.radiusLabel.TabIndex = 23;
-            this.radiusLabel.Text = "Radius / side length (x,y):";
+            this.enemyWeightBox.Location = new System.Drawing.Point(73, 32);
+            this.enemyWeightBox.Name = "enemyWeightBox";
+            this.enemyWeightBox.Size = new System.Drawing.Size(92, 20);
+            this.enemyWeightBox.TabIndex = 29;
+            this.enemyWeightBox.Text = "10";
             // 
-            // radiusBox
+            // enemyWeightLabel
             // 
-            this.radiusBox.Location = new System.Drawing.Point(140, 193);
-            this.radiusBox.Name = "radiusBox";
-            this.radiusBox.Size = new System.Drawing.Size(84, 20);
-            this.radiusBox.TabIndex = 22;
-            this.radiusBox.Text = "30";
+            this.enemyWeightLabel.AutoSize = true;
+            this.enemyWeightLabel.Location = new System.Drawing.Point(6, 32);
+            this.enemyWeightLabel.Name = "enemyWeightLabel";
+            this.enemyWeightLabel.Size = new System.Drawing.Size(44, 13);
+            this.enemyWeightLabel.TabIndex = 26;
+            this.enemyWeightLabel.Text = "Weight:";
             // 
-            // widthTrackBar
+            // itemTab
             // 
-            this.widthTrackBar.Location = new System.Drawing.Point(230, 113);
-            this.widthTrackBar.Maximum = 4;
-            this.widthTrackBar.Minimum = 1;
-            this.widthTrackBar.Name = "widthTrackBar";
-            this.widthTrackBar.Size = new System.Drawing.Size(75, 45);
-            this.widthTrackBar.TabIndex = 21;
-            this.widthTrackBar.Value = 1;
+            this.itemTab.Controls.Add(this.itemDepthSlider);
+            this.itemTab.Controls.Add(this.itemSpawnButton);
+            this.itemTab.Controls.Add(this.itemTextureText);
+            this.itemTab.Controls.Add(this.itemSpawnLabel);
+            this.itemTab.Controls.Add(this.depthLabel);
+            this.itemTab.Controls.Add(this.weightLabel);
+            this.itemTab.Controls.Add(this.itemWeightBox);
+            this.itemTab.Controls.Add(this.itemRadiusText);
+            this.itemTab.Controls.Add(this.itemRadiusLabel);
+            this.itemTab.Controls.Add(this.itemImmovableBox);
+            this.itemTab.Controls.Add(this.polygonTypeLabel);
+            this.itemTab.Controls.Add(this.itemPolygonType);
+            this.itemTab.Location = new System.Drawing.Point(4, 22);
+            this.itemTab.Name = "itemTab";
+            this.itemTab.Padding = new System.Windows.Forms.Padding(3);
+            this.itemTab.Size = new System.Drawing.Size(271, 231);
+            this.itemTab.TabIndex = 1;
+            this.itemTab.Text = "Items";
+            this.itemTab.UseVisualStyleBackColor = true;
+            // 
+            // itemDepthSlider
+            // 
+            this.itemDepthSlider.Location = new System.Drawing.Point(142, 128);
+            this.itemDepthSlider.Maximum = 4;
+            this.itemDepthSlider.Minimum = 1;
+            this.itemDepthSlider.Name = "itemDepthSlider";
+            this.itemDepthSlider.Size = new System.Drawing.Size(84, 45);
+            this.itemDepthSlider.TabIndex = 41;
+            this.itemDepthSlider.Value = 1;
+            // 
+            // itemSpawnButton
+            // 
+            this.itemSpawnButton.Location = new System.Drawing.Point(142, 186);
+            this.itemSpawnButton.Name = "itemSpawnButton";
+            this.itemSpawnButton.Size = new System.Drawing.Size(84, 23);
+            this.itemSpawnButton.TabIndex = 40;
+            this.itemSpawnButton.Text = "Spawn";
+            this.itemSpawnButton.UseVisualStyleBackColor = true;
+            this.itemSpawnButton.Click += new System.EventHandler(this.itemSpawnButton_Click);
+            // 
+            // itemTextureText
+            // 
+            this.itemTextureText.Location = new System.Drawing.Point(142, 48);
+            this.itemTextureText.Name = "itemTextureText";
+            this.itemTextureText.Size = new System.Drawing.Size(84, 20);
+            this.itemTextureText.TabIndex = 39;
+            // 
+            // itemSpawnLabel
+            // 
+            this.itemSpawnLabel.AutoSize = true;
+            this.itemSpawnLabel.Location = new System.Drawing.Point(6, 48);
+            this.itemSpawnLabel.Name = "itemSpawnLabel";
+            this.itemSpawnLabel.Size = new System.Drawing.Size(69, 13);
+            this.itemSpawnLabel.TabIndex = 38;
+            this.itemSpawnLabel.Text = "Item Texture:";
             // 
             // depthLabel
             // 
             this.depthLabel.AutoSize = true;
-            this.depthLabel.Location = new System.Drawing.Point(4, 113);
+            this.depthLabel.Location = new System.Drawing.Point(6, 128);
             this.depthLabel.Name = "depthLabel";
-            this.depthLabel.Size = new System.Drawing.Size(103, 13);
-            this.depthLabel.TabIndex = 18;
-            this.depthLabel.Text = "Start Depth / Width:";
+            this.depthLabel.Size = new System.Drawing.Size(64, 13);
+            this.depthLabel.TabIndex = 36;
+            this.depthLabel.Text = "Start Depth:";
             // 
-            // depthComboBox
+            // weightLabel
             // 
-            this.depthComboBox.FormattingEnabled = true;
-            this.depthComboBox.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3"});
-            this.depthComboBox.Location = new System.Drawing.Point(140, 113);
-            this.depthComboBox.Name = "depthComboBox";
-            this.depthComboBox.Size = new System.Drawing.Size(84, 21);
-            this.depthComboBox.TabIndex = 17;
-            this.depthComboBox.Text = "0";
+            this.weightLabel.AutoSize = true;
+            this.weightLabel.Location = new System.Drawing.Point(6, 74);
+            this.weightLabel.Name = "weightLabel";
+            this.weightLabel.Size = new System.Drawing.Size(44, 13);
+            this.weightLabel.TabIndex = 34;
+            this.weightLabel.Text = "Weight:";
+            // 
+            // itemWeightBox
+            // 
+            this.itemWeightBox.Location = new System.Drawing.Point(142, 74);
+            this.itemWeightBox.Name = "itemWeightBox";
+            this.itemWeightBox.Size = new System.Drawing.Size(84, 20);
+            this.itemWeightBox.TabIndex = 33;
+            this.itemWeightBox.Text = "10";
+            // 
+            // itemRadiusText
+            // 
+            this.itemRadiusText.Location = new System.Drawing.Point(142, 102);
+            this.itemRadiusText.Name = "itemRadiusText";
+            this.itemRadiusText.Size = new System.Drawing.Size(84, 20);
+            this.itemRadiusText.TabIndex = 26;
+            this.itemRadiusText.Text = "30";
+            // 
+            // itemRadiusLabel
+            // 
+            this.itemRadiusLabel.AutoSize = true;
+            this.itemRadiusLabel.Location = new System.Drawing.Point(6, 102);
+            this.itemRadiusLabel.Name = "itemRadiusLabel";
+            this.itemRadiusLabel.Size = new System.Drawing.Size(127, 13);
+            this.itemRadiusLabel.TabIndex = 32;
+            this.itemRadiusLabel.Text = "Radius / side length (x,y):";
+            // 
+            // itemImmovableBox
+            // 
+            this.itemImmovableBox.AutoSize = true;
+            this.itemImmovableBox.Location = new System.Drawing.Point(9, 189);
+            this.itemImmovableBox.Name = "itemImmovableBox";
+            this.itemImmovableBox.Size = new System.Drawing.Size(77, 17);
+            this.itemImmovableBox.TabIndex = 31;
+            this.itemImmovableBox.Text = "Immovable";
+            this.itemImmovableBox.UseVisualStyleBackColor = true;
+            // 
+            // polygonTypeLabel
+            // 
+            this.polygonTypeLabel.AutoSize = true;
+            this.polygonTypeLabel.Location = new System.Drawing.Point(6, 18);
+            this.polygonTypeLabel.Name = "polygonTypeLabel";
+            this.polygonTypeLabel.Size = new System.Drawing.Size(75, 13);
+            this.polygonTypeLabel.TabIndex = 30;
+            this.polygonTypeLabel.Text = "Polygon Type:";
+            // 
+            // itemPolygonType
+            // 
+            this.itemPolygonType.FormattingEnabled = true;
+            this.itemPolygonType.Items.AddRange(new object[] {
+            "Rectangle",
+            "Circle"});
+            this.itemPolygonType.Location = new System.Drawing.Point(142, 18);
+            this.itemPolygonType.Name = "itemPolygonType";
+            this.itemPolygonType.Size = new System.Drawing.Size(84, 21);
+            this.itemPolygonType.TabIndex = 29;
             // 
             // maxOffsetBox
             // 
-            this.maxOffsetBox.Location = new System.Drawing.Point(258, 248);
+            this.maxOffsetBox.Location = new System.Drawing.Point(264, 356);
             this.maxOffsetBox.Name = "maxOffsetBox";
             this.maxOffsetBox.Size = new System.Drawing.Size(45, 20);
             this.maxOffsetBox.TabIndex = 16;
@@ -373,7 +478,7 @@
             // maxoffsetLabel
             // 
             this.maxoffsetLabel.AutoSize = true;
-            this.maxoffsetLabel.Location = new System.Drawing.Point(222, 248);
+            this.maxoffsetLabel.Location = new System.Drawing.Point(228, 356);
             this.maxoffsetLabel.Name = "maxoffsetLabel";
             this.maxoffsetLabel.Size = new System.Drawing.Size(30, 13);
             this.maxoffsetLabel.TabIndex = 15;
@@ -382,7 +487,7 @@
             // offsetSliderLabel
             // 
             this.offsetSliderLabel.AutoSize = true;
-            this.offsetSliderLabel.Location = new System.Drawing.Point(2, 248);
+            this.offsetSliderLabel.Location = new System.Drawing.Point(8, 356);
             this.offsetSliderLabel.Name = "offsetSliderLabel";
             this.offsetSliderLabel.Size = new System.Drawing.Size(38, 13);
             this.offsetSliderLabel.TabIndex = 14;
@@ -390,7 +495,7 @@
             // 
             // offsetTrackBar
             // 
-            this.offsetTrackBar.Location = new System.Drawing.Point(46, 248);
+            this.offsetTrackBar.Location = new System.Drawing.Point(52, 356);
             this.offsetTrackBar.Maximum = 100;
             this.offsetTrackBar.Name = "offsetTrackBar";
             this.offsetTrackBar.Size = new System.Drawing.Size(165, 45);
@@ -398,19 +503,9 @@
             this.offsetTrackBar.TickFrequency = 10;
             this.offsetTrackBar.Scroll += new System.EventHandler(this.offsetTrackBar_Scroll);
             // 
-            // spawnItemButton
-            // 
-            this.spawnItemButton.Location = new System.Drawing.Point(140, 219);
-            this.spawnItemButton.Name = "spawnItemButton";
-            this.spawnItemButton.Size = new System.Drawing.Size(84, 23);
-            this.spawnItemButton.TabIndex = 12;
-            this.spawnItemButton.Text = "Spawn Item";
-            this.spawnItemButton.UseVisualStyleBackColor = true;
-            this.spawnItemButton.Click += new System.EventHandler(this.spawnItemButton_Click);
-            // 
             // acceptButton
             // 
-            this.acceptButton.Location = new System.Drawing.Point(223, 295);
+            this.acceptButton.Location = new System.Drawing.Point(223, 378);
             this.acceptButton.Name = "acceptButton";
             this.acceptButton.Size = new System.Drawing.Size(80, 23);
             this.acceptButton.TabIndex = 11;
@@ -421,7 +516,7 @@
             // currentPosTextLabel
             // 
             this.currentPosTextLabel.AutoSize = true;
-            this.currentPosTextLabel.Location = new System.Drawing.Point(137, 59);
+            this.currentPosTextLabel.Location = new System.Drawing.Point(137, 30);
             this.currentPosTextLabel.Name = "currentPosTextLabel";
             this.currentPosTextLabel.Size = new System.Drawing.Size(105, 13);
             this.currentPosTextLabel.TabIndex = 9;
@@ -430,7 +525,7 @@
             // backgroundPictureLabel
             // 
             this.backgroundPictureLabel.AutoSize = true;
-            this.backgroundPictureLabel.Location = new System.Drawing.Point(4, 31);
+            this.backgroundPictureLabel.Location = new System.Drawing.Point(4, 59);
             this.backgroundPictureLabel.Name = "backgroundPictureLabel";
             this.backgroundPictureLabel.Size = new System.Drawing.Size(68, 13);
             this.backgroundPictureLabel.TabIndex = 5;
@@ -438,7 +533,7 @@
             // 
             // backgroundButton
             // 
-            this.backgroundButton.Location = new System.Drawing.Point(140, 26);
+            this.backgroundButton.Location = new System.Drawing.Point(140, 54);
             this.backgroundButton.Name = "backgroundButton";
             this.backgroundButton.Size = new System.Drawing.Size(80, 23);
             this.backgroundButton.TabIndex = 4;
@@ -446,19 +541,10 @@
             this.backgroundButton.UseVisualStyleBackColor = true;
             this.backgroundButton.Click += new System.EventHandler(this.backgroundButton_Click);
             // 
-            // itemTextureLabel
-            // 
-            this.itemTextureLabel.AutoSize = true;
-            this.itemTextureLabel.Location = new System.Drawing.Point(4, 86);
-            this.itemTextureLabel.Name = "itemTextureLabel";
-            this.itemTextureLabel.Size = new System.Drawing.Size(66, 13);
-            this.itemTextureLabel.TabIndex = 3;
-            this.itemTextureLabel.Text = "Spawn Item:";
-            // 
             // currentPosLabel
             // 
             this.currentPosLabel.AutoSize = true;
-            this.currentPosLabel.Location = new System.Drawing.Point(4, 59);
+            this.currentPosLabel.Location = new System.Drawing.Point(4, 30);
             this.currentPosLabel.Name = "currentPosLabel";
             this.currentPosLabel.Size = new System.Drawing.Size(84, 13);
             this.currentPosLabel.TabIndex = 1;
@@ -473,26 +559,28 @@
             this.leveEditorTitleLabel.TabIndex = 0;
             this.leveEditorTitleLabel.Text = "Level Editor";
             // 
-            // itemsDropBox
+            // enemyCountBox
             // 
-            this.itemsDropBox.FormattingEnabled = true;
-            this.itemsDropBox.Items.AddRange(new object[] {
-            "enemies",
-            "box",
-            "circle",
-            "log"});
-            this.itemsDropBox.Location = new System.Drawing.Point(140, 86);
-            this.itemsDropBox.Name = "itemsDropBox";
-            this.itemsDropBox.Size = new System.Drawing.Size(165, 21);
-            this.itemsDropBox.TabIndex = 2;
-            this.itemsDropBox.Text = "box";
-            this.itemsDropBox.SelectedIndexChanged += new System.EventHandler(this.itemsDropBox_SelectedIndexChanged);
+            this.enemyCountBox.Location = new System.Drawing.Point(73, 59);
+            this.enemyCountBox.Name = "enemyCountBox";
+            this.enemyCountBox.Size = new System.Drawing.Size(92, 20);
+            this.enemyCountBox.TabIndex = 42;
+            this.enemyCountBox.Text = "1";
+            // 
+            // enemyCountLabel
+            // 
+            this.enemyCountLabel.AutoSize = true;
+            this.enemyCountLabel.Location = new System.Drawing.Point(6, 59);
+            this.enemyCountLabel.Name = "enemyCountLabel";
+            this.enemyCountLabel.Size = new System.Drawing.Size(38, 13);
+            this.enemyCountLabel.TabIndex = 43;
+            this.enemyCountLabel.Text = "Count:";
             // 
             // Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 554);
+            this.ClientSize = new System.Drawing.Size(339, 630);
             this.Controls.Add(this.levelEditorPanel);
             this.Controls.Add(this.mapPanel);
             this.Controls.Add(this.saveButton);
@@ -503,7 +591,12 @@
             this.mapPanel.PerformLayout();
             this.levelEditorPanel.ResumeLayout(false);
             this.levelEditorPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.widthTrackBar)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.enemyTab.ResumeLayout(false);
+            this.enemyTab.PerformLayout();
+            this.itemTab.ResumeLayout(false);
+            this.itemTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemDepthSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.offsetTrackBar)).EndInit();
             this.ResumeLayout(false);
 
@@ -531,26 +624,35 @@
         private System.Windows.Forms.Label currentPosLabel;
         private System.Windows.Forms.Label backgroundPictureLabel;
         private System.Windows.Forms.Button backgroundButton;
-        private System.Windows.Forms.Label itemTextureLabel;
         private System.Windows.Forms.Label currentPosTextLabel;
         private System.Windows.Forms.Button acceptButton;
-        private System.Windows.Forms.Button spawnItemButton;
         private System.Windows.Forms.Button mapBackgroundButton;
         private System.Windows.Forms.Label mapBackgroundLabel;
         private System.Windows.Forms.TrackBar offsetTrackBar;
         private System.Windows.Forms.Label offsetSliderLabel;
         private System.Windows.Forms.TextBox maxOffsetBox;
         private System.Windows.Forms.Label maxoffsetLabel;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage enemyTab;
+        private System.Windows.Forms.TextBox enemyTypeText;
+        private System.Windows.Forms.Label enemyTypeLabel;
+        private System.Windows.Forms.TextBox enemyWeightBox;
+        private System.Windows.Forms.Label enemyWeightLabel;
+        private System.Windows.Forms.TabPage itemTab;
+        private System.Windows.Forms.TrackBar itemDepthSlider;
+        private System.Windows.Forms.Button itemSpawnButton;
+        private System.Windows.Forms.TextBox itemTextureText;
+        private System.Windows.Forms.Label itemSpawnLabel;
         private System.Windows.Forms.Label depthLabel;
-        private System.Windows.Forms.TrackBar widthTrackBar;
-        private System.Windows.Forms.ComboBox depthComboBox;
-        private System.Windows.Forms.TextBox radiusBox;
-        private System.Windows.Forms.Label radiusLabel;
         private System.Windows.Forms.Label weightLabel;
-        private System.Windows.Forms.TextBox weightBox;
-        private System.Windows.Forms.CheckBox immovableBox;
+        private System.Windows.Forms.TextBox itemWeightBox;
+        private System.Windows.Forms.TextBox itemRadiusText;
+        private System.Windows.Forms.Label itemRadiusLabel;
+        private System.Windows.Forms.CheckBox itemImmovableBox;
         private System.Windows.Forms.Label polygonTypeLabel;
-        private System.Windows.Forms.ComboBox polygonType;
-        private System.Windows.Forms.ComboBox itemsDropBox;
+        private System.Windows.Forms.ComboBox itemPolygonType;
+        private System.Windows.Forms.Button enemySpawnButton;
+        private System.Windows.Forms.Label enemyCountLabel;
+        private System.Windows.Forms.TextBox enemyCountBox;
     }
 }
