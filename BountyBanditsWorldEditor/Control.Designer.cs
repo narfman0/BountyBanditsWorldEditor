@@ -46,6 +46,9 @@
             this.levelNameBox = new System.Windows.Forms.TextBox();
             this.selectedLevelLabel = new System.Windows.Forms.Label();
             this.levelEditorPanel = new System.Windows.Forms.Panel();
+            this.polygonTypeLabel = new System.Windows.Forms.Label();
+            this.polygonType = new System.Windows.Forms.ComboBox();
+            this.immovableBox = new System.Windows.Forms.CheckBox();
             this.weightLabel = new System.Windows.Forms.Label();
             this.weightBox = new System.Windows.Forms.TextBox();
             this.radiusLabel = new System.Windows.Forms.Label();
@@ -62,10 +65,10 @@
             this.currentPosTextLabel = new System.Windows.Forms.Label();
             this.backgroundPictureLabel = new System.Windows.Forms.Label();
             this.backgroundButton = new System.Windows.Forms.Button();
-            this.itemDropboxLabel = new System.Windows.Forms.Label();
-            this.itemsDropBox = new System.Windows.Forms.ComboBox();
+            this.itemTextureLabel = new System.Windows.Forms.Label();
             this.currentPosLabel = new System.Windows.Forms.Label();
             this.leveEditorTitleLabel = new System.Windows.Forms.Label();
+            this.itemsDropBox = new System.Windows.Forms.ComboBox();
             this.mapPanel.SuspendLayout();
             this.levelEditorPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.widthTrackBar)).BeginInit();
@@ -233,6 +236,9 @@
             // levelEditorPanel
             // 
             this.levelEditorPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.levelEditorPanel.Controls.Add(this.polygonTypeLabel);
+            this.levelEditorPanel.Controls.Add(this.polygonType);
+            this.levelEditorPanel.Controls.Add(this.immovableBox);
             this.levelEditorPanel.Controls.Add(this.weightLabel);
             this.levelEditorPanel.Controls.Add(this.weightBox);
             this.levelEditorPanel.Controls.Add(this.radiusLabel);
@@ -249,14 +255,44 @@
             this.levelEditorPanel.Controls.Add(this.currentPosTextLabel);
             this.levelEditorPanel.Controls.Add(this.backgroundPictureLabel);
             this.levelEditorPanel.Controls.Add(this.backgroundButton);
-            this.levelEditorPanel.Controls.Add(this.itemDropboxLabel);
+            this.levelEditorPanel.Controls.Add(this.itemTextureLabel);
             this.levelEditorPanel.Controls.Add(this.itemsDropBox);
             this.levelEditorPanel.Controls.Add(this.currentPosLabel);
             this.levelEditorPanel.Controls.Add(this.leveEditorTitleLabel);
             this.levelEditorPanel.Location = new System.Drawing.Point(13, 212);
             this.levelEditorPanel.Name = "levelEditorPanel";
-            this.levelEditorPanel.Size = new System.Drawing.Size(314, 304);
+            this.levelEditorPanel.Size = new System.Drawing.Size(314, 329);
             this.levelEditorPanel.TabIndex = 3;
+            // 
+            // polygonTypeLabel
+            // 
+            this.polygonTypeLabel.AutoSize = true;
+            this.polygonTypeLabel.Location = new System.Drawing.Point(4, 140);
+            this.polygonTypeLabel.Name = "polygonTypeLabel";
+            this.polygonTypeLabel.Size = new System.Drawing.Size(75, 13);
+            this.polygonTypeLabel.TabIndex = 28;
+            this.polygonTypeLabel.Text = "Polygon Type:";
+            // 
+            // polygonType
+            // 
+            this.polygonType.FormattingEnabled = true;
+            this.polygonType.Items.AddRange(new object[] {
+            "Rectangle",
+            "Circle"});
+            this.polygonType.Location = new System.Drawing.Point(140, 140);
+            this.polygonType.Name = "polygonType";
+            this.polygonType.Size = new System.Drawing.Size(84, 21);
+            this.polygonType.TabIndex = 27;
+            // 
+            // immovableBox
+            // 
+            this.immovableBox.AutoSize = true;
+            this.immovableBox.Location = new System.Drawing.Point(232, 170);
+            this.immovableBox.Name = "immovableBox";
+            this.immovableBox.Size = new System.Drawing.Size(77, 17);
+            this.immovableBox.TabIndex = 26;
+            this.immovableBox.Text = "Immovable";
+            this.immovableBox.UseVisualStyleBackColor = true;
             // 
             // weightLabel
             // 
@@ -278,15 +314,15 @@
             // radiusLabel
             // 
             this.radiusLabel.AutoSize = true;
-            this.radiusLabel.Location = new System.Drawing.Point(4, 140);
+            this.radiusLabel.Location = new System.Drawing.Point(4, 193);
             this.radiusLabel.Name = "radiusLabel";
-            this.radiusLabel.Size = new System.Drawing.Size(43, 13);
+            this.radiusLabel.Size = new System.Drawing.Size(127, 13);
             this.radiusLabel.TabIndex = 23;
-            this.radiusLabel.Text = "Radius:";
+            this.radiusLabel.Text = "Radius / side length (x,y):";
             // 
             // radiusBox
             // 
-            this.radiusBox.Location = new System.Drawing.Point(140, 140);
+            this.radiusBox.Location = new System.Drawing.Point(140, 193);
             this.radiusBox.Name = "radiusBox";
             this.radiusBox.Size = new System.Drawing.Size(84, 20);
             this.radiusBox.TabIndex = 22;
@@ -327,7 +363,7 @@
             // 
             // maxOffsetBox
             // 
-            this.maxOffsetBox.Location = new System.Drawing.Point(260, 229);
+            this.maxOffsetBox.Location = new System.Drawing.Point(258, 248);
             this.maxOffsetBox.Name = "maxOffsetBox";
             this.maxOffsetBox.Size = new System.Drawing.Size(45, 20);
             this.maxOffsetBox.TabIndex = 16;
@@ -337,7 +373,7 @@
             // maxoffsetLabel
             // 
             this.maxoffsetLabel.AutoSize = true;
-            this.maxoffsetLabel.Location = new System.Drawing.Point(224, 229);
+            this.maxoffsetLabel.Location = new System.Drawing.Point(222, 248);
             this.maxoffsetLabel.Name = "maxoffsetLabel";
             this.maxoffsetLabel.Size = new System.Drawing.Size(30, 13);
             this.maxoffsetLabel.TabIndex = 15;
@@ -346,7 +382,7 @@
             // offsetSliderLabel
             // 
             this.offsetSliderLabel.AutoSize = true;
-            this.offsetSliderLabel.Location = new System.Drawing.Point(4, 229);
+            this.offsetSliderLabel.Location = new System.Drawing.Point(2, 248);
             this.offsetSliderLabel.Name = "offsetSliderLabel";
             this.offsetSliderLabel.Size = new System.Drawing.Size(38, 13);
             this.offsetSliderLabel.TabIndex = 14;
@@ -354,7 +390,7 @@
             // 
             // offsetTrackBar
             // 
-            this.offsetTrackBar.Location = new System.Drawing.Point(48, 229);
+            this.offsetTrackBar.Location = new System.Drawing.Point(46, 248);
             this.offsetTrackBar.Maximum = 100;
             this.offsetTrackBar.Name = "offsetTrackBar";
             this.offsetTrackBar.Size = new System.Drawing.Size(165, 45);
@@ -364,7 +400,7 @@
             // 
             // spawnItemButton
             // 
-            this.spawnItemButton.Location = new System.Drawing.Point(140, 192);
+            this.spawnItemButton.Location = new System.Drawing.Point(140, 219);
             this.spawnItemButton.Name = "spawnItemButton";
             this.spawnItemButton.Size = new System.Drawing.Size(84, 23);
             this.spawnItemButton.TabIndex = 12;
@@ -374,7 +410,7 @@
             // 
             // acceptButton
             // 
-            this.acceptButton.Location = new System.Drawing.Point(225, 276);
+            this.acceptButton.Location = new System.Drawing.Point(223, 295);
             this.acceptButton.Name = "acceptButton";
             this.acceptButton.Size = new System.Drawing.Size(80, 23);
             this.acceptButton.TabIndex = 11;
@@ -410,29 +446,14 @@
             this.backgroundButton.UseVisualStyleBackColor = true;
             this.backgroundButton.Click += new System.EventHandler(this.backgroundButton_Click);
             // 
-            // itemDropboxLabel
+            // itemTextureLabel
             // 
-            this.itemDropboxLabel.AutoSize = true;
-            this.itemDropboxLabel.Location = new System.Drawing.Point(4, 86);
-            this.itemDropboxLabel.Name = "itemDropboxLabel";
-            this.itemDropboxLabel.Size = new System.Drawing.Size(66, 13);
-            this.itemDropboxLabel.TabIndex = 3;
-            this.itemDropboxLabel.Text = "Spawn Item:";
-            // 
-            // itemsDropBox
-            // 
-            this.itemsDropBox.FormattingEnabled = true;
-            this.itemsDropBox.Items.AddRange(new object[] {
-            "enemies",
-            "box",
-            "circle",
-            "log"});
-            this.itemsDropBox.Location = new System.Drawing.Point(140, 86);
-            this.itemsDropBox.Name = "itemsDropBox";
-            this.itemsDropBox.Size = new System.Drawing.Size(165, 21);
-            this.itemsDropBox.TabIndex = 2;
-            this.itemsDropBox.Text = "box";
-            this.itemsDropBox.SelectedIndexChanged += new System.EventHandler(this.itemsDropBox_SelectedIndexChanged);
+            this.itemTextureLabel.AutoSize = true;
+            this.itemTextureLabel.Location = new System.Drawing.Point(4, 86);
+            this.itemTextureLabel.Name = "itemTextureLabel";
+            this.itemTextureLabel.Size = new System.Drawing.Size(66, 13);
+            this.itemTextureLabel.TabIndex = 3;
+            this.itemTextureLabel.Text = "Spawn Item:";
             // 
             // currentPosLabel
             // 
@@ -452,11 +473,26 @@
             this.leveEditorTitleLabel.TabIndex = 0;
             this.leveEditorTitleLabel.Text = "Level Editor";
             // 
+            // itemsDropBox
+            // 
+            this.itemsDropBox.FormattingEnabled = true;
+            this.itemsDropBox.Items.AddRange(new object[] {
+            "enemies",
+            "box",
+            "circle",
+            "log"});
+            this.itemsDropBox.Location = new System.Drawing.Point(140, 86);
+            this.itemsDropBox.Name = "itemsDropBox";
+            this.itemsDropBox.Size = new System.Drawing.Size(165, 21);
+            this.itemsDropBox.TabIndex = 2;
+            this.itemsDropBox.Text = "box";
+            this.itemsDropBox.SelectedIndexChanged += new System.EventHandler(this.itemsDropBox_SelectedIndexChanged);
+            // 
             // Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 528);
+            this.ClientSize = new System.Drawing.Size(339, 554);
             this.Controls.Add(this.levelEditorPanel);
             this.Controls.Add(this.mapPanel);
             this.Controls.Add(this.saveButton);
@@ -495,8 +531,7 @@
         private System.Windows.Forms.Label currentPosLabel;
         private System.Windows.Forms.Label backgroundPictureLabel;
         private System.Windows.Forms.Button backgroundButton;
-        private System.Windows.Forms.Label itemDropboxLabel;
-        private System.Windows.Forms.ComboBox itemsDropBox;
+        private System.Windows.Forms.Label itemTextureLabel;
         private System.Windows.Forms.Label currentPosTextLabel;
         private System.Windows.Forms.Button acceptButton;
         private System.Windows.Forms.Button spawnItemButton;
@@ -513,5 +548,9 @@
         private System.Windows.Forms.Label radiusLabel;
         private System.Windows.Forms.Label weightLabel;
         private System.Windows.Forms.TextBox weightBox;
+        private System.Windows.Forms.CheckBox immovableBox;
+        private System.Windows.Forms.Label polygonTypeLabel;
+        private System.Windows.Forms.ComboBox polygonType;
+        private System.Windows.Forms.ComboBox itemsDropBox;
     }
 }

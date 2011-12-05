@@ -242,7 +242,19 @@ namespace BountyBanditsWorldEditor
                     }
                     else
                     {
-                        textWriter.WriteElementString("radius", item.radius);
+                        switch (item.polygonType)
+                        {
+                            case GameItem.PhysicsPolygonType.Circle:
+                                textWriter.WriteElementString("radius", item.radius);
+                                break;
+                            case GameItem.PhysicsPolygonType.Rectangle:
+                                textWriter.WriteStartElement("sideLengths");
+                                textWriter.WriteElementString("x", item.sideLengths.X.ToString());
+                                textWriter.WriteElementString("y", item.sideLengths.Y.ToString());
+                                textWriter.WriteEndElement();
+                                break;
+                        }
+                        textWriter.WriteElementString("immovable", item.immovable.ToString());
                         textWriter.WriteElementString("startdepth", item.startdepth);
                         textWriter.WriteElementString("width", item.width.ToString());
                     }

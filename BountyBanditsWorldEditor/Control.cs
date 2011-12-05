@@ -122,14 +122,32 @@ namespace BountyBanditsWorldEditor
 
         private void spawnItemButton_Click(object sender, EventArgs e)
         {
-            GameItem item = new GameItem();
-            item.name = this.itemsDropBox.Text;
-            item.radius = this.radiusBox.Text;
-            item.startdepth = this.depthComboBox.Text;
-            item.weight = uint.Parse(this.weightBox.Text);
-            item.width = (uint)this.widthTrackBar.Value;
-            item.loc = gameref.loc + gameref.offset;
-            gameref.levels[gameref.selectedLevelIndex].items.Add(item);
+            try
+            {
+                GameItem item = new GameItem();
+                item.name = this.itemsDropBox.Text;
+                if (this.polygonType.SelectedText == "Circle")
+                {
+                    item.radius = this.radiusBox.Text;
+                    item.polygonType = GameItem.PhysicsPolygonType.Circle;
+                }
+                else
+                {
+                    String[] sideLengths = this.radiusBox.Text.Split(',');
+                    item.sideLengths = new Vector2(int.Parse(sideLengths[0]), int.Parse(sideLengths[1]));
+                    item.polygonType = GameItem.PhysicsPolygonType.Rectangle;
+                }
+                item.immovable = this.immovableBox.Checked;
+                item.startdepth = this.depthComboBox.Text;
+                item.weight = uint.Parse(this.weightBox.Text);
+                item.width = (uint)this.widthTrackBar.Value;
+                item.loc = gameref.loc + gameref.offset;
+                gameref.levels[gameref.selectedLevelIndex].items.Add(item);
+            }
+            catch (Exception exceptionSpawnItem)
+            {
+                Console.WriteLine(exceptionSpawnItem.StackTrace);
+            }
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -149,12 +167,16 @@ namespace BountyBanditsWorldEditor
                 depthLabel.Text = ENEMIES_LABEL;
                 radiusLabel.Text = TYPE_LEVEL;
                 radiusBox.Text = "cow";
+                immovableBox.Enabled = false;
+                polygonType.Enabled = false;
             }
             else
             {
                 depthLabel.Text = DEPTH_LABEL;
                 radiusLabel.Text = RADIUS_LEVEL;
                 radiusBox.Text = "30";
+                immovableBox.Enabled = true;
+                polygonType.Enabled = true;
             }
         }
     }
