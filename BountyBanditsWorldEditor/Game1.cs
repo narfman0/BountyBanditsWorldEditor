@@ -226,7 +226,25 @@ namespace BountyBanditsWorldEditor
                         adj += ",";
                 }
                 textWriter.WriteElementString("adj", adj.ToString());
-                textWriter.WriteElementString("backgroundPath", level.backgroundpath);
+                textWriter.WriteElementString("horizonPath", level.horizonPath);
+                textWriter.WriteStartElement("background");
+                foreach (BackgroundItemStruct str in level.backgroundItems)
+                {
+                    textWriter.WriteStartElement("graphic");
+                    textWriter.WriteElementString("path", str.texture);
+                    textWriter.WriteStartElement("location");
+                    textWriter.WriteElementString("x", str.location.X.ToString());
+                    textWriter.WriteElementString("y", str.location.Y.ToString());
+                    textWriter.WriteEndElement();
+                    textWriter.WriteAttributeString("rotation", str.rotation.ToString());
+                    textWriter.WriteAttributeString("scale", str.scale.ToString());
+                    textWriter.WriteEndElement();
+                }
+                textWriter.WriteEndElement();
+
+
+
+
 
                 textWriter.WriteStartElement("items");
                 foreach (GameItem item in level.items)

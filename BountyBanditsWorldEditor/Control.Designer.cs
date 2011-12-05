@@ -68,6 +68,14 @@
             this.itemImmovableBox = new System.Windows.Forms.CheckBox();
             this.polygonTypeLabel = new System.Windows.Forms.Label();
             this.itemPolygonType = new System.Windows.Forms.ComboBox();
+            this.backgroundTab = new System.Windows.Forms.TabPage();
+            this.backgroundSpawnButton = new System.Windows.Forms.Button();
+            this.backgroundScaleLabel = new System.Windows.Forms.Label();
+            this.backgroundScaleField = new System.Windows.Forms.TextBox();
+            this.backgroundRotationText = new System.Windows.Forms.TextBox();
+            this.backgroundTextureField = new System.Windows.Forms.TextBox();
+            this.backgroundRotationLabel = new System.Windows.Forms.Label();
+            this.backgroundTextureLabel = new System.Windows.Forms.Label();
             this.maxOffsetBox = new System.Windows.Forms.TextBox();
             this.maxoffsetLabel = new System.Windows.Forms.Label();
             this.offsetSliderLabel = new System.Windows.Forms.Label();
@@ -84,6 +92,7 @@
             this.enemyTab.SuspendLayout();
             this.itemTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemDepthSlider)).BeginInit();
+            this.backgroundTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.offsetTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -268,6 +277,7 @@
             // 
             this.tabControl1.Controls.Add(this.enemyTab);
             this.tabControl1.Controls.Add(this.itemTab);
+            this.tabControl1.Controls.Add(this.backgroundTab);
             this.tabControl1.Location = new System.Drawing.Point(17, 83);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -486,6 +496,83 @@
             this.itemPolygonType.Text = "Circle";
             this.itemPolygonType.SelectedIndexChanged += new System.EventHandler(this.itemPolygonType_SelectedIndexChanged);
             // 
+            // backgroundTab
+            // 
+            this.backgroundTab.Controls.Add(this.backgroundSpawnButton);
+            this.backgroundTab.Controls.Add(this.backgroundScaleLabel);
+            this.backgroundTab.Controls.Add(this.backgroundScaleField);
+            this.backgroundTab.Controls.Add(this.backgroundRotationText);
+            this.backgroundTab.Controls.Add(this.backgroundTextureField);
+            this.backgroundTab.Controls.Add(this.backgroundRotationLabel);
+            this.backgroundTab.Controls.Add(this.backgroundTextureLabel);
+            this.backgroundTab.Location = new System.Drawing.Point(4, 22);
+            this.backgroundTab.Name = "backgroundTab";
+            this.backgroundTab.Size = new System.Drawing.Size(271, 231);
+            this.backgroundTab.TabIndex = 2;
+            this.backgroundTab.Text = "Background";
+            this.backgroundTab.UseVisualStyleBackColor = true;
+            // 
+            // backgroundSpawnButton
+            // 
+            this.backgroundSpawnButton.Location = new System.Drawing.Point(60, 82);
+            this.backgroundSpawnButton.Name = "backgroundSpawnButton";
+            this.backgroundSpawnButton.Size = new System.Drawing.Size(100, 23);
+            this.backgroundSpawnButton.TabIndex = 42;
+            this.backgroundSpawnButton.Text = "Spawn";
+            this.backgroundSpawnButton.UseVisualStyleBackColor = true;
+            this.backgroundSpawnButton.Click += new System.EventHandler(this.backgroundSpawnButton_Click);
+            // 
+            // backgroundScaleLabel
+            // 
+            this.backgroundScaleLabel.AutoSize = true;
+            this.backgroundScaleLabel.Location = new System.Drawing.Point(3, 56);
+            this.backgroundScaleLabel.Name = "backgroundScaleLabel";
+            this.backgroundScaleLabel.Size = new System.Drawing.Size(37, 13);
+            this.backgroundScaleLabel.TabIndex = 5;
+            this.backgroundScaleLabel.Text = "Scale:";
+            // 
+            // backgroundScaleField
+            // 
+            this.backgroundScaleField.Location = new System.Drawing.Point(60, 56);
+            this.backgroundScaleField.Name = "backgroundScaleField";
+            this.backgroundScaleField.Size = new System.Drawing.Size(100, 20);
+            this.backgroundScaleField.TabIndex = 4;
+            this.backgroundScaleField.Text = "1";
+            // 
+            // backgroundRotationText
+            // 
+            this.backgroundRotationText.Location = new System.Drawing.Point(60, 30);
+            this.backgroundRotationText.Name = "backgroundRotationText";
+            this.backgroundRotationText.Size = new System.Drawing.Size(100, 20);
+            this.backgroundRotationText.TabIndex = 3;
+            this.backgroundRotationText.Text = "0";
+            // 
+            // backgroundTextureField
+            // 
+            this.backgroundTextureField.Location = new System.Drawing.Point(60, 4);
+            this.backgroundTextureField.Name = "backgroundTextureField";
+            this.backgroundTextureField.Size = new System.Drawing.Size(100, 20);
+            this.backgroundTextureField.TabIndex = 2;
+            this.backgroundTextureField.Text = "road";
+            // 
+            // backgroundRotationLabel
+            // 
+            this.backgroundRotationLabel.AutoSize = true;
+            this.backgroundRotationLabel.Location = new System.Drawing.Point(3, 30);
+            this.backgroundRotationLabel.Name = "backgroundRotationLabel";
+            this.backgroundRotationLabel.Size = new System.Drawing.Size(50, 13);
+            this.backgroundRotationLabel.TabIndex = 1;
+            this.backgroundRotationLabel.Text = "Rotation:";
+            // 
+            // backgroundTextureLabel
+            // 
+            this.backgroundTextureLabel.AutoSize = true;
+            this.backgroundTextureLabel.Location = new System.Drawing.Point(3, 4);
+            this.backgroundTextureLabel.Name = "backgroundTextureLabel";
+            this.backgroundTextureLabel.Size = new System.Drawing.Size(46, 13);
+            this.backgroundTextureLabel.TabIndex = 0;
+            this.backgroundTextureLabel.Text = "Texture:";
+            // 
             // maxOffsetBox
             // 
             this.maxOffsetBox.Location = new System.Drawing.Point(264, 356);
@@ -547,9 +634,9 @@
             this.backgroundPictureLabel.AutoSize = true;
             this.backgroundPictureLabel.Location = new System.Drawing.Point(4, 59);
             this.backgroundPictureLabel.Name = "backgroundPictureLabel";
-            this.backgroundPictureLabel.Size = new System.Drawing.Size(68, 13);
+            this.backgroundPictureLabel.Size = new System.Drawing.Size(46, 13);
             this.backgroundPictureLabel.TabIndex = 5;
-            this.backgroundPictureLabel.Text = "Background:";
+            this.backgroundPictureLabel.Text = "Horizon:";
             // 
             // backgroundButton
             // 
@@ -600,6 +687,8 @@
             this.itemTab.ResumeLayout(false);
             this.itemTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemDepthSlider)).EndInit();
+            this.backgroundTab.ResumeLayout(false);
+            this.backgroundTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.offsetTrackBar)).EndInit();
             this.ResumeLayout(false);
 
@@ -657,5 +746,13 @@
         private System.Windows.Forms.Button enemySpawnButton;
         private System.Windows.Forms.Label enemyCountLabel;
         private System.Windows.Forms.TextBox enemyCountBox;
+        private System.Windows.Forms.TabPage backgroundTab;
+        private System.Windows.Forms.TextBox backgroundTextureField;
+        private System.Windows.Forms.Label backgroundRotationLabel;
+        private System.Windows.Forms.Label backgroundTextureLabel;
+        private System.Windows.Forms.TextBox backgroundRotationText;
+        private System.Windows.Forms.Label backgroundScaleLabel;
+        private System.Windows.Forms.TextBox backgroundScaleField;
+        private System.Windows.Forms.Button backgroundSpawnButton;
     }
 }

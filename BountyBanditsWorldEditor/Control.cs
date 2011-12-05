@@ -86,7 +86,7 @@ namespace BountyBanditsWorldEditor
 
         private void backgroundButton_Click(object sender, EventArgs e)
         {
-            gameref.levels[gameref.selectedLevelIndex].backgroundpath = filechooserPicture();
+            gameref.levels[gameref.selectedLevelIndex].horizonPath = filechooserPicture();
         }
         private string filechooserPicture(){
             OpenFileDialog openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -179,6 +179,15 @@ namespace BountyBanditsWorldEditor
                 itemRadiusLabel.Text = "Radius:";
                 itemRadiusText.Text = "10";
             }
+        }
+
+        private void backgroundSpawnButton_Click(object sender, EventArgs e)
+        {
+            BackgroundItemStruct str = new BackgroundItemStruct();
+            str.location = gameref.loc + gameref.offset;
+            str.rotation = float.Parse(backgroundRotationText.Text);
+            str.scale = float.Parse(backgroundScaleField.Text);
+            gameref.levels[gameref.selectedLevelIndex].backgroundItems.Add(str);
         }
     }
 }
