@@ -143,7 +143,7 @@ namespace BountyBanditsWorldEditor
             {
                 GameItem item = new GameItem();
                 item.name = this.itemTextureText.Text;
-                if (this.itemPolygonType.SelectedText == "Circle")
+                if (this.itemPolygonType.Text == "Circle")
                 {
                     item.radius = this.itemRadiusText.Text;
                     item.polygonType = GameItem.PhysicsPolygonType.Circle;
@@ -164,6 +164,20 @@ namespace BountyBanditsWorldEditor
             catch (Exception exceptionSpawnItem)
             {
                 MessageBox.Show("Exception from game item: " + exceptionSpawnItem.StackTrace);
+            }
+        }
+
+        private void itemPolygonType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (itemPolygonType.Text == "Rectangle")
+            {
+                itemRadiusLabel.Text = "Side Lengths (x,y):";
+                itemRadiusText.Text = "10,10";
+            }
+            else
+            {
+                itemRadiusLabel.Text = "Radius:";
+                itemRadiusText.Text = "10";
             }
         }
     }

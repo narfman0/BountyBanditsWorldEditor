@@ -48,6 +48,8 @@
             this.levelEditorPanel = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.enemyTab = new System.Windows.Forms.TabPage();
+            this.enemyCountLabel = new System.Windows.Forms.Label();
+            this.enemyCountBox = new System.Windows.Forms.TextBox();
             this.enemySpawnButton = new System.Windows.Forms.Button();
             this.enemyTypeText = new System.Windows.Forms.TextBox();
             this.enemyTypeLabel = new System.Windows.Forms.Label();
@@ -76,8 +78,6 @@
             this.backgroundButton = new System.Windows.Forms.Button();
             this.currentPosLabel = new System.Windows.Forms.Label();
             this.leveEditorTitleLabel = new System.Windows.Forms.Label();
-            this.enemyCountBox = new System.Windows.Forms.TextBox();
-            this.enemyCountLabel = new System.Windows.Forms.Label();
             this.mapPanel.SuspendLayout();
             this.levelEditorPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -291,6 +291,23 @@
             this.enemyTab.Text = "Enemies";
             this.enemyTab.UseVisualStyleBackColor = true;
             // 
+            // enemyCountLabel
+            // 
+            this.enemyCountLabel.AutoSize = true;
+            this.enemyCountLabel.Location = new System.Drawing.Point(6, 59);
+            this.enemyCountLabel.Name = "enemyCountLabel";
+            this.enemyCountLabel.Size = new System.Drawing.Size(38, 13);
+            this.enemyCountLabel.TabIndex = 43;
+            this.enemyCountLabel.Text = "Count:";
+            // 
+            // enemyCountBox
+            // 
+            this.enemyCountBox.Location = new System.Drawing.Point(73, 59);
+            this.enemyCountBox.Name = "enemyCountBox";
+            this.enemyCountBox.Size = new System.Drawing.Size(92, 20);
+            this.enemyCountBox.TabIndex = 42;
+            this.enemyCountBox.Text = "1";
+            // 
             // enemySpawnButton
             // 
             this.enemySpawnButton.Location = new System.Drawing.Point(73, 85);
@@ -383,6 +400,7 @@
             this.itemTextureText.Name = "itemTextureText";
             this.itemTextureText.Size = new System.Drawing.Size(84, 20);
             this.itemTextureText.TabIndex = 39;
+            this.itemTextureText.Text = "log";
             // 
             // itemSpawnLabel
             // 
@@ -465,6 +483,8 @@
             this.itemPolygonType.Name = "itemPolygonType";
             this.itemPolygonType.Size = new System.Drawing.Size(84, 21);
             this.itemPolygonType.TabIndex = 29;
+            this.itemPolygonType.Text = "Circle";
+            this.itemPolygonType.SelectedIndexChanged += new System.EventHandler(this.itemPolygonType_SelectedIndexChanged);
             // 
             // maxOffsetBox
             // 
@@ -558,23 +578,6 @@
             this.leveEditorTitleLabel.Size = new System.Drawing.Size(63, 13);
             this.leveEditorTitleLabel.TabIndex = 0;
             this.leveEditorTitleLabel.Text = "Level Editor";
-            // 
-            // enemyCountBox
-            // 
-            this.enemyCountBox.Location = new System.Drawing.Point(73, 59);
-            this.enemyCountBox.Name = "enemyCountBox";
-            this.enemyCountBox.Size = new System.Drawing.Size(92, 20);
-            this.enemyCountBox.TabIndex = 42;
-            this.enemyCountBox.Text = "1";
-            // 
-            // enemyCountLabel
-            // 
-            this.enemyCountLabel.AutoSize = true;
-            this.enemyCountLabel.Location = new System.Drawing.Point(6, 59);
-            this.enemyCountLabel.Name = "enemyCountLabel";
-            this.enemyCountLabel.Size = new System.Drawing.Size(38, 13);
-            this.enemyCountLabel.TabIndex = 43;
-            this.enemyCountLabel.Text = "Count:";
             // 
             // Control
             // 

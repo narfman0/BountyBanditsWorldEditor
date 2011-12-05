@@ -155,16 +155,16 @@ namespace BountyBanditsWorldEditor
                     {
                         string lowerName = item.name.ToLower();
                         PrimitiveLine brush = new PrimitiveLine(GraphicsDevice);
-                        if (lowerName.Contains("box"))
+                        if (item.polygonType == GameItem.PhysicsPolygonType.Rectangle)
                         {
-                            brush.AddVector(item.loc);
-                            brush.AddVector(new Vector2(item.loc.X, item.loc.Y + float.Parse(item.radius)));
-                            brush.AddVector(new Vector2(item.loc.X + float.Parse(item.radius), item.loc.Y + float.Parse(item.radius)));
-                            brush.AddVector(new Vector2(item.loc.X + float.Parse(item.radius), item.loc.Y));
-                            brush.AddVector(item.loc);
+                            brush.AddVector(new Vector2(item.loc.X - item.sideLengths.X / 2, item.loc.Y - item.sideLengths.Y / 2));
+                            brush.AddVector(new Vector2(item.loc.X - item.sideLengths.X / 2, item.loc.Y + item.sideLengths.Y / 2));
+                            brush.AddVector(new Vector2(item.loc.X + item.sideLengths.X / 2, item.loc.Y + item.sideLengths.Y / 2));
+                            brush.AddVector(new Vector2(item.loc.X + item.sideLengths.X / 2, item.loc.Y - item.sideLengths.Y / 2));
+                            brush.AddVector(new Vector2(item.loc.X - item.sideLengths.X / 2, item.loc.Y - item.sideLengths.Y / 2));
                             brush.Position = -offset;
                         }
-                        if (lowerName.Contains("circle") || lowerName.Contains("log"))
+                        else
                         {
                             brush.CreateCircle(float.Parse(item.radius), 12);
                             brush.Position = item.loc - offset;
