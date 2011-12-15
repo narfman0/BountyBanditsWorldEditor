@@ -54,7 +54,7 @@ namespace BountyBanditsWorldEditor
 
         public void updateLevelLoc()
         {
-            this.currentPosTextLabel.Text = (gameref.loc.X + gameref.offset.X) + "x   " + (gameref.loc.Y + gameref.offset.Y) + "y";
+            this.currentPosTextLabel.Text = (gameref.currentLocation.X + gameref.offset.X) + "x   " + (gameref.currentLocation.Y + gameref.offset.Y) + "y";
         }
 
         private void updateLevelButton_Click(object sender, EventArgs e)
@@ -132,7 +132,7 @@ namespace BountyBanditsWorldEditor
             item.name = this.enemyTypeText.Text;
             item.startdepth = this.enemyCountBox.Text;
             item.weight = uint.Parse(this.enemyWeightBox.Text);
-            item.loc = gameref.loc + gameref.offset;
+            item.loc = gameref.currentLocation + gameref.offset;
             gameref.levels[gameref.selectedLevelIndex].items.Add(item);
         }
 
@@ -158,7 +158,7 @@ namespace BountyBanditsWorldEditor
                 item.startdepth = this.itemDepthSlider.Text;
                 item.weight = uint.Parse(this.itemWeightBox.Text);
                 item.width = 1;
-                item.loc = gameref.loc + gameref.offset;
+                item.loc = gameref.currentLocation + gameref.offset;
                 gameref.levels[gameref.selectedLevelIndex].items.Add(item);
             }
             catch (Exception exceptionSpawnItem)
@@ -184,7 +184,7 @@ namespace BountyBanditsWorldEditor
         private void backgroundSpawnButton_Click(object sender, EventArgs e)
         {
             BackgroundItemStruct str = new BackgroundItemStruct();
-            str.location = gameref.loc + gameref.offset;
+            str.location = gameref.currentLocation + gameref.offset;
             str.rotation = float.Parse(backgroundRotationText.Text);
             str.scale = float.Parse(backgroundScaleField.Text);
             gameref.levels[gameref.selectedLevelIndex].backgroundItems.Add(str);

@@ -29,11 +29,13 @@ namespace BountyBanditsWorldEditor
         Control control;
         public int timeSinceLastClick = 0;
         SpriteFont font;
-        private int windowWidth, windowHeight;
         Enums.State currentState; private int timeSinceLastStateChange = 0;
         public string mapBackgroundPath;
         #endregion
-        public Vector2 loc, offset;
+        public Vector2 currentLocation, offset;
+        private TextureManager textureManager;
+        private PrimitiveLine brush;
+        private Resolution resolution;
 
         public Game1()
         {
@@ -52,8 +54,9 @@ namespace BountyBanditsWorldEditor
         /// </summary>
         protected override void Initialize()
         {
-            windowWidth = (int)(GraphicsDevice.DisplayMode.Width / 1.2);
-            windowHeight = (int)(GraphicsDevice.DisplayMode.Height / 1.2);
+            brush = new PrimitiveLine(GraphicsDevice);
+            textureManager = new TextureManager(Content);
+            resolution = new Resolution(graphics, ScreenMode.tv720p);
             newMap();
             base.Initialize();
         }
@@ -93,7 +96,7 @@ namespace BountyBanditsWorldEditor
                     if (ButtonState.Pressed == Mouse.GetState().LeftButton && Environment.TickCount - timeSinceLastClick > 1000
                         && Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
                     {
-                        loc = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+                        currentLocation = new Vector2(Mouse.GetState().X, resolution.ScreenHeight-Mouse.GetState().Y);
                         control.updateLevelLoc();
                     }
                     break;
@@ -153,23 +156,40 @@ namespace BountyBanditsWorldEditor
                 case Enums.State.Leveleditor:
                     foreach(GameItem item in levels[selectedLevelIndex].items)
                     {
-                        string lowerName = item.name.ToLower();
-                        PrimitiveLine brush = new PrimitiveLine(GraphicsDevice);
-                        if (item.polygonType == GameItem.PhysicsPolygonType.Rectangle)
+                        Texture2D texture = textureManager.getTexture(item.name);
+                        //if texture manager has item, draw with texture, otherwise hand draw with brush
+                        if (texture != null)
                         {
-                            brush.AddVector(new Vector2(item.loc.X - item.sideLengths.X / 2, item.loc.Y - item.sideLengths.Y / 2));
-                            brush.AddVector(new Vector2(item.loc.X - item.sideLengths.X / 2, item.loc.Y + item.sideLengths.Y / 2));
-                            brush.AddVector(new Vector2(item.loc.X + item.sideLengths.X / 2, item.loc.Y + item.sideLengths.Y / 2));
-                            brush.AddVector(new Vector2(item.loc.X + item.sideLengths.X / 2, item.loc.Y - item.sideLengths.Y / 2));
-                            brush.AddVector(new Vector2(item.loc.X - item.sideLengths.X / 2, item.loc.Y - item.sideLengths.Y / 2));
-                            brush.Position = -offset;
+                            Vector2 textureDimensions = new Vector2(texture.Width, texture.Height),
+                                scale = item.polygonType == GameItem.PhysicsPolygonType.Circle ? 
+                                    new Vector2(float.Parse(item.radius)) / textureDimensions : 
+                                    item.sideLengths / textureDimensions,
+                                origin = scale * textureDimensions / 2;
+                            spriteBatch.Draw(texture, new Vector2(item.loc.X, resolution.ScreenHeight - item.loc.Y), null, Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
                         }
                         else
                         {
-                            brush.CreateCircle(float.Parse(item.radius), 12);
-                            brush.Position = item.loc - offset;
+                            brush.ClearVectors();
+                            switch (item.polygonType)
+                            {
+                                case GameItem.PhysicsPolygonType.Rectangle:
+                                    brush.AddVector(new Vector2(item.loc.X - item.sideLengths.X / 2, item.loc.Y - item.sideLengths.Y / 2));
+                                    brush.AddVector(new Vector2(item.loc.X - item.sideLengths.X / 2, item.loc.Y + item.sideLengths.Y / 2));
+                                    brush.AddVector(new Vector2(item.loc.X + item.sideLengths.X / 2, item.loc.Y + item.sideLengths.Y / 2));
+                                    brush.AddVector(new Vector2(item.loc.X + item.sideLengths.X / 2, item.loc.Y - item.sideLengths.Y / 2));
+                                    brush.AddVector(new Vector2(item.loc.X - item.sideLengths.X / 2, item.loc.Y - item.sideLengths.Y / 2));
+                                    brush.Position = -offset;
+                                    brush.Render(spriteBatch);
+                                    break;
+                                case GameItem.PhysicsPolygonType.Circle:
+                                    break;
+                                //case GameItem.PhysicsPolygonType.Polygon:
+                                //    foreach (Vector2 vertex in item.vertices)
+                                //        brush.AddVector(vertex);
+                                //    brush.Render(spriteBatch);
+                                //    break;
+                            }
                         }
-                        brush.Render(spriteBatch);
                     }
                     break;
                 #endregion
@@ -304,7 +324,7 @@ namespace BountyBanditsWorldEditor
         public void newMap()
         {
             
-            offset = loc = Vector2.Zero;
+            offset = currentLocation = Vector2.Zero;
             currentState = Enums.State.Worldeditor;
             selectedLevelIndex = 0;
             Level.totalLevels = 0;
