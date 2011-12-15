@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BountyBanditsWorldEditor", "BountyBanditsWorldEditor\BountyBanditsWorldEditor.csproj", "{519B1CCF-DDF2-4E14-9962-D3719D384AC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BountyBanditsWorldEditorContent", "BountyBanditsWorldEditor\Content\BountyBanditsWorldEditorContent.contentproj", "{E79D93CC-5114-4B85-B63D-DE934350F3FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

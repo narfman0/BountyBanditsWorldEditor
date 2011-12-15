@@ -146,7 +146,7 @@ namespace BountyBanditsWorldEditor
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.Deferred, SaveStateMode.SaveState);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             switch (currentState)
             {
                 #region Leveleditor

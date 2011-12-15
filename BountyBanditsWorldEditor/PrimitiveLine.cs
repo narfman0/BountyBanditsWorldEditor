@@ -55,7 +55,7 @@ namespace BountyBanditsWorldEditor
         public PrimitiveLine(GraphicsDevice graphicsDevice)
         {
             // create pixels
-            pixel = new Texture2D(graphicsDevice, 1, 1, 1, TextureUsage.None, SurfaceFormat.Color);
+            pixel = new Texture2D(graphicsDevice, 1, 1);
             Color[] pixels = new Color[1];
             pixels[0] = Color.White;
             pixel.SetData<Color>(pixels);
