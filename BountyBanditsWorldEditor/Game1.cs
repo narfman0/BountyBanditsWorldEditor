@@ -154,6 +154,18 @@ namespace BountyBanditsWorldEditor
             {
                 #region Leveleditor
                 case Enums.State.Leveleditor:
+                    foreach (BackgroundItemStruct backgroundItem in levels[selectedLevelIndex].backgroundItems)
+                    {
+                        Texture2D texture = textureManager.getTexture(backgroundItem.texture);
+                        if (texture != null)
+                        {
+                            Vector2 textureDimensions = new Vector2(texture.Width, texture.Height),
+                                    scale = new Vector2(backgroundItem.scale),
+                                    origin = scale * textureDimensions / 2;
+                            spriteBatch.Draw(texture, new Vector2(backgroundItem.location.X, resolution.ScreenHeight - backgroundItem.location.Y),
+                                null, Color.White, backgroundItem.rotation, origin, scale, SpriteEffects.None, 0f);
+                        }
+                    }
                     foreach(GameItem item in levels[selectedLevelIndex].items)
                     {
                         Texture2D texture = textureManager.getTexture(item.name);
@@ -165,7 +177,8 @@ namespace BountyBanditsWorldEditor
                                     new Vector2(float.Parse(item.radius)) / textureDimensions : 
                                     item.sideLengths / textureDimensions,
                                 origin = scale * textureDimensions / 2;
-                            spriteBatch.Draw(texture, new Vector2(item.loc.X, resolution.ScreenHeight - item.loc.Y), null, Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
+                            spriteBatch.Draw(texture, new Vector2(item.loc.X, resolution.ScreenHeight - item.loc.Y), 
+                                null, Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
                         }
                         else
                         {

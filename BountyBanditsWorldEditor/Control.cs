@@ -184,6 +184,7 @@ namespace BountyBanditsWorldEditor
         private void backgroundSpawnButton_Click(object sender, EventArgs e)
         {
             BackgroundItemStruct str = new BackgroundItemStruct();
+            str.texture = backgroundTextureLabel.Text;
             str.location = gameref.currentLocation + gameref.offset;
             str.rotation = float.Parse(backgroundRotationText.Text);
             str.scale = float.Parse(backgroundScaleField.Text);
