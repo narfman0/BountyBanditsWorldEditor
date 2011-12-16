@@ -190,5 +190,11 @@ namespace BountyBanditsWorldEditor
             str.scale = float.Parse(backgroundScaleField.Text);
             gameref.levels[gameref.selectedLevelIndex].backgroundItems.Add(str);
         }
+
+        private void optionsButton_Click(object sender, EventArgs e)
+        {
+            OptionsForm form = new OptionsForm(gameref);
+            form.Visible = true;
+        }
     }
 }

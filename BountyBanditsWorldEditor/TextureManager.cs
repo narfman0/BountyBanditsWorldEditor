@@ -15,36 +15,37 @@ namespace BountyBanditsWorldEditor
     public class TextureManager
     {
         private Dictionary<String, Texture2D> textures = new Dictionary<String, Texture2D>();
-        public TextureManager(ContentManager content)
+        private Game1 gameref;
+        private ContentManager content;
+
+        public TextureManager(Game1 gameref, ContentManager content)
         {
-            foreach (String textureDirectory in new String[]{@".\"})
-                addTextureDirectory(content, textureDirectory);
+            this.gameref = gameref;
+            this.content = content;
+            foreach (String textureDirectory in gameref.getOptions().getTextureDirectories())
+                addTextureDirectory(textureDirectory);
         }
-        public void addTextureDirectory(ContentManager content, string path)
+        public void addTextureDirectory(string path)
         {
             string[] fileEntries = Directory.GetFiles(path);
             foreach (string fileName in fileEntries)
             {
                 string name = fileName.Split('\\')[fileName.Split('\\').Length - 1].Split('.')[0];
-                try
-                {
-                    textures.Add(name, content.Load<Texture2D>(path.Substring(8) + name));
-                }
-                catch (Exception e) { Console.WriteLine(e.StackTrace); }
-                try
-                {
-                    textures.Add(name, content.Load<Texture2D>(path.Substring(10) + name));
-                }
-                catch (Exception e) { Console.WriteLine(e.StackTrace); }
-                try
-                {
-                    textures.Add(name, content.Load<Texture2D>(path + name));
-                }
-                catch (Exception e) { Console.WriteLine(e.StackTrace); }
+                List<String> pathMethods = new List<String> {path, path + @"\" };
+                if(path.Length > 8) 
+                    pathMethods.Add(path.Substring(8));
+                if(path.Length > 10) 
+                    pathMethods.Add(path.Substring(10));
+                foreach(String pathMethod in pathMethods)
+                    try
+                    {
+                        textures.Add(name, content.Load<Texture2D>(pathMethod + name));
+                    }
+                    catch (Exception e) { Console.WriteLine(e.StackTrace); }
             }
             string[] dirs = Directory.GetDirectories(path);
             foreach (string dir in Directory.GetDirectories(path))
-                addTextureDirectory(content, dir + @"\");
+                addTextureDirectory(dir + @"\");
         }
         public Texture2D getTexture(string name)
         {

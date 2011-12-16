@@ -86,6 +86,7 @@
             this.backgroundButton = new System.Windows.Forms.Button();
             this.currentPosLabel = new System.Windows.Forms.Label();
             this.leveEditorTitleLabel = new System.Windows.Forms.Label();
+            this.optionsButton = new System.Windows.Forms.Button();
             this.mapPanel.SuspendLayout();
             this.levelEditorPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -102,7 +103,7 @@
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(75, 23);
             this.newButton.TabIndex = 0;
-            this.newButton.Text = "New...";
+            this.newButton.Text = "New";
             this.newButton.UseVisualStyleBackColor = true;
             this.newButton.Click += new System.EventHandler(this.newButton_Click);
             // 
@@ -112,7 +113,7 @@
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 1;
-            this.saveButton.Text = "Save...";
+            this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
@@ -666,11 +667,22 @@
             this.leveEditorTitleLabel.TabIndex = 0;
             this.leveEditorTitleLabel.Text = "Level Editor";
             // 
+            // optionsButton
+            // 
+            this.optionsButton.Location = new System.Drawing.Point(177, 13);
+            this.optionsButton.Name = "optionsButton";
+            this.optionsButton.Size = new System.Drawing.Size(75, 23);
+            this.optionsButton.TabIndex = 4;
+            this.optionsButton.Text = "Options";
+            this.optionsButton.UseVisualStyleBackColor = true;
+            this.optionsButton.Click += new System.EventHandler(this.optionsButton_Click);
+            // 
             // Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(339, 630);
+            this.Controls.Add(this.optionsButton);
             this.Controls.Add(this.levelEditorPanel);
             this.Controls.Add(this.mapPanel);
             this.Controls.Add(this.saveButton);
@@ -754,5 +766,6 @@
         private System.Windows.Forms.Label backgroundScaleLabel;
         private System.Windows.Forms.TextBox backgroundScaleField;
         private System.Windows.Forms.Button backgroundSpawnButton;
+        private System.Windows.Forms.Button optionsButton;
     }
 }

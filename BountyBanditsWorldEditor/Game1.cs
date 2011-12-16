@@ -33,9 +33,10 @@ namespace BountyBanditsWorldEditor
         public string mapBackgroundPath;
         #endregion
         public Vector2 currentLocation, offset;
-        private TextureManager textureManager;
+        public TextureManager textureManager;
         private PrimitiveLine brush;
         private Resolution resolution;
+        private Options options;
 
         public Game1()
         {
@@ -55,7 +56,8 @@ namespace BountyBanditsWorldEditor
         protected override void Initialize()
         {
             brush = new PrimitiveLine(GraphicsDevice);
-            textureManager = new TextureManager(Content);
+            options = new Options(this);
+            textureManager = new TextureManager(this, Content);
             resolution = new Resolution(graphics, ScreenMode.tv720p);
             newMap();
             base.Initialize();
@@ -363,5 +365,7 @@ namespace BountyBanditsWorldEditor
             else if (currentState == Enums.State.Worldeditor)
                 currentState = Enums.State.Leveleditor;
         }
+
+        public Options getOptions() { return options; }
     }
 }
