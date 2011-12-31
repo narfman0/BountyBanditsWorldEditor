@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
+using BountyBanditsWorldEditor.Map;
 
 namespace BountyBanditsWorldEditor
 {
@@ -37,6 +38,7 @@ namespace BountyBanditsWorldEditor
         private PrimitiveLine brush;
         private Resolution resolution;
         private Options options;
+        public Guid guid = Guid.Empty;
 
         public Game1()
         {
@@ -158,7 +160,7 @@ namespace BountyBanditsWorldEditor
                 case Enums.State.Leveleditor:
                     foreach (BackgroundItemStruct backgroundItem in levels[selectedLevelIndex].backgroundItems)
                     {
-                        Texture2D texture = textureManager.getTexture(backgroundItem.texture);
+                        Texture2D texture = textureManager.getTexture(backgroundItem.texturePath);
                         if (texture != null)
                         {
                             Vector2 textureDimensions = new Vector2(texture.Width, texture.Height),
@@ -175,8 +177,8 @@ namespace BountyBanditsWorldEditor
                         if (texture != null)
                         {
                             Vector2 textureDimensions = new Vector2(texture.Width, texture.Height),
-                                scale = item.polygonType == GameItem.PhysicsPolygonType.Circle ? 
-                                    new Vector2(float.Parse(item.radius)) / textureDimensions : 
+                                scale = item.polygonType == PhysicsPolygonType.Circle ? 
+                                    new Vector2(item.radius) / textureDimensions : 
                                     item.sideLengths / textureDimensions,
                                 origin = scale * textureDimensions / 2;
                             spriteBatch.Draw(texture, new Vector2(item.loc.X - offset.X, resolution.ScreenHeight - (item.loc.Y-offset.Y)), 
@@ -187,7 +189,7 @@ namespace BountyBanditsWorldEditor
                             brush.ClearVectors();
                             switch (item.polygonType)
                             {
-                                case GameItem.PhysicsPolygonType.Rectangle:
+                                case PhysicsPolygonType.Rectangle:
                                     brush.AddVector(new Vector2(item.loc.X - offset.X - item.sideLengths.X / 2, resolution.ScreenHeight - (item.loc.Y - offset.Y - item.sideLengths.Y / 2)));
                                     brush.AddVector(new Vector2(item.loc.X - offset.X - item.sideLengths.X / 2, resolution.ScreenHeight - (item.loc.Y - offset.Y + item.sideLengths.Y / 2)));
                                     brush.AddVector(new Vector2(item.loc.X - offset.X + item.sideLengths.X / 2, resolution.ScreenHeight - (item.loc.Y - offset.Y + item.sideLengths.Y / 2)));
@@ -196,9 +198,9 @@ namespace BountyBanditsWorldEditor
                                     brush.Position = -offset;
                                     brush.Render(spriteBatch);
                                     break;
-                                case GameItem.PhysicsPolygonType.Circle:
+                                case PhysicsPolygonType.Circle:
                                     break;
-                                //case GameItem.PhysicsPolygonType.Polygon:
+                                //case PhysicsPolygonType.Polygon:
                                 //    foreach (Vector2 vertex in item.vertices)
                                 //        brush.AddVector(vertex);
                                 //    brush.Render(spriteBatch);
@@ -242,98 +244,6 @@ namespace BountyBanditsWorldEditor
             item.number = Level.totalLevels++;
             levels.Add(item);
             control.setLevelInfo(item.loc.X, item.loc.Y, item.name, item.number);
-        }
-
-        public bool exportMap(string filename)
-        {
-            XmlTextWriter textWriter = new XmlTextWriter(filename, System.Text.Encoding.UTF8);
-            textWriter.Formatting = Formatting.Indented;
-            textWriter.WriteProcessingInstruction("xml", "version='1.0' encoding='UTF-8'");
-            textWriter.WriteStartElement("Root");
-
-            foreach (Level level in levels)
-            {
-                textWriter.WriteStartElement("level");
-                string adj = "";
-                foreach(int adjint in level.adjacent){
-                    adj += adjint;
-                    if(adjint != level.adjacent[level.adjacent.Count-1])
-                        adj += ",";
-                }
-                textWriter.WriteElementString("adj", adj.ToString());
-                textWriter.WriteElementString("horizonPath", level.horizonPath);
-                textWriter.WriteStartElement("background");
-                foreach (BackgroundItemStruct str in level.backgroundItems)
-                {
-                    textWriter.WriteStartElement("graphic");
-                    textWriter.WriteElementString("path", str.texture);
-                    textWriter.WriteStartElement("location");
-                    textWriter.WriteElementString("x", str.location.X.ToString());
-                    textWriter.WriteElementString("y", str.location.Y.ToString());
-                    textWriter.WriteEndElement();
-                    textWriter.WriteAttributeString("rotation", str.rotation.ToString());
-                    textWriter.WriteAttributeString("scale", str.scale.ToString());
-                    textWriter.WriteEndElement();
-                }
-                textWriter.WriteEndElement();
-
-
-
-
-
-                textWriter.WriteStartElement("items");
-                foreach (GameItem item in level.items)
-                {
-                    textWriter.WriteStartElement("item");
-                    textWriter.WriteElementString("name", item.name);
-                    textWriter.WriteElementString("loc", item.loc.X + "," + item.loc.Y);
-                    if (item.name.Contains("enemies"))
-                    {
-                        textWriter.WriteElementString("count", item.startdepth);
-                        textWriter.WriteElementString("bosses", item.width.ToString());
-                        textWriter.WriteElementString("type", item.radius);
-                    }
-                    else
-                    {
-                        switch (item.polygonType)
-                        {
-                            case GameItem.PhysicsPolygonType.Circle:
-                                textWriter.WriteElementString("radius", item.radius);
-                                break;
-                            case GameItem.PhysicsPolygonType.Rectangle:
-                                textWriter.WriteStartElement("sideLengths");
-                                textWriter.WriteElementString("x", item.sideLengths.X.ToString());
-                                textWriter.WriteElementString("y", item.sideLengths.Y.ToString());
-                                textWriter.WriteEndElement();
-                                break;
-                        }
-                        textWriter.WriteElementString("immovable", item.immovable.ToString());
-                        textWriter.WriteElementString("startdepth", item.startdepth);
-                        textWriter.WriteElementString("width", item.width.ToString());
-                    }
-                    textWriter.WriteElementString("weight", item.weight.ToString());
-                    textWriter.WriteEndElement();
-                }
-                textWriter.WriteEndElement();
-
-                textWriter.WriteElementString("location", level.loc.X + "," + level.loc.Y);
-                textWriter.WriteElementString("name", level.name);
-                textWriter.WriteElementString("number", level.number.ToString());
-
-                string prereq = "";
-                foreach (int prereqint in level.prereq)
-                {
-                    prereq += prereqint;
-                    if (prereqint != level.prereq[level.prereq.Count - 1])
-                        prereq += ",";
-                }
-                textWriter.WriteElementString("prereq", prereq.ToString());
-
-                textWriter.WriteEndElement();
-            }
-
-            textWriter.Close();  
-            return false;
         }
 
         public void newMap()

@@ -87,6 +87,7 @@
             this.currentPosLabel = new System.Windows.Forms.Label();
             this.leveEditorTitleLabel = new System.Windows.Forms.Label();
             this.optionsButton = new System.Windows.Forms.Button();
+            this.loadButton = new System.Windows.Forms.Button();
             this.mapPanel.SuspendLayout();
             this.levelEditorPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -669,7 +670,7 @@
             // 
             // optionsButton
             // 
-            this.optionsButton.Location = new System.Drawing.Point(177, 13);
+            this.optionsButton.Location = new System.Drawing.Point(252, 12);
             this.optionsButton.Name = "optionsButton";
             this.optionsButton.Size = new System.Drawing.Size(75, 23);
             this.optionsButton.TabIndex = 4;
@@ -677,11 +678,22 @@
             this.optionsButton.UseVisualStyleBackColor = true;
             this.optionsButton.Click += new System.EventHandler(this.optionsButton_Click);
             // 
+            // loadButton
+            // 
+            this.loadButton.Location = new System.Drawing.Point(177, 13);
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(69, 23);
+            this.loadButton.TabIndex = 5;
+            this.loadButton.Text = "Load";
+            this.loadButton.UseVisualStyleBackColor = true;
+            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
+            // 
             // Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(339, 630);
+            this.Controls.Add(this.loadButton);
             this.Controls.Add(this.optionsButton);
             this.Controls.Add(this.levelEditorPanel);
             this.Controls.Add(this.mapPanel);
@@ -767,5 +779,6 @@
         private System.Windows.Forms.TextBox backgroundScaleField;
         private System.Windows.Forms.Button backgroundSpawnButton;
         private System.Windows.Forms.Button optionsButton;
+        private System.Windows.Forms.Button loadButton;
     }
 }

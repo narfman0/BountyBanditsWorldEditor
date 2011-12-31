@@ -132,7 +132,8 @@
     </Compile>
     <Compile Include="Enums.cs" />
     <Compile Include="GameItem.cs" />
-    <Compile Include="Level.cs" />
+    <Compile Include="Map\Level.cs" />
+    <Compile Include="CampaignImportExport.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="OptionsForm.cs">
       <SubType>Form</SubType>
@@ -145,7 +146,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Resolution.cs" />
+    <Compile Include="Map\SpawnPoint.cs" />
     <Compile Include="TextureManager.cs" />
+    <Compile Include="XMLUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

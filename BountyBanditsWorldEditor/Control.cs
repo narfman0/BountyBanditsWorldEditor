@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Xna.Framework;
+using BountyBanditsWorldEditor.Map;
 
 namespace BountyBanditsWorldEditor
 {
@@ -86,7 +87,7 @@ namespace BountyBanditsWorldEditor
 
         private void backgroundButton_Click(object sender, EventArgs e)
         {
-            gameref.levels[gameref.selectedLevelIndex].horizonPath = filechooserPicture();
+            gameref.levels[gameref.selectedLevelIndex].horizon = filechooserPicture();
         }
         private string filechooserPicture(){
             OpenFileDialog openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -123,14 +124,14 @@ namespace BountyBanditsWorldEditor
             openFileDialog1.Filter = "xml files (*.xml)|*.xml";
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
-                gameref.exportMap(openFileDialog1.FileName);
+                CampaignImportExport.exportMap(openFileDialog1.FileName, gameref);
         }
 
         private void enemySpawnButton_Click(object sender, EventArgs e)
         {
             GameItem item = new GameItem();
             item.name = this.enemyTypeText.Text;
-            item.startdepth = this.enemyCountBox.Text;
+            item.startdepth = uint.Parse(this.enemyCountBox.Text);
             item.weight = uint.Parse(this.enemyWeightBox.Text);
             item.loc = gameref.currentLocation + gameref.offset;
             gameref.levels[gameref.selectedLevelIndex].items.Add(item);
@@ -145,17 +146,17 @@ namespace BountyBanditsWorldEditor
                 item.name = this.itemTextureText.Text;
                 if (this.itemPolygonType.Text == "Circle")
                 {
-                    item.radius = this.itemRadiusText.Text;
-                    item.polygonType = GameItem.PhysicsPolygonType.Circle;
+                    item.radius = uint.Parse(this.itemRadiusText.Text);
+                    item.polygonType = PhysicsPolygonType.Circle;
                 }
                 else
                 {
                     String[] sideLengths = this.itemRadiusText.Text.Split(',');
                     item.sideLengths = new Vector2(int.Parse(sideLengths[0]), int.Parse(sideLengths[1]));
-                    item.polygonType = GameItem.PhysicsPolygonType.Rectangle;
+                    item.polygonType = PhysicsPolygonType.Rectangle;
                 }
                 item.immovable = this.itemImmovableBox.Checked;
-                item.startdepth = this.itemDepthSlider.Text;
+                item.startdepth = uint.Parse(this.itemDepthSlider.Text);
                 item.weight = uint.Parse(this.itemWeightBox.Text);
                 item.width = 1;
                 item.loc = gameref.currentLocation + gameref.offset;
@@ -184,7 +185,7 @@ namespace BountyBanditsWorldEditor
         private void backgroundSpawnButton_Click(object sender, EventArgs e)
         {
             BackgroundItemStruct str = new BackgroundItemStruct();
-            str.texture = backgroundTextureLabel.Text;
+            str.texturePath = backgroundTextureLabel.Text;
             str.location = gameref.currentLocation + gameref.offset;
             str.rotation = float.Parse(backgroundRotationText.Text);
             str.scale = float.Parse(backgroundScaleField.Text);
@@ -195,6 +196,16 @@ namespace BountyBanditsWorldEditor
         {
             OptionsForm form = new OptionsForm(gameref);
             form.Visible = true;
+        }
+
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            openFileDialog.DefaultExt = "xml";
+            openFileDialog.Filter = "xml files (*.xml)|*.xml";
+            DialogResult result = openFileDialog.ShowDialog();
+            if (result == DialogResult.OK)
+                CampaignImportExport.importMap(openFileDialog.FileName, gameref);
         }
     }
 }

@@ -1,0 +1,110 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml;
+using BountyBanditsWorldEditor.Map;
+
+namespace BountyBanditsWorldEditor
+{
+    public static class CampaignImportExport
+    {
+        public static bool exportMap(string filename, Game1 game)
+        {
+            XmlTextWriter textWriter = new XmlTextWriter(filename, System.Text.Encoding.UTF8);
+            textWriter.Formatting = Formatting.Indented;
+            textWriter.WriteProcessingInstruction("xml", "version='1.0' encoding='UTF-8'");
+            textWriter.WriteStartElement("Root");
+            textWriter.WriteAttributeString("guid", game.guid.ToString());
+            foreach (Level level in game.levels)
+            {
+                textWriter.WriteStartElement("level");
+                string adj = "";
+                foreach (int adjint in level.adjacent)
+                {
+                    adj += adjint;
+                    if (adjint != level.adjacent[level.adjacent.Count - 1])
+                        adj += ",";
+                }
+                textWriter.WriteElementString("adj", adj.ToString());
+                textWriter.WriteElementString("horizonPath", level.horizon);
+                textWriter.WriteStartElement("background");
+                foreach (BackgroundItemStruct str in level.backgroundItems)
+                {
+                    textWriter.WriteStartElement("graphic");
+                    textWriter.WriteElementString("path", str.texturePath);
+                    textWriter.WriteStartElement("location");
+                    textWriter.WriteElementString("x", str.location.X.ToString());
+                    textWriter.WriteElementString("y", str.location.Y.ToString());
+                    textWriter.WriteEndElement();
+                    textWriter.WriteAttributeString("rotation", str.rotation.ToString());
+                    textWriter.WriteAttributeString("scale", str.scale.ToString());
+                    textWriter.WriteEndElement();
+                }
+                textWriter.WriteEndElement();
+                textWriter.WriteStartElement("items");
+                foreach (GameItem item in level.items)
+                {
+                    textWriter.WriteStartElement("item");
+                    textWriter.WriteElementString("name", item.name);
+                    textWriter.WriteElementString("loc", item.loc.X + "," + item.loc.Y);
+                    if (item.name.Contains("enemies"))
+                    {
+                        textWriter.WriteElementString("count", item.startdepth.ToString());
+                        textWriter.WriteElementString("bosses", item.width.ToString());
+                        textWriter.WriteElementString("type", item.radius.ToString());
+                    }
+                    else
+                    {
+                        switch (item.polygonType)
+                        {
+                            case PhysicsPolygonType.Circle:
+                                textWriter.WriteElementString("radius", item.radius.ToString());
+                                break;
+                            case PhysicsPolygonType.Rectangle:
+                                textWriter.WriteStartElement("sideLengths");
+                                textWriter.WriteElementString("x", item.sideLengths.X.ToString());
+                                textWriter.WriteElementString("y", item.sideLengths.Y.ToString());
+                                textWriter.WriteEndElement();
+                                break;
+                        }
+                        textWriter.WriteElementString("immovable", item.immovable.ToString());
+                        textWriter.WriteElementString("startdepth", item.startdepth.ToString());
+                        textWriter.WriteElementString("width", item.width.ToString());
+                    }
+                    textWriter.WriteElementString("weight", item.weight.ToString());
+                    textWriter.WriteEndElement();
+                }
+                textWriter.WriteEndElement();
+
+                textWriter.WriteElementString("location", level.loc.X + "," + level.loc.Y);
+                textWriter.WriteElementString("name", level.name);
+                textWriter.WriteElementString("number", level.number.ToString());
+
+                string prereq = "";
+                foreach (int prereqint in level.prereq)
+                {
+                    prereq += prereqint;
+                    if (prereqint != level.prereq[level.prereq.Count - 1])
+                        prereq += ",";
+                }
+                textWriter.WriteElementString("prereq", prereq.ToString());
+
+                textWriter.WriteEndElement();
+            }
+
+            textWriter.Close();
+            return false;
+        }
+
+        public static void importMap(string filename, Game1 gameref)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(filename);
+            List<Level> levels = new List<Level>();
+            foreach(XmlElement levelElement in xmlDoc.GetElementsByTagName("level"))
+                levels.Add(Level.fromXML(levelElement, gameref, filename.Substring(0,filename.LastIndexOf(@"\")) ));
+            gameref.guid = Guid.Parse(xmlDoc.GetElementsByTagName("guid")[0].FirstChild.Value);
+        }
+    }
+}
