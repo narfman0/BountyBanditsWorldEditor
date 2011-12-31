@@ -31,13 +31,13 @@ namespace BountyBanditsWorldEditor.Map
             newLvl.number =int.Parse(node.GetElementsByTagName("number")[0].FirstChild.Value);
             newLvl.name = node.GetAttribute("name");
             foreach (string singleAdj in node.GetElementsByTagName("adj")[0].FirstChild.Value.Split(','))
-            newLvl.adjacent.Add(Int32.Parse(singleAdj));
+                newLvl.adjacent.Add(Int32.Parse(singleAdj));
             XmlNodeList list = node.GetElementsByTagName("prereq");
             if (list.Count > 0 && list[0].FirstChild != null)
                 foreach (string singlePrereq in node.GetElementsByTagName("prereq")[0].FirstChild.Value.Split(','))
                     newLvl.prereq.Add(Int32.Parse(singlePrereq));
             newLvl.loc = XMLUtil.fromXMLVector2(node.GetElementsByTagName("location")[0]);
-            newLvl.horizon = campaignPath + node.GetElementsByTagName("horizonPath")[0].FirstChild.Value;
+            newLvl.horizon = node.GetElementsByTagName("horizonPath")[0].FirstChild.Value;
             foreach (XmlElement item in node.GetElementsByTagName("items")[0].ChildNodes)
             {
                 string name = "";

@@ -15,10 +15,12 @@ namespace BountyBanditsWorldEditor
             textWriter.Formatting = Formatting.Indented;
             textWriter.WriteProcessingInstruction("xml", "version='1.0' encoding='UTF-8'");
             textWriter.WriteStartElement("Root");
-            textWriter.WriteAttributeString("guid", game.guid.ToString());
+            textWriter.WriteElementString("guid", game.guid.ToString());
             foreach (Level level in game.levels)
             {
                 textWriter.WriteStartElement("level");
+                textWriter.WriteAttributeString("length", level.levelLength.ToString());
+                textWriter.WriteAttributeString("name", level.name);
                 string adj = "";
                 foreach (int adjint in level.adjacent)
                 {
@@ -32,13 +34,13 @@ namespace BountyBanditsWorldEditor
                 foreach (BackgroundItemStruct str in level.backgroundItems)
                 {
                     textWriter.WriteStartElement("graphic");
+                    textWriter.WriteAttributeString("rotation", str.rotation.ToString());
+                    textWriter.WriteAttributeString("scale", str.scale.ToString());
                     textWriter.WriteElementString("path", str.texturePath);
                     textWriter.WriteStartElement("location");
                     textWriter.WriteElementString("x", str.location.X.ToString());
                     textWriter.WriteElementString("y", str.location.Y.ToString());
                     textWriter.WriteEndElement();
-                    textWriter.WriteAttributeString("rotation", str.rotation.ToString());
-                    textWriter.WriteAttributeString("scale", str.scale.ToString());
                     textWriter.WriteEndElement();
                 }
                 textWriter.WriteEndElement();
@@ -76,9 +78,7 @@ namespace BountyBanditsWorldEditor
                     textWriter.WriteEndElement();
                 }
                 textWriter.WriteEndElement();
-
                 textWriter.WriteElementString("location", level.loc.X + "," + level.loc.Y);
-                textWriter.WriteElementString("name", level.name);
                 textWriter.WriteElementString("number", level.number.ToString());
 
                 string prereq = "";
