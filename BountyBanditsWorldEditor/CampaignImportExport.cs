@@ -101,9 +101,9 @@ namespace BountyBanditsWorldEditor
         {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(filename);
-            List<Level> levels = new List<Level>();
+            gameref.levels.Clear();
             foreach(XmlElement levelElement in xmlDoc.GetElementsByTagName("level"))
-                levels.Add(Level.fromXML(levelElement, gameref, filename.Substring(0,filename.LastIndexOf(@"\")) ));
+                gameref.levels.Add(Level.fromXML(levelElement, gameref, filename.Substring(0, filename.LastIndexOf(@"\"))));
             gameref.guid = Guid.Parse(xmlDoc.GetElementsByTagName("guid")[0].FirstChild.Value);
         }
     }
