@@ -164,7 +164,7 @@ namespace BountyBanditsWorldEditor
                             Vector2 textureDimensions = new Vector2(texture.Width, texture.Height),
                                     scale = new Vector2(backgroundItem.scale),
                                     origin = scale * textureDimensions / 2;
-                            spriteBatch.Draw(texture, new Vector2(backgroundItem.location.X, resolution.ScreenHeight - backgroundItem.location.Y),
+                            spriteBatch.Draw(texture, new Vector2(backgroundItem.location.X - offset.X, resolution.ScreenHeight - (backgroundItem.location.Y-offset.Y)),
                                 null, Color.White, backgroundItem.rotation, origin, scale, SpriteEffects.None, 0f);
                         }
                     }
@@ -179,7 +179,7 @@ namespace BountyBanditsWorldEditor
                                     new Vector2(float.Parse(item.radius)) / textureDimensions : 
                                     item.sideLengths / textureDimensions,
                                 origin = scale * textureDimensions / 2;
-                            spriteBatch.Draw(texture, new Vector2(item.loc.X, resolution.ScreenHeight - item.loc.Y), 
+                            spriteBatch.Draw(texture, new Vector2(item.loc.X - offset.X, resolution.ScreenHeight - (item.loc.Y-offset.Y)), 
                                 null, Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
                         }
                         else
@@ -188,11 +188,11 @@ namespace BountyBanditsWorldEditor
                             switch (item.polygonType)
                             {
                                 case GameItem.PhysicsPolygonType.Rectangle:
-                                    brush.AddVector(new Vector2(item.loc.X - item.sideLengths.X / 2, item.loc.Y - item.sideLengths.Y / 2));
-                                    brush.AddVector(new Vector2(item.loc.X - item.sideLengths.X / 2, item.loc.Y + item.sideLengths.Y / 2));
-                                    brush.AddVector(new Vector2(item.loc.X + item.sideLengths.X / 2, item.loc.Y + item.sideLengths.Y / 2));
-                                    brush.AddVector(new Vector2(item.loc.X + item.sideLengths.X / 2, item.loc.Y - item.sideLengths.Y / 2));
-                                    brush.AddVector(new Vector2(item.loc.X - item.sideLengths.X / 2, item.loc.Y - item.sideLengths.Y / 2));
+                                    brush.AddVector(new Vector2(item.loc.X - offset.X - item.sideLengths.X / 2, resolution.ScreenHeight - (item.loc.Y - offset.Y - item.sideLengths.Y / 2)));
+                                    brush.AddVector(new Vector2(item.loc.X - offset.X - item.sideLengths.X / 2, resolution.ScreenHeight - (item.loc.Y - offset.Y + item.sideLengths.Y / 2)));
+                                    brush.AddVector(new Vector2(item.loc.X - offset.X + item.sideLengths.X / 2, resolution.ScreenHeight - (item.loc.Y - offset.Y + item.sideLengths.Y / 2)));
+                                    brush.AddVector(new Vector2(item.loc.X - offset.X + item.sideLengths.X / 2, resolution.ScreenHeight - (item.loc.Y - offset.Y - item.sideLengths.Y / 2)));
+                                    brush.AddVector(new Vector2(item.loc.X - offset.X - item.sideLengths.X / 2, resolution.ScreenHeight - (item.loc.Y - offset.Y - item.sideLengths.Y / 2)));
                                     brush.Position = -offset;
                                     brush.Render(spriteBatch);
                                     break;
