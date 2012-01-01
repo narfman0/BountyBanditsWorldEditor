@@ -66,13 +66,13 @@ namespace BountyBanditsWorldEditor
                 if(adjstr!="")
                     adjacent.Add(int.Parse(adjstr));
 
-            List<int> prereqacent = new List<int>();
+            List<int> prereq = new List<int>();
             string[] prereqStrings = this.prereqLevelsBox.Text.Split(',');
             foreach (string prereqstr in prereqStrings)
                 if(prereqstr!="")
-                    prereqacent.Add(int.Parse(prereqstr));
+                    prereq.Add(int.Parse(prereqstr));
 
-            gameref.updateLevel(float.Parse(this.locXBox.Text), float.Parse(this.locYBox.Text), adjacent, prereqacent, this.levelNameBox.Text, int.Parse(this.levelIndexBox.Text));
+            gameref.updateLevel(float.Parse(this.locXBox.Text), float.Parse(this.locYBox.Text), adjacent, prereq, this.levelNameBox.Text, int.Parse(this.levelIndexBox.Text));
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -115,6 +115,7 @@ namespace BountyBanditsWorldEditor
         private void acceptButton_Click(object sender, EventArgs e)
         {
             gameref.switchState();
+            mapLevelTabControl.SelectedTab = mapTab;
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -156,7 +157,7 @@ namespace BountyBanditsWorldEditor
                     item.polygonType = PhysicsPolygonType.Rectangle;
                 }
                 item.immovable = this.itemImmovableBox.Checked;
-                item.startdepth = uint.Parse(this.itemDepthSlider.Text);
+                item.startdepth = (uint)this.itemDepthSlider.Value;
                 item.weight = uint.Parse(this.itemWeightBox.Text);
                 item.width = 1;
                 item.loc = gameref.currentLocation + gameref.offset;
@@ -206,6 +207,17 @@ namespace BountyBanditsWorldEditor
             DialogResult result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
                 CampaignImportExport.importMap(openFileDialog.FileName, gameref);
+        }
+
+        private void deleteLevelButton_Click(object sender, EventArgs e)
+        {
+            gameref.levels.RemoveAt(gameref.selectedLevelIndex--);
+            gameref.selectedLevelIndex = Math.Max(0, gameref.selectedLevelIndex);
+        }
+
+        internal void setLevelEditorTabActive()
+        {
+            mapLevelTabControl.SelectedTab = levelTab;
         }
     }
 }

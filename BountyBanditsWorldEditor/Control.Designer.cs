@@ -31,6 +31,7 @@
             this.newButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.mapPanel = new System.Windows.Forms.Panel();
+            this.deleteLevelButton = new System.Windows.Forms.Button();
             this.mapBackgroundButton = new System.Windows.Forms.Button();
             this.mapBackgroundLabel = new System.Windows.Forms.Label();
             this.levelIndexLabel = new System.Windows.Forms.Label();
@@ -88,6 +89,9 @@
             this.leveEditorTitleLabel = new System.Windows.Forms.Label();
             this.optionsButton = new System.Windows.Forms.Button();
             this.loadButton = new System.Windows.Forms.Button();
+            this.mapLevelTabControl = new System.Windows.Forms.TabControl();
+            this.mapTab = new System.Windows.Forms.TabPage();
+            this.levelTab = new System.Windows.Forms.TabPage();
             this.mapPanel.SuspendLayout();
             this.levelEditorPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -96,6 +100,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.itemDepthSlider)).BeginInit();
             this.backgroundTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.offsetTrackBar)).BeginInit();
+            this.mapLevelTabControl.SuspendLayout();
+            this.mapTab.SuspendLayout();
+            this.levelTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // newButton
@@ -121,6 +128,7 @@
             // mapPanel
             // 
             this.mapPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mapPanel.Controls.Add(this.deleteLevelButton);
             this.mapPanel.Controls.Add(this.mapBackgroundButton);
             this.mapPanel.Controls.Add(this.mapBackgroundLabel);
             this.mapPanel.Controls.Add(this.levelIndexLabel);
@@ -135,16 +143,26 @@
             this.mapPanel.Controls.Add(this.adjacentLevelsLabel);
             this.mapPanel.Controls.Add(this.levelNameBox);
             this.mapPanel.Controls.Add(this.selectedLevelLabel);
-            this.mapPanel.Location = new System.Drawing.Point(13, 43);
+            this.mapPanel.Location = new System.Drawing.Point(3, 6);
             this.mapPanel.Name = "mapPanel";
-            this.mapPanel.Size = new System.Drawing.Size(314, 162);
+            this.mapPanel.Size = new System.Drawing.Size(314, 198);
             this.mapPanel.TabIndex = 2;
+            // 
+            // deleteLevelButton
+            // 
+            this.deleteLevelButton.Location = new System.Drawing.Point(230, 163);
+            this.deleteLevelButton.Name = "deleteLevelButton";
+            this.deleteLevelButton.Size = new System.Drawing.Size(79, 23);
+            this.deleteLevelButton.TabIndex = 14;
+            this.deleteLevelButton.Text = "Delete Level";
+            this.deleteLevelButton.UseVisualStyleBackColor = true;
+            this.deleteLevelButton.Click += new System.EventHandler(this.deleteLevelButton_Click);
             // 
             // mapBackgroundButton
             // 
             this.mapBackgroundButton.Location = new System.Drawing.Point(140, 134);
             this.mapBackgroundButton.Name = "mapBackgroundButton";
-            this.mapBackgroundButton.Size = new System.Drawing.Size(84, 23);
+            this.mapBackgroundButton.Size = new System.Drawing.Size(86, 23);
             this.mapBackgroundButton.TabIndex = 13;
             this.mapBackgroundButton.Text = "Browse...";
             this.mapBackgroundButton.UseVisualStyleBackColor = true;
@@ -177,9 +195,9 @@
             // 
             // updateLevelButton
             // 
-            this.updateLevelButton.Location = new System.Drawing.Point(230, 134);
+            this.updateLevelButton.Location = new System.Drawing.Point(140, 163);
             this.updateLevelButton.Name = "updateLevelButton";
-            this.updateLevelButton.Size = new System.Drawing.Size(81, 23);
+            this.updateLevelButton.Size = new System.Drawing.Size(86, 23);
             this.updateLevelButton.TabIndex = 9;
             this.updateLevelButton.Text = "Update";
             this.updateLevelButton.UseVisualStyleBackColor = true;
@@ -205,7 +223,7 @@
             // 
             this.locYBox.Location = new System.Drawing.Point(230, 82);
             this.locYBox.Name = "locYBox";
-            this.locYBox.Size = new System.Drawing.Size(81, 20);
+            this.locYBox.Size = new System.Drawing.Size(79, 20);
             this.locYBox.TabIndex = 6;
             // 
             // prereqLevelsLabel
@@ -221,14 +239,14 @@
             // 
             this.prereqLevelsBox.Location = new System.Drawing.Point(140, 56);
             this.prereqLevelsBox.Name = "prereqLevelsBox";
-            this.prereqLevelsBox.Size = new System.Drawing.Size(171, 20);
+            this.prereqLevelsBox.Size = new System.Drawing.Size(169, 20);
             this.prereqLevelsBox.TabIndex = 4;
             // 
             // adjacentLevelsBox
             // 
             this.adjacentLevelsBox.Location = new System.Drawing.Point(140, 30);
             this.adjacentLevelsBox.Name = "adjacentLevelsBox";
-            this.adjacentLevelsBox.Size = new System.Drawing.Size(171, 20);
+            this.adjacentLevelsBox.Size = new System.Drawing.Size(169, 20);
             this.adjacentLevelsBox.TabIndex = 3;
             // 
             // adjacentLevelsLabel
@@ -244,7 +262,7 @@
             // 
             this.levelNameBox.Location = new System.Drawing.Point(140, 4);
             this.levelNameBox.Name = "levelNameBox";
-            this.levelNameBox.Size = new System.Drawing.Size(171, 20);
+            this.levelNameBox.Size = new System.Drawing.Size(169, 20);
             this.levelNameBox.TabIndex = 1;
             // 
             // selectedLevelLabel
@@ -270,7 +288,7 @@
             this.levelEditorPanel.Controls.Add(this.backgroundButton);
             this.levelEditorPanel.Controls.Add(this.currentPosLabel);
             this.levelEditorPanel.Controls.Add(this.leveEditorTitleLabel);
-            this.levelEditorPanel.Location = new System.Drawing.Point(13, 212);
+            this.levelEditorPanel.Location = new System.Drawing.Point(6, 6);
             this.levelEditorPanel.Name = "levelEditorPanel";
             this.levelEditorPanel.Size = new System.Drawing.Size(314, 406);
             this.levelEditorPanel.TabIndex = 3;
@@ -688,15 +706,46 @@
             this.loadButton.UseVisualStyleBackColor = true;
             this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
             // 
+            // mapLevelTabControl
+            // 
+            this.mapLevelTabControl.Controls.Add(this.mapTab);
+            this.mapLevelTabControl.Controls.Add(this.levelTab);
+            this.mapLevelTabControl.Location = new System.Drawing.Point(12, 42);
+            this.mapLevelTabControl.Name = "mapLevelTabControl";
+            this.mapLevelTabControl.SelectedIndex = 0;
+            this.mapLevelTabControl.Size = new System.Drawing.Size(335, 446);
+            this.mapLevelTabControl.TabIndex = 6;
+            // 
+            // mapTab
+            // 
+            this.mapTab.Controls.Add(this.mapPanel);
+            this.mapTab.Location = new System.Drawing.Point(4, 22);
+            this.mapTab.Name = "mapTab";
+            this.mapTab.Padding = new System.Windows.Forms.Padding(3);
+            this.mapTab.Size = new System.Drawing.Size(327, 420);
+            this.mapTab.TabIndex = 1;
+            this.mapTab.Text = "Map";
+            this.mapTab.UseVisualStyleBackColor = true;
+            // 
+            // levelTab
+            // 
+            this.levelTab.Controls.Add(this.levelEditorPanel);
+            this.levelTab.Location = new System.Drawing.Point(4, 22);
+            this.levelTab.Name = "levelTab";
+            this.levelTab.Padding = new System.Windows.Forms.Padding(3);
+            this.levelTab.Size = new System.Drawing.Size(327, 420);
+            this.levelTab.TabIndex = 0;
+            this.levelTab.Text = "Level";
+            this.levelTab.UseVisualStyleBackColor = true;
+            // 
             // Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 630);
+            this.ClientSize = new System.Drawing.Size(359, 501);
+            this.Controls.Add(this.mapLevelTabControl);
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.optionsButton);
-            this.Controls.Add(this.levelEditorPanel);
-            this.Controls.Add(this.mapPanel);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.newButton);
             this.Name = "Control";
@@ -714,6 +763,9 @@
             this.backgroundTab.ResumeLayout(false);
             this.backgroundTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.offsetTrackBar)).EndInit();
+            this.mapLevelTabControl.ResumeLayout(false);
+            this.mapTab.ResumeLayout(false);
+            this.levelTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -780,5 +832,9 @@
         private System.Windows.Forms.Button backgroundSpawnButton;
         private System.Windows.Forms.Button optionsButton;
         private System.Windows.Forms.Button loadButton;
+        private System.Windows.Forms.TabControl mapLevelTabControl;
+        private System.Windows.Forms.TabPage mapTab;
+        private System.Windows.Forms.TabPage levelTab;
+        private System.Windows.Forms.Button deleteLevelButton;
     }
 }

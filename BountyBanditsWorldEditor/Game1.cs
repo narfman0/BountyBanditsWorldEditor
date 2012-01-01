@@ -273,7 +273,10 @@ namespace BountyBanditsWorldEditor
             if (currentState == Enums.State.Leveleditor)
                 currentState = Enums.State.Worldeditor;
             else if (currentState == Enums.State.Worldeditor)
+            {
                 currentState = Enums.State.Leveleditor;
+                control.setLevelEditorTabActive();
+            }
         }
 
         public Options getOptions() { return options; }
