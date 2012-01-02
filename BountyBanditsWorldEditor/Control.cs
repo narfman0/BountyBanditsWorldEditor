@@ -160,6 +160,7 @@ namespace BountyBanditsWorldEditor
                 item.startdepth = (uint)this.itemDepthSlider.Value;
                 item.weight = uint.Parse(this.itemWeightBox.Text);
                 item.width = 1;
+                item.rotation = float.Parse(this.rotationTextBox.Text);
                 item.loc = gameref.currentLocation + gameref.offset;
                 gameref.levels[gameref.selectedLevelIndex].items.Add(item);
             }

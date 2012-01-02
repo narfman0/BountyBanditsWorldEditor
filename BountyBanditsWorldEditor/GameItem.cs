@@ -17,6 +17,7 @@ namespace BountyBanditsWorldEditor
         public uint weight = 1, radius = 10, startdepth = 0, width = 1;
         public Guid guid;
         public Vector2 loc, sideLengths = Vector2.One;
+        public float rotation;
         //public Vertices vertices;
         public bool immovable = false;
         public PhysicsPolygonType polygonType;
@@ -26,6 +27,8 @@ namespace BountyBanditsWorldEditor
         }
         public void copyValues(XmlElement element)
         {
+            if (element.HasAttributes && element.Attributes.GetNamedItem("rotation").Value != null)
+                rotation = float.Parse(element.Attributes.GetNamedItem("rotation").Value);
             foreach (XmlElement itemChild in element)
                 if (itemChild.Name.Equals("name"))
                     name = itemChild.FirstChild.Value;
@@ -60,7 +63,6 @@ namespace BountyBanditsWorldEditor
             }
             catch (Exception e)
             {
-                String throwAway = e.StackTrace;
                 guid = Guid.NewGuid();
             }
         }
@@ -112,6 +114,7 @@ namespace BountyBanditsWorldEditor
             element.AppendChild(weightNode);
             element.AppendChild(widthNode);
             element.AppendChild(immovableNode);
+            element.Attributes.GetNamedItem("rotation").Value = rotation.ToString();
             return element;
         }
     }

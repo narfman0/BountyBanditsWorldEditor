@@ -30,8 +30,15 @@ namespace BountyBanditsWorldEditor.Map
             Level newLvl = new Level();
             newLvl.number =int.Parse(node.GetElementsByTagName("number")[0].FirstChild.Value);
             newLvl.name = node.GetAttribute("name");
-            foreach (string singleAdj in node.GetElementsByTagName("adj")[0].FirstChild.Value.Split(','))
-                newLvl.adjacent.Add(Int32.Parse(singleAdj));
+            try
+            {
+                foreach (string singleAdj in node.GetElementsByTagName("adj")[0].FirstChild.Value.Split(','))
+                    newLvl.adjacent.Add(Int32.Parse(singleAdj));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("No adjacent levels? tsk tsk. " + e.StackTrace);
+            }
             XmlNodeList list = node.GetElementsByTagName("prereq");
             if (list.Count > 0 && list[0].FirstChild != null)
                 foreach (string singlePrereq in node.GetElementsByTagName("prereq")[0].FirstChild.Value.Split(','))

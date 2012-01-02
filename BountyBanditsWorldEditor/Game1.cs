@@ -182,7 +182,7 @@ namespace BountyBanditsWorldEditor
                                     item.sideLengths / textureDimensions,
                                 origin = scale * textureDimensions / 2;
                             spriteBatch.Draw(texture, new Vector2(item.loc.X - offset.X, resolution.ScreenHeight - (item.loc.Y-offset.Y)), 
-                                null, Color.White, 0f, origin, scale, SpriteEffects.None, 0f);
+                                null, Color.White, item.rotation, origin, scale, SpriteEffects.None, 0f);
                         }
                         else
                         {

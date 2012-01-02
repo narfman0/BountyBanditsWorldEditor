@@ -48,8 +48,6 @@ namespace BountyBanditsWorldEditor
                 foreach (GameItem item in level.items)
                 {
                     textWriter.WriteStartElement("item");
-                    textWriter.WriteElementString("name", item.name);
-                    textWriter.WriteElementString("loc", item.loc.X + "," + item.loc.Y);
                     if (item.name.Contains("enemies"))
                     {
                         textWriter.WriteElementString("count", item.startdepth.ToString());
@@ -58,6 +56,7 @@ namespace BountyBanditsWorldEditor
                     }
                     else
                     {
+                        textWriter.WriteAttributeString("rotation", item.rotation.ToString());
                         switch (item.polygonType)
                         {
                             case PhysicsPolygonType.Circle:
@@ -74,6 +73,8 @@ namespace BountyBanditsWorldEditor
                         textWriter.WriteElementString("startdepth", item.startdepth.ToString());
                         textWriter.WriteElementString("width", item.width.ToString());
                     }
+                    textWriter.WriteElementString("name", item.name);
+                    textWriter.WriteElementString("loc", item.loc.X + "," + item.loc.Y);
                     textWriter.WriteElementString("weight", item.weight.ToString());
                     textWriter.WriteEndElement();
                 }

@@ -92,6 +92,8 @@
             this.mapLevelTabControl = new System.Windows.Forms.TabControl();
             this.mapTab = new System.Windows.Forms.TabPage();
             this.levelTab = new System.Windows.Forms.TabPage();
+            this.rotationTextBox = new System.Windows.Forms.TextBox();
+            this.rotationLabel = new System.Windows.Forms.Label();
             this.mapPanel.SuspendLayout();
             this.levelEditorPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -384,6 +386,8 @@
             // 
             // itemTab
             // 
+            this.itemTab.Controls.Add(this.rotationLabel);
+            this.itemTab.Controls.Add(this.rotationTextBox);
             this.itemTab.Controls.Add(this.itemDepthSlider);
             this.itemTab.Controls.Add(this.itemSpawnButton);
             this.itemTab.Controls.Add(this.itemTextureText);
@@ -406,7 +410,7 @@
             // 
             // itemDepthSlider
             // 
-            this.itemDepthSlider.Location = new System.Drawing.Point(142, 128);
+            this.itemDepthSlider.Location = new System.Drawing.Point(142, 151);
             this.itemDepthSlider.Maximum = 4;
             this.itemDepthSlider.Minimum = 1;
             this.itemDepthSlider.Name = "itemDepthSlider";
@@ -416,7 +420,7 @@
             // 
             // itemSpawnButton
             // 
-            this.itemSpawnButton.Location = new System.Drawing.Point(142, 186);
+            this.itemSpawnButton.Location = new System.Drawing.Point(142, 202);
             this.itemSpawnButton.Name = "itemSpawnButton";
             this.itemSpawnButton.Size = new System.Drawing.Size(84, 23);
             this.itemSpawnButton.TabIndex = 40;
@@ -426,7 +430,7 @@
             // 
             // itemTextureText
             // 
-            this.itemTextureText.Location = new System.Drawing.Point(142, 48);
+            this.itemTextureText.Location = new System.Drawing.Point(142, 37);
             this.itemTextureText.Name = "itemTextureText";
             this.itemTextureText.Size = new System.Drawing.Size(84, 20);
             this.itemTextureText.TabIndex = 39;
@@ -435,7 +439,7 @@
             // itemSpawnLabel
             // 
             this.itemSpawnLabel.AutoSize = true;
-            this.itemSpawnLabel.Location = new System.Drawing.Point(6, 48);
+            this.itemSpawnLabel.Location = new System.Drawing.Point(6, 37);
             this.itemSpawnLabel.Name = "itemSpawnLabel";
             this.itemSpawnLabel.Size = new System.Drawing.Size(69, 13);
             this.itemSpawnLabel.TabIndex = 38;
@@ -444,7 +448,7 @@
             // depthLabel
             // 
             this.depthLabel.AutoSize = true;
-            this.depthLabel.Location = new System.Drawing.Point(6, 128);
+            this.depthLabel.Location = new System.Drawing.Point(6, 151);
             this.depthLabel.Name = "depthLabel";
             this.depthLabel.Size = new System.Drawing.Size(64, 13);
             this.depthLabel.TabIndex = 36;
@@ -453,7 +457,7 @@
             // weightLabel
             // 
             this.weightLabel.AutoSize = true;
-            this.weightLabel.Location = new System.Drawing.Point(6, 74);
+            this.weightLabel.Location = new System.Drawing.Point(6, 63);
             this.weightLabel.Name = "weightLabel";
             this.weightLabel.Size = new System.Drawing.Size(44, 13);
             this.weightLabel.TabIndex = 34;
@@ -461,7 +465,7 @@
             // 
             // itemWeightBox
             // 
-            this.itemWeightBox.Location = new System.Drawing.Point(142, 74);
+            this.itemWeightBox.Location = new System.Drawing.Point(142, 63);
             this.itemWeightBox.Name = "itemWeightBox";
             this.itemWeightBox.Size = new System.Drawing.Size(84, 20);
             this.itemWeightBox.TabIndex = 33;
@@ -469,7 +473,7 @@
             // 
             // itemRadiusText
             // 
-            this.itemRadiusText.Location = new System.Drawing.Point(142, 102);
+            this.itemRadiusText.Location = new System.Drawing.Point(142, 89);
             this.itemRadiusText.Name = "itemRadiusText";
             this.itemRadiusText.Size = new System.Drawing.Size(84, 20);
             this.itemRadiusText.TabIndex = 26;
@@ -478,7 +482,7 @@
             // itemRadiusLabel
             // 
             this.itemRadiusLabel.AutoSize = true;
-            this.itemRadiusLabel.Location = new System.Drawing.Point(6, 102);
+            this.itemRadiusLabel.Location = new System.Drawing.Point(6, 89);
             this.itemRadiusLabel.Name = "itemRadiusLabel";
             this.itemRadiusLabel.Size = new System.Drawing.Size(127, 13);
             this.itemRadiusLabel.TabIndex = 32;
@@ -487,7 +491,7 @@
             // itemImmovableBox
             // 
             this.itemImmovableBox.AutoSize = true;
-            this.itemImmovableBox.Location = new System.Drawing.Point(9, 189);
+            this.itemImmovableBox.Location = new System.Drawing.Point(9, 202);
             this.itemImmovableBox.Name = "itemImmovableBox";
             this.itemImmovableBox.Size = new System.Drawing.Size(77, 17);
             this.itemImmovableBox.TabIndex = 31;
@@ -497,7 +501,7 @@
             // polygonTypeLabel
             // 
             this.polygonTypeLabel.AutoSize = true;
-            this.polygonTypeLabel.Location = new System.Drawing.Point(6, 18);
+            this.polygonTypeLabel.Location = new System.Drawing.Point(6, 10);
             this.polygonTypeLabel.Name = "polygonTypeLabel";
             this.polygonTypeLabel.Size = new System.Drawing.Size(75, 13);
             this.polygonTypeLabel.TabIndex = 30;
@@ -509,7 +513,7 @@
             this.itemPolygonType.Items.AddRange(new object[] {
             "Rectangle",
             "Circle"});
-            this.itemPolygonType.Location = new System.Drawing.Point(142, 18);
+            this.itemPolygonType.Location = new System.Drawing.Point(142, 10);
             this.itemPolygonType.Name = "itemPolygonType";
             this.itemPolygonType.Size = new System.Drawing.Size(84, 21);
             this.itemPolygonType.TabIndex = 29;
@@ -738,6 +742,23 @@
             this.levelTab.Text = "Level";
             this.levelTab.UseVisualStyleBackColor = true;
             // 
+            // rotationTextBox
+            // 
+            this.rotationTextBox.Location = new System.Drawing.Point(142, 116);
+            this.rotationTextBox.Name = "rotationTextBox";
+            this.rotationTextBox.Size = new System.Drawing.Size(84, 20);
+            this.rotationTextBox.TabIndex = 42;
+            this.rotationTextBox.Text = "0";
+            // 
+            // rotationLabel
+            // 
+            this.rotationLabel.AutoSize = true;
+            this.rotationLabel.Location = new System.Drawing.Point(7, 116);
+            this.rotationLabel.Name = "rotationLabel";
+            this.rotationLabel.Size = new System.Drawing.Size(50, 13);
+            this.rotationLabel.TabIndex = 43;
+            this.rotationLabel.Text = "Rotation:";
+            // 
             // Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -836,5 +857,7 @@
         private System.Windows.Forms.TabPage mapTab;
         private System.Windows.Forms.TabPage levelTab;
         private System.Windows.Forms.Button deleteLevelButton;
+        private System.Windows.Forms.Label rotationLabel;
+        private System.Windows.Forms.TextBox rotationTextBox;
     }
 }
