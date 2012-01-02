@@ -108,6 +108,10 @@ namespace BountyBanditsWorldEditor
 
         private void maxOffsetBox_TextChanged(object sender, EventArgs e)
         {
+            maxOffsetChanged();
+        }
+
+        private void maxOffsetChanged(){
             this.offsetTrackBar.Maximum = int.Parse(this.maxOffsetBox.Text);
             this.offsetTrackBar.TickFrequency = this.offsetTrackBar.Maximum / 20;
         }
@@ -216,9 +220,11 @@ namespace BountyBanditsWorldEditor
             gameref.selectedLevelIndex = Math.Max(0, gameref.selectedLevelIndex);
         }
 
-        internal void setLevelEditorTabActive()
+        public void setLevelEditorTabActive()
         {
             mapLevelTabControl.SelectedTab = levelTab;
+            this.maxOffsetBox.Text = gameref.levels[gameref.selectedLevelIndex].levelLength.ToString();
+            maxOffsetChanged();
         }
     }
 }

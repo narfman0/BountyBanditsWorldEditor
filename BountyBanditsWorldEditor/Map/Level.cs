@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml;
 using Microsoft.Xna.Framework.Graphics;
 using BountyBanditsWorldEditor;
+using System.Windows.Forms;
 
 namespace BountyBanditsWorldEditor.Map
 {
@@ -37,7 +38,7 @@ namespace BountyBanditsWorldEditor.Map
             }
             catch (Exception e)
             {
-                Console.WriteLine("No adjacent levels? tsk tsk. " + e.StackTrace);
+                MessageBox.Show("No adjacent levels. Exception: " + e.StackTrace);
             }
             XmlNodeList list = node.GetElementsByTagName("prereq");
             if (list.Count > 0 && list[0].FirstChild != null)
