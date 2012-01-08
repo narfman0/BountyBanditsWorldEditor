@@ -26,6 +26,24 @@ namespace BountyBanditsWorldEditor.Map
         public List<SpawnPoint> spawns = new List<SpawnPoint>();
         #endregion
 
+        public GameItem getGameItemAtLocation(float x, float y)
+        {
+            foreach (GameItem item in items)
+                switch(item.polygonType)
+                {
+                    case PhysicsPolygonType.Circle:
+                        if ( Math.Pow(x - item.loc.X, 2) + Math.Pow(y - item.loc.Y, 2) < Math.Pow(item.radius, 2))
+                            return item;
+                        break;
+                    case PhysicsPolygonType.Rectangle:
+                        if (x < item.loc.X + item.sideLengths.X / 2 && x > item.loc.X - item.sideLengths.X / 2 &&
+                            y < item.loc.Y + item.sideLengths.Y / 2 && y > item.loc.Y - item.sideLengths.Y / 2)
+                            return item;
+                        break;
+                }
+            return null;
+        }
+
         public static Level fromXML(XmlElement node, Game gameref, String campaignPath)
         {
             Level newLvl = new Level();

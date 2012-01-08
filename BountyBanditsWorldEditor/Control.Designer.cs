@@ -57,6 +57,8 @@
             this.enemyWeightBox = new System.Windows.Forms.TextBox();
             this.enemyWeightLabel = new System.Windows.Forms.Label();
             this.itemTab = new System.Windows.Forms.TabPage();
+            this.rotationLabel = new System.Windows.Forms.Label();
+            this.itemRotationTextBox = new System.Windows.Forms.TextBox();
             this.itemDepthSlider = new System.Windows.Forms.TrackBar();
             this.itemSpawnButton = new System.Windows.Forms.Button();
             this.itemTextureText = new System.Windows.Forms.TextBox();
@@ -92,8 +94,8 @@
             this.mapLevelTabControl = new System.Windows.Forms.TabControl();
             this.mapTab = new System.Windows.Forms.TabPage();
             this.levelTab = new System.Windows.Forms.TabPage();
-            this.rotationTextBox = new System.Windows.Forms.TextBox();
-            this.rotationLabel = new System.Windows.Forms.Label();
+            this.itemWidthSlider = new System.Windows.Forms.TrackBar();
+            this.itemWidthLabel = new System.Windows.Forms.Label();
             this.mapPanel.SuspendLayout();
             this.levelEditorPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -105,6 +107,7 @@
             this.mapLevelTabControl.SuspendLayout();
             this.mapTab.SuspendLayout();
             this.levelTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemWidthSlider)).BeginInit();
             this.SuspendLayout();
             // 
             // newButton
@@ -292,7 +295,7 @@
             this.levelEditorPanel.Controls.Add(this.leveEditorTitleLabel);
             this.levelEditorPanel.Location = new System.Drawing.Point(6, 6);
             this.levelEditorPanel.Name = "levelEditorPanel";
-            this.levelEditorPanel.Size = new System.Drawing.Size(314, 406);
+            this.levelEditorPanel.Size = new System.Drawing.Size(314, 451);
             this.levelEditorPanel.TabIndex = 3;
             // 
             // tabControl1
@@ -303,7 +306,7 @@
             this.tabControl1.Location = new System.Drawing.Point(17, 83);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(279, 257);
+            this.tabControl1.Size = new System.Drawing.Size(279, 312);
             this.tabControl1.TabIndex = 17;
             // 
             // enemyTab
@@ -386,8 +389,10 @@
             // 
             // itemTab
             // 
+            this.itemTab.Controls.Add(this.itemWidthLabel);
+            this.itemTab.Controls.Add(this.itemWidthSlider);
             this.itemTab.Controls.Add(this.rotationLabel);
-            this.itemTab.Controls.Add(this.rotationTextBox);
+            this.itemTab.Controls.Add(this.itemRotationTextBox);
             this.itemTab.Controls.Add(this.itemDepthSlider);
             this.itemTab.Controls.Add(this.itemSpawnButton);
             this.itemTab.Controls.Add(this.itemTextureText);
@@ -403,10 +408,27 @@
             this.itemTab.Location = new System.Drawing.Point(4, 22);
             this.itemTab.Name = "itemTab";
             this.itemTab.Padding = new System.Windows.Forms.Padding(3);
-            this.itemTab.Size = new System.Drawing.Size(271, 231);
+            this.itemTab.Size = new System.Drawing.Size(271, 286);
             this.itemTab.TabIndex = 1;
             this.itemTab.Text = "Items";
             this.itemTab.UseVisualStyleBackColor = true;
+            // 
+            // rotationLabel
+            // 
+            this.rotationLabel.AutoSize = true;
+            this.rotationLabel.Location = new System.Drawing.Point(7, 116);
+            this.rotationLabel.Name = "rotationLabel";
+            this.rotationLabel.Size = new System.Drawing.Size(50, 13);
+            this.rotationLabel.TabIndex = 43;
+            this.rotationLabel.Text = "Rotation:";
+            // 
+            // itemRotationTextBox
+            // 
+            this.itemRotationTextBox.Location = new System.Drawing.Point(142, 116);
+            this.itemRotationTextBox.Name = "itemRotationTextBox";
+            this.itemRotationTextBox.Size = new System.Drawing.Size(84, 20);
+            this.itemRotationTextBox.TabIndex = 42;
+            this.itemRotationTextBox.Text = "0";
             // 
             // itemDepthSlider
             // 
@@ -420,7 +442,7 @@
             // 
             // itemSpawnButton
             // 
-            this.itemSpawnButton.Location = new System.Drawing.Point(142, 202);
+            this.itemSpawnButton.Location = new System.Drawing.Point(142, 251);
             this.itemSpawnButton.Name = "itemSpawnButton";
             this.itemSpawnButton.Size = new System.Drawing.Size(84, 23);
             this.itemSpawnButton.TabIndex = 40;
@@ -491,7 +513,7 @@
             // itemImmovableBox
             // 
             this.itemImmovableBox.AutoSize = true;
-            this.itemImmovableBox.Location = new System.Drawing.Point(9, 202);
+            this.itemImmovableBox.Location = new System.Drawing.Point(9, 251);
             this.itemImmovableBox.Name = "itemImmovableBox";
             this.itemImmovableBox.Size = new System.Drawing.Size(77, 17);
             this.itemImmovableBox.TabIndex = 31;
@@ -599,7 +621,7 @@
             // 
             // maxOffsetBox
             // 
-            this.maxOffsetBox.Location = new System.Drawing.Point(264, 356);
+            this.maxOffsetBox.Location = new System.Drawing.Point(258, 401);
             this.maxOffsetBox.Name = "maxOffsetBox";
             this.maxOffsetBox.Size = new System.Drawing.Size(45, 20);
             this.maxOffsetBox.TabIndex = 16;
@@ -609,7 +631,7 @@
             // maxoffsetLabel
             // 
             this.maxoffsetLabel.AutoSize = true;
-            this.maxoffsetLabel.Location = new System.Drawing.Point(228, 356);
+            this.maxoffsetLabel.Location = new System.Drawing.Point(222, 401);
             this.maxoffsetLabel.Name = "maxoffsetLabel";
             this.maxoffsetLabel.Size = new System.Drawing.Size(30, 13);
             this.maxoffsetLabel.TabIndex = 15;
@@ -618,7 +640,7 @@
             // offsetSliderLabel
             // 
             this.offsetSliderLabel.AutoSize = true;
-            this.offsetSliderLabel.Location = new System.Drawing.Point(8, 356);
+            this.offsetSliderLabel.Location = new System.Drawing.Point(2, 401);
             this.offsetSliderLabel.Name = "offsetSliderLabel";
             this.offsetSliderLabel.Size = new System.Drawing.Size(38, 13);
             this.offsetSliderLabel.TabIndex = 14;
@@ -626,7 +648,7 @@
             // 
             // offsetTrackBar
             // 
-            this.offsetTrackBar.Location = new System.Drawing.Point(52, 356);
+            this.offsetTrackBar.Location = new System.Drawing.Point(46, 401);
             this.offsetTrackBar.Maximum = 100;
             this.offsetTrackBar.Name = "offsetTrackBar";
             this.offsetTrackBar.Size = new System.Drawing.Size(165, 45);
@@ -636,7 +658,7 @@
             // 
             // acceptButton
             // 
-            this.acceptButton.Location = new System.Drawing.Point(223, 378);
+            this.acceptButton.Location = new System.Drawing.Point(217, 423);
             this.acceptButton.Name = "acceptButton";
             this.acceptButton.Size = new System.Drawing.Size(80, 23);
             this.acceptButton.TabIndex = 11;
@@ -717,7 +739,7 @@
             this.mapLevelTabControl.Location = new System.Drawing.Point(12, 42);
             this.mapLevelTabControl.Name = "mapLevelTabControl";
             this.mapLevelTabControl.SelectedIndex = 0;
-            this.mapLevelTabControl.Size = new System.Drawing.Size(335, 446);
+            this.mapLevelTabControl.Size = new System.Drawing.Size(335, 489);
             this.mapLevelTabControl.TabIndex = 6;
             // 
             // mapTab
@@ -737,33 +759,35 @@
             this.levelTab.Location = new System.Drawing.Point(4, 22);
             this.levelTab.Name = "levelTab";
             this.levelTab.Padding = new System.Windows.Forms.Padding(3);
-            this.levelTab.Size = new System.Drawing.Size(327, 420);
+            this.levelTab.Size = new System.Drawing.Size(327, 463);
             this.levelTab.TabIndex = 0;
             this.levelTab.Text = "Level";
             this.levelTab.UseVisualStyleBackColor = true;
             // 
-            // rotationTextBox
+            // itemWidthSlider
             // 
-            this.rotationTextBox.Location = new System.Drawing.Point(142, 116);
-            this.rotationTextBox.Name = "rotationTextBox";
-            this.rotationTextBox.Size = new System.Drawing.Size(84, 20);
-            this.rotationTextBox.TabIndex = 42;
-            this.rotationTextBox.Text = "0";
+            this.itemWidthSlider.Location = new System.Drawing.Point(142, 200);
+            this.itemWidthSlider.Maximum = 4;
+            this.itemWidthSlider.Minimum = 1;
+            this.itemWidthSlider.Name = "itemWidthSlider";
+            this.itemWidthSlider.Size = new System.Drawing.Size(84, 45);
+            this.itemWidthSlider.TabIndex = 44;
+            this.itemWidthSlider.Value = 1;
             // 
-            // rotationLabel
+            // itemWidthLabel
             // 
-            this.rotationLabel.AutoSize = true;
-            this.rotationLabel.Location = new System.Drawing.Point(7, 116);
-            this.rotationLabel.Name = "rotationLabel";
-            this.rotationLabel.Size = new System.Drawing.Size(50, 13);
-            this.rotationLabel.TabIndex = 43;
-            this.rotationLabel.Text = "Rotation:";
+            this.itemWidthLabel.AutoSize = true;
+            this.itemWidthLabel.Location = new System.Drawing.Point(9, 200);
+            this.itemWidthLabel.Name = "itemWidthLabel";
+            this.itemWidthLabel.Size = new System.Drawing.Size(38, 13);
+            this.itemWidthLabel.TabIndex = 45;
+            this.itemWidthLabel.Text = "Width:";
             // 
             // Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 501);
+            this.ClientSize = new System.Drawing.Size(359, 543);
             this.Controls.Add(this.mapLevelTabControl);
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.optionsButton);
@@ -787,6 +811,7 @@
             this.mapLevelTabControl.ResumeLayout(false);
             this.mapTab.ResumeLayout(false);
             this.levelTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.itemWidthSlider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -858,6 +883,8 @@
         private System.Windows.Forms.TabPage levelTab;
         private System.Windows.Forms.Button deleteLevelButton;
         private System.Windows.Forms.Label rotationLabel;
-        private System.Windows.Forms.TextBox rotationTextBox;
+        private System.Windows.Forms.TextBox itemRotationTextBox;
+        private System.Windows.Forms.Label itemWidthLabel;
+        private System.Windows.Forms.TrackBar itemWidthSlider;
     }
 }

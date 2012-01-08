@@ -49,11 +49,11 @@ namespace BountyBanditsWorldEditor
 
         public void switchState()
         {
-            updateLevelLoc();
+            updateCurrentPositionLabel();
             this.levelEditorPanel.Visible = !this.levelEditorPanel.Visible;
         }
 
-        public void updateLevelLoc()
+        public void updateCurrentPositionLabel()
         {
             this.currentPosTextLabel.Text = (gameref.currentLocation.X + gameref.offset.X) + "x   " + (gameref.currentLocation.Y + gameref.offset.Y) + "y";
         }
@@ -87,7 +87,7 @@ namespace BountyBanditsWorldEditor
 
         private void backgroundButton_Click(object sender, EventArgs e)
         {
-            gameref.levels[gameref.selectedLevelIndex].horizon = filechooserPicture();
+            gameref.CurrentLevel.horizon = filechooserPicture();
         }
         private string filechooserPicture(){
             OpenFileDialog openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -139,7 +139,7 @@ namespace BountyBanditsWorldEditor
             item.startdepth = uint.Parse(this.enemyCountBox.Text);
             item.weight = uint.Parse(this.enemyWeightBox.Text);
             item.loc = gameref.currentLocation + gameref.offset;
-            gameref.levels[gameref.selectedLevelIndex].items.Add(item);
+            gameref.CurrentLevel.items.Add(item);
         }
 
         private void itemSpawnButton_Click(object sender, EventArgs e)
@@ -163,10 +163,10 @@ namespace BountyBanditsWorldEditor
                 item.immovable = this.itemImmovableBox.Checked;
                 item.startdepth = (uint)this.itemDepthSlider.Value;
                 item.weight = uint.Parse(this.itemWeightBox.Text);
-                item.width = 1;
-                item.rotation = float.Parse(this.rotationTextBox.Text);
+                item.width = (uint)this.itemWidthSlider.Value;
+                item.rotation = float.Parse(this.itemRotationTextBox.Text);
                 item.loc = gameref.currentLocation + gameref.offset;
-                gameref.levels[gameref.selectedLevelIndex].items.Add(item);
+                gameref.CurrentLevel.items.Add(item);
             }
             catch (Exception exceptionSpawnItem)
             {
@@ -195,7 +195,7 @@ namespace BountyBanditsWorldEditor
             str.location = gameref.currentLocation + gameref.offset;
             str.rotation = float.Parse(backgroundRotationText.Text);
             str.scale = float.Parse(backgroundScaleField.Text);
-            gameref.levels[gameref.selectedLevelIndex].backgroundItems.Add(str);
+            gameref.CurrentLevel.backgroundItems.Add(str);
         }
 
         private void optionsButton_Click(object sender, EventArgs e)
@@ -223,8 +223,21 @@ namespace BountyBanditsWorldEditor
         public void setLevelEditorTabActive()
         {
             mapLevelTabControl.SelectedTab = levelTab;
-            this.maxOffsetBox.Text = gameref.levels[gameref.selectedLevelIndex].levelLength.ToString();
+            this.maxOffsetBox.Text = gameref.CurrentLevel.levelLength.ToString();
             maxOffsetChanged();
+        }
+
+        public void setGuiControls(GameItem item)
+        {
+            itemPolygonType.SelectedItem = item.polygonType;
+            itemTextureText.Text = item.name;
+            itemWeightBox.Text = item.weight.ToString();
+            itemRadiusText.Text = item.polygonType == PhysicsPolygonType.Circle ? item.radius.ToString() : 
+                item.sideLengths.X.ToString() + "," + item.sideLengths.Y.ToString();
+            itemRotationTextBox.Text = item.rotation.ToString();
+            itemDepthSlider.Value = (int)item.startdepth;
+            itemWidthSlider.Value = (int)item.width;
+            itemImmovableBox.Checked = item.immovable;
         }
     }
 }

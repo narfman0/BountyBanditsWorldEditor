@@ -40,6 +40,8 @@ namespace BountyBanditsWorldEditor
         private Options options;
         public Guid guid = Guid.Empty;
 
+        public Level CurrentLevel { get { return levels[selectedLevelIndex]; } }
+
         public Game1()
         {
             this.IsMouseVisible = true;
@@ -101,8 +103,17 @@ namespace BountyBanditsWorldEditor
                         ButtonState.Pressed != previousMouseState.LeftButton &&
                         Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
                     {
-                        currentLocation = new Vector2(Mouse.GetState().X, resolution.ScreenHeight-Mouse.GetState().Y);
-                        control.updateLevelLoc();
+                        currentLocation = new Vector2(Mouse.GetState().X, resolution.ScreenHeight - Mouse.GetState().Y);
+                        control.updateCurrentPositionLabel();
+                        if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
+                        {
+                            GameItem item = CurrentLevel.getGameItemAtLocation(currentLocation.X, currentLocation.Y);
+                            if (item != null)
+                            {
+                                CurrentLevel.items.Remove(item);
+                                control.setGuiControls(item);
+                            }
+                        }
                     }
                     break;
                 #endregion
@@ -155,7 +166,7 @@ namespace BountyBanditsWorldEditor
             {
                 #region Leveleditor
                 case Enums.State.Leveleditor:
-                    foreach (BackgroundItemStruct backgroundItem in levels[selectedLevelIndex].backgroundItems)
+                    foreach (BackgroundItemStruct backgroundItem in CurrentLevel.backgroundItems)
                     {
                         Texture2D texture = textureManager.getTexture(backgroundItem.texturePath);
                         if (texture != null)
@@ -167,7 +178,7 @@ namespace BountyBanditsWorldEditor
                                 null, Color.White, backgroundItem.rotation, origin, scale, SpriteEffects.None, 0f);
                         }
                     }
-                    foreach(GameItem item in levels[selectedLevelIndex].items)
+                    foreach(GameItem item in CurrentLevel.items)
                     {
                         Texture2D texture = textureManager.getTexture(item.name);
                         //if texture manager has item, draw with texture, otherwise hand draw with brush
