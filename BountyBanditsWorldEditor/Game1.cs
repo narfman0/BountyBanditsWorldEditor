@@ -28,11 +28,11 @@ namespace BountyBanditsWorldEditor
         public List<Level> levels;
         public int selectedLevelIndex;
         Control control;
-        public int timeSinceLastClick = 0;
         SpriteFont font;
         Enums.State currentState; private int timeSinceLastStateChange = 0;
         public string mapBackgroundPath;
         #endregion
+        private MouseState previousMouseState = Mouse.GetState();
         public Vector2 currentLocation, offset;
         public TextureManager textureManager;
         private PrimitiveLine brush;
@@ -97,8 +97,9 @@ namespace BountyBanditsWorldEditor
             {
                 #region Leveleditor
                 case Enums.State.Leveleditor:
-                    if (ButtonState.Pressed == Mouse.GetState().LeftButton && Environment.TickCount - timeSinceLastClick > 1000
-                        && Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
+                    if (ButtonState.Pressed == Mouse.GetState().LeftButton &&
+                        ButtonState.Pressed != previousMouseState.LeftButton &&
+                        Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
                     {
                         currentLocation = new Vector2(Mouse.GetState().X, resolution.ScreenHeight-Mouse.GetState().Y);
                         control.updateLevelLoc();
@@ -120,29 +121,25 @@ namespace BountyBanditsWorldEditor
                             indexOfClosestLevel = level.number;
                         }
                     }
-                    if (ButtonState.Pressed == Mouse.GetState().LeftButton && Environment.TickCount - timeSinceLastClick > 1000
-                        && Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
+                    if (ButtonState.Pressed == Mouse.GetState().LeftButton &&
+                        ButtonState.Pressed != previousMouseState.LeftButton &&
+                        Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
                     {
                         if (distance < DISTANCE_FOR_SELECTION)
                         {
                             control.setLevelInfo(levels[indexOfClosestLevel].loc.X, levels[indexOfClosestLevel].loc.Y,
                                 levels[indexOfClosestLevel].adjacent, levels[indexOfClosestLevel].prereq,
                                 levels[indexOfClosestLevel].name, levels[indexOfClosestLevel].number);
+                            selectedLevelIndex = indexOfClosestLevel;
+                            switchState();
                         }
                         else
                             addLevel();
-                        timeSinceLastClick = Environment.TickCount;
-                    }
-                    else if (ButtonState.Pressed == Mouse.GetState().LeftButton && Environment.TickCount - timeSinceLastClick > 200
-                        && Mouse.GetState().X > 0 && Mouse.GetState().Y > 0 && distance < DISTANCE_FOR_SELECTION)
-                    {
-                        switchState();
-                        selectedLevelIndex = indexOfClosestLevel;
-                        timeSinceLastClick = Environment.TickCount;
                     }
                     break;
                 #endregion
             }
+            previousMouseState = Mouse.GetState();
             base.Update(gameTime);
         }
 
