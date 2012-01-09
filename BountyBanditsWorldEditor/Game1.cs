@@ -145,8 +145,13 @@ namespace BountyBanditsWorldEditor
                             {
                                 levels.RemoveAt(indexOfClosestLevel);
                                 foreach (Level level in levels)
+                                {
                                     if (level.number >= indexOfClosestLevel)
                                         --level.number;
+                                    for (int i = 0; i < level.adjacent.Count; i++)
+                                        if (level.adjacent[i] == indexOfClosestLevel)
+                                            level.adjacent.RemoveAt(i);
+                                }
                                 selectedLevelIndex = 0;
                             }
                             else if (selectedLevelIndex == indexOfClosestLevel)
