@@ -1,0 +1,33 @@
+\documentclass[letterpaper]{article}
+
+\author{narfman0}
+\title{BountyBanditsWorldEditor Howto}
+
+\begin{document}
+\maketitle
+
+\section{Installation}
+\begin{enumerate}
+    \item Ensure XNA4.0 redistributable is installed
+    \item Grab and run the latest installer from:\\*
+https://github.com/narfman0/BountyBanditsWorldEditor/downloads
+\end{enumerate}
+
+\section{Usage}
+\subsection{Overview}
+The bounty bandits world editor has two main modes, world editing mode and level editing mode. The program starts in world editing mode, and after single clicking to create a level, then single clicking again on that level, one enters level editing mode. Note that there are three types of tasks to be done in level editing mode: enemy creation, game item instantiation, and background information.
+
+\subsection{World editing}
+The purpose of world editing is to populate the world with locations in which the players may fight. There will be many stages, each with a set of levels. To place a new level, simply click on an empty area in the world editor. A new level named "default" should appears. The level may have certain required levels 
+to beat before unlocking it, defined in the field "prereq levels," comma delimited. 
+
+Adjacent levels may be added so the user may navigate to and from the level. Level location determines where on the world map the level will appear, while the necessary field "level index" should be assigned a monotonically increasing integer starting from 0 (0, 1, 2, etc.). There is one world background given, which, after selecting "browse," will be silently saved with the world upon successful export.
+
+\subsection{Level editing}
+Levels have three groups of objects: enemies, game items, and backgrounds (quest and story related content not yet implemented). As a level is created and the level tab is selected, One may note the three tabs referencing the above items. Placing enemies and backgrounds is straightforward, though it is not displayed in the gui (todo). Items will render according to size, location, rotation, texture, etc. To delete an item, hold down ctrl and left click on an item. It should dissappear, while its attributed should appear in the game item spawning page. This is currently the simplest way to move an item.
+
+\subsection{Options}
+The user may define custom content directories. To do so, in the options menu, copy the full path of the directory in which the textures lie. The program will recursively scan everything in that directory, and when teh texture is used, should be rendered accordingly. Otherwise a white sillhouette should appear. One may add multiple directories, comma delimited.
+
+The user should run their content through an xna content compiler (like http://xnacontentcompiler.codeplex.com/) for best results.
+\end{document}
