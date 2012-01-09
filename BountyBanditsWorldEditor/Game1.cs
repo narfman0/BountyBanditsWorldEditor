@@ -221,6 +221,11 @@ namespace BountyBanditsWorldEditor
                                     brush.Render(spriteBatch);
                                     break;
                                 case PhysicsPolygonType.Circle:
+                                    brush.AddVector(new Vector2(item.loc.X - offset.X - item.radius, resolution.ScreenHeight - (item.loc.Y - offset.Y + item.radius)));
+                                    brush.AddVector(new Vector2(item.loc.X - offset.X + item.radius, resolution.ScreenHeight - (item.loc.Y - offset.Y + item.radius)));
+                                    brush.AddVector(new Vector2(item.loc.X - offset.X + item.radius, resolution.ScreenHeight - (item.loc.Y - offset.Y - item.radius)));
+                                    brush.AddVector(new Vector2(item.loc.X - offset.X - item.radius, resolution.ScreenHeight - (item.loc.Y - offset.Y - item.radius)));
+                                    brush.Render(spriteBatch);
                                     break;
                                 //case PhysicsPolygonType.Polygon:
                                 //    foreach (Vector2 vertex in item.vertices)
