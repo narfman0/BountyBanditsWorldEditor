@@ -103,7 +103,7 @@ namespace BountyBanditsWorldEditor
                         ButtonState.Pressed != previousMouseState.LeftButton &&
                         Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
                     {
-                        currentLocation = new Vector2(Mouse.GetState().X, resolution.ScreenHeight - Mouse.GetState().Y);
+                        currentLocation = new Vector2(Mouse.GetState().X + offset.X, resolution.ScreenHeight - (Mouse.GetState().Y + offset.Y));
                         control.updateCurrentPositionLabel();
                         if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
                         {
@@ -141,8 +141,18 @@ namespace BountyBanditsWorldEditor
                             control.setLevelInfo(levels[indexOfClosestLevel].loc.X, levels[indexOfClosestLevel].loc.Y,
                                 levels[indexOfClosestLevel].adjacent, levels[indexOfClosestLevel].prereq,
                                 levels[indexOfClosestLevel].name, levels[indexOfClosestLevel].number);
-                            selectedLevelIndex = indexOfClosestLevel;
-                            switchState();
+                            if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
+                            {
+                                levels.RemoveAt(indexOfClosestLevel);
+                                foreach (Level level in levels)
+                                    if (level.number >= indexOfClosestLevel)
+                                        --level.number;
+                                selectedLevelIndex = 0;
+                            }
+                            else if (selectedLevelIndex == indexOfClosestLevel)
+                                switchState();
+                            else
+                                selectedLevelIndex = indexOfClosestLevel;
                         }
                         else
                             addLevel();
@@ -247,9 +257,9 @@ namespace BountyBanditsWorldEditor
         {
             Level item = new Level();
             selectedLevelIndex = levels.Count;
+            item.number = selectedLevelIndex;
             item.loc.X = Mouse.GetState().X;
             item.loc.Y = Mouse.GetState().Y;
-            item.number = Level.totalLevels++;
             levels.Add(item);
             control.setLevelInfo(item.loc.X, item.loc.Y, item.name, item.number);
         }
@@ -260,7 +270,6 @@ namespace BountyBanditsWorldEditor
             offset = currentLocation = Vector2.Zero;
             currentState = Enums.State.Worldeditor;
             selectedLevelIndex = 0;
-            Level.totalLevels = 0;
             levels = new List<Level>();
         }
 
