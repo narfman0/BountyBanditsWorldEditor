@@ -55,7 +55,7 @@ namespace BountyBanditsWorldEditor
 
         public void updateCurrentPositionLabel()
         {
-            this.currentPosTextLabel.Text = (gameref.currentLocation.X + gameref.offset.X) + "x   " + (gameref.currentLocation.Y + gameref.offset.Y) + "y";
+            this.currentPosTextLabel.Text = gameref.currentLocation.X + "x   " + gameref.currentLocation.Y + "y";
         }
 
         private void updateLevelButton_Click(object sender, EventArgs e)
@@ -138,7 +138,7 @@ namespace BountyBanditsWorldEditor
             item.name = this.enemyTypeText.Text;
             item.startdepth = uint.Parse(this.enemyCountBox.Text);
             item.weight = uint.Parse(this.enemyWeightBox.Text);
-            item.loc = gameref.currentLocation + gameref.offset;
+            item.loc = gameref.currentLocation;
             gameref.CurrentLevel.items.Add(item);
         }
 
@@ -149,23 +149,20 @@ namespace BountyBanditsWorldEditor
             {
                 GameItem item = new GameItem();
                 item.name = this.itemTextureText.Text;
-                if (this.itemPolygonType.Text == "Circle")
-                {
+                item.polygonType = (PhysicsPolygonType)Enum.Parse(typeof(PhysicsPolygonType), this.itemPolygonType.Text);
+                if (item.polygonType == PhysicsPolygonType.Circle)
                     item.radius = uint.Parse(this.itemRadiusText.Text);
-                    item.polygonType = PhysicsPolygonType.Circle;
-                }
                 else
                 {
                     String[] sideLengths = this.itemRadiusText.Text.Split(',');
                     item.sideLengths = new Vector2(int.Parse(sideLengths[0]), int.Parse(sideLengths[1]));
-                    item.polygonType = PhysicsPolygonType.Rectangle;
                 }
                 item.immovable = this.itemImmovableBox.Checked;
                 item.startdepth = (uint)this.itemDepthSlider.Value;
                 item.weight = uint.Parse(this.itemWeightBox.Text);
                 item.width = (uint)this.itemWidthSlider.Value;
                 item.rotation = float.Parse(this.itemRotationTextBox.Text);
-                item.loc = gameref.currentLocation + gameref.offset;
+                item.loc = gameref.currentLocation;
                 gameref.CurrentLevel.items.Add(item);
             }
             catch (Exception exceptionSpawnItem)
@@ -192,7 +189,7 @@ namespace BountyBanditsWorldEditor
         {
             BackgroundItemStruct str = new BackgroundItemStruct();
             str.texturePath = backgroundTextureLabel.Text;
-            str.location = gameref.currentLocation + gameref.offset;
+            str.location = gameref.currentLocation;
             str.rotation = float.Parse(backgroundRotationText.Text);
             str.scale = float.Parse(backgroundScaleField.Text);
             gameref.CurrentLevel.backgroundItems.Add(str);
@@ -229,7 +226,7 @@ namespace BountyBanditsWorldEditor
 
         public void setGuiControls(GameItem item)
         {
-            itemPolygonType.SelectedItem = item.polygonType;
+            itemPolygonType.SelectedItem = item.polygonType.ToString();
             itemTextureText.Text = item.name;
             itemWeightBox.Text = item.weight.ToString();
             itemRadiusText.Text = item.polygonType == PhysicsPolygonType.Circle ? item.radius.ToString() : 
