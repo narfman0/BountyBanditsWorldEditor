@@ -57,6 +57,8 @@
             this.enemyWeightBox = new System.Windows.Forms.TextBox();
             this.enemyWeightLabel = new System.Windows.Forms.Label();
             this.itemTab = new System.Windows.Forms.TabPage();
+            this.itemWidthLabel = new System.Windows.Forms.Label();
+            this.itemWidthSlider = new System.Windows.Forms.TrackBar();
             this.rotationLabel = new System.Windows.Forms.Label();
             this.itemRotationTextBox = new System.Windows.Forms.TextBox();
             this.itemDepthSlider = new System.Windows.Forms.TrackBar();
@@ -94,20 +96,18 @@
             this.mapLevelTabControl = new System.Windows.Forms.TabControl();
             this.mapTab = new System.Windows.Forms.TabPage();
             this.levelTab = new System.Windows.Forms.TabPage();
-            this.itemWidthSlider = new System.Windows.Forms.TrackBar();
-            this.itemWidthLabel = new System.Windows.Forms.Label();
             this.mapPanel.SuspendLayout();
             this.levelEditorPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.enemyTab.SuspendLayout();
             this.itemTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemWidthSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemDepthSlider)).BeginInit();
             this.backgroundTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.offsetTrackBar)).BeginInit();
             this.mapLevelTabControl.SuspendLayout();
             this.mapTab.SuspendLayout();
             this.levelTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.itemWidthSlider)).BeginInit();
             this.SuspendLayout();
             // 
             // newButton
@@ -321,7 +321,7 @@
             this.enemyTab.Location = new System.Drawing.Point(4, 22);
             this.enemyTab.Name = "enemyTab";
             this.enemyTab.Padding = new System.Windows.Forms.Padding(3);
-            this.enemyTab.Size = new System.Drawing.Size(271, 231);
+            this.enemyTab.Size = new System.Drawing.Size(271, 286);
             this.enemyTab.TabIndex = 0;
             this.enemyTab.Text = "Enemies";
             this.enemyTab.UseVisualStyleBackColor = true;
@@ -413,6 +413,25 @@
             this.itemTab.Text = "Items";
             this.itemTab.UseVisualStyleBackColor = true;
             // 
+            // itemWidthLabel
+            // 
+            this.itemWidthLabel.AutoSize = true;
+            this.itemWidthLabel.Location = new System.Drawing.Point(9, 200);
+            this.itemWidthLabel.Name = "itemWidthLabel";
+            this.itemWidthLabel.Size = new System.Drawing.Size(38, 13);
+            this.itemWidthLabel.TabIndex = 45;
+            this.itemWidthLabel.Text = "Width:";
+            // 
+            // itemWidthSlider
+            // 
+            this.itemWidthSlider.Location = new System.Drawing.Point(142, 200);
+            this.itemWidthSlider.Maximum = 4;
+            this.itemWidthSlider.Minimum = 1;
+            this.itemWidthSlider.Name = "itemWidthSlider";
+            this.itemWidthSlider.Size = new System.Drawing.Size(84, 45);
+            this.itemWidthSlider.TabIndex = 44;
+            this.itemWidthSlider.Value = 1;
+            // 
             // rotationLabel
             // 
             this.rotationLabel.AutoSize = true;
@@ -433,12 +452,10 @@
             // itemDepthSlider
             // 
             this.itemDepthSlider.Location = new System.Drawing.Point(142, 151);
-            this.itemDepthSlider.Maximum = 4;
-            this.itemDepthSlider.Minimum = 1;
+            this.itemDepthSlider.Maximum = 3;
             this.itemDepthSlider.Name = "itemDepthSlider";
             this.itemDepthSlider.Size = new System.Drawing.Size(84, 45);
             this.itemDepthSlider.TabIndex = 41;
-            this.itemDepthSlider.Value = 1;
             // 
             // itemSpawnButton
             // 
@@ -553,7 +570,7 @@
             this.backgroundTab.Controls.Add(this.backgroundTextureLabel);
             this.backgroundTab.Location = new System.Drawing.Point(4, 22);
             this.backgroundTab.Name = "backgroundTab";
-            this.backgroundTab.Size = new System.Drawing.Size(271, 231);
+            this.backgroundTab.Size = new System.Drawing.Size(271, 286);
             this.backgroundTab.TabIndex = 2;
             this.backgroundTab.Text = "Background";
             this.backgroundTab.UseVisualStyleBackColor = true;
@@ -748,7 +765,7 @@
             this.mapTab.Location = new System.Drawing.Point(4, 22);
             this.mapTab.Name = "mapTab";
             this.mapTab.Padding = new System.Windows.Forms.Padding(3);
-            this.mapTab.Size = new System.Drawing.Size(327, 420);
+            this.mapTab.Size = new System.Drawing.Size(327, 463);
             this.mapTab.TabIndex = 1;
             this.mapTab.Text = "Map";
             this.mapTab.UseVisualStyleBackColor = true;
@@ -763,25 +780,6 @@
             this.levelTab.TabIndex = 0;
             this.levelTab.Text = "Level";
             this.levelTab.UseVisualStyleBackColor = true;
-            // 
-            // itemWidthSlider
-            // 
-            this.itemWidthSlider.Location = new System.Drawing.Point(142, 200);
-            this.itemWidthSlider.Maximum = 4;
-            this.itemWidthSlider.Minimum = 1;
-            this.itemWidthSlider.Name = "itemWidthSlider";
-            this.itemWidthSlider.Size = new System.Drawing.Size(84, 45);
-            this.itemWidthSlider.TabIndex = 44;
-            this.itemWidthSlider.Value = 1;
-            // 
-            // itemWidthLabel
-            // 
-            this.itemWidthLabel.AutoSize = true;
-            this.itemWidthLabel.Location = new System.Drawing.Point(9, 200);
-            this.itemWidthLabel.Name = "itemWidthLabel";
-            this.itemWidthLabel.Size = new System.Drawing.Size(38, 13);
-            this.itemWidthLabel.TabIndex = 45;
-            this.itemWidthLabel.Text = "Width:";
             // 
             // Control
             // 
@@ -804,6 +802,7 @@
             this.enemyTab.PerformLayout();
             this.itemTab.ResumeLayout(false);
             this.itemTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemWidthSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemDepthSlider)).EndInit();
             this.backgroundTab.ResumeLayout(false);
             this.backgroundTab.PerformLayout();
@@ -811,7 +810,6 @@
             this.mapLevelTabControl.ResumeLayout(false);
             this.mapTab.ResumeLayout(false);
             this.levelTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.itemWidthSlider)).EndInit();
             this.ResumeLayout(false);
 
         }
