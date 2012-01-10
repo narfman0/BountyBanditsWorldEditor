@@ -33,6 +33,7 @@ namespace BountyBanditsWorldEditor
         public string mapBackgroundPath;
         #endregion
         private MouseState previousMouseState = Mouse.GetState();
+        private GameItem movingItem;
         public Vector2 currentLocation, offset;
         public TextureManager textureManager;
         private PrimitiveLine brush;
@@ -99,12 +100,29 @@ namespace BountyBanditsWorldEditor
             {
                 #region Leveleditor
                 case Enums.State.Leveleditor:
+                    Vector2 currentLocation = new Vector2(Mouse.GetState().X + offset.X, resolution.ScreenHeight - (Mouse.GetState().Y + offset.Y));
+                    #region Moving gameitem
                     if (ButtonState.Pressed == Mouse.GetState().LeftButton &&
                         ButtonState.Pressed != previousMouseState.LeftButton &&
                         Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
                     {
-                        currentLocation = new Vector2(Mouse.GetState().X + offset.X, resolution.ScreenHeight - (Mouse.GetState().Y + offset.Y));
+                        this.currentLocation = currentLocation;
                         control.updateCurrentPositionLabel();
+                        if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
+                            movingItem = CurrentLevel.getGameItemAtLocation(currentLocation.X, currentLocation.Y);
+                    }
+                    if (ButtonState.Pressed == Mouse.GetState().LeftButton &&
+                        movingItem != null && Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
+                        movingItem.loc = currentLocation;
+                    if (ButtonState.Pressed != Mouse.GetState().LeftButton &&
+                        ButtonState.Pressed == previousMouseState.LeftButton &&
+                        Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
+                        movingItem = null;
+                    #endregion
+                    if (ButtonState.Pressed == Mouse.GetState().RightButton &&
+                        ButtonState.Pressed != previousMouseState.RightButton &&
+                        Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
+                    {
                         if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
                         {
                             GameItem item = CurrentLevel.getGameItemAtLocation(currentLocation.X, currentLocation.Y);
