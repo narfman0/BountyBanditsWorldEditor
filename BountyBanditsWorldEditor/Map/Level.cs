@@ -24,6 +24,7 @@ namespace BountyBanditsWorldEditor.Map
         public List<GameItem> items = new List<GameItem>();
         public List<SpawnPoint> spawns = new List<SpawnPoint>();
         #endregion
+        private const float DEFAULT_DIMENSION = 64f;
 
         public GameItem getGameItemAtLocation(float x, float y)
         {
@@ -41,6 +42,36 @@ namespace BountyBanditsWorldEditor.Map
                         break;
                 }
             return null;
+        }
+
+        public SpawnPoint getSpawnAtLocation(float x, float y, Game1 gameref)
+        {
+            foreach (SpawnPoint spawn in spawns)
+            {
+                Vector2 dimensions = getDimensions(spawn.name, gameref);
+                if (x < spawn.loc.X + dimensions.X && x > spawn.loc.X - dimensions.X &&
+                    y < spawn.loc.Y + dimensions.Y && y > spawn.loc.Y - dimensions.Y)
+                    return spawn;
+            }
+            return null;
+        }
+
+        public BackgroundItemStruct? getBackgroundItemAtLocation(float x, float y, Game1 gameref)
+        {
+            foreach (BackgroundItemStruct str in backgroundItems)
+            {
+                Vector2 dimensions = getDimensions(str.texturePath, gameref);
+                if (x < str.location.X + dimensions.X && x > str.location.X - dimensions.X &&
+                    y < str.location.Y + dimensions.Y && y > str.location.Y - dimensions.Y)
+                    return str;
+            }
+            return null;
+        }
+
+        private Vector2 getDimensions(string texName, Game1 gameref)
+        {
+            Texture2D tex = gameref.textureManager.getTexture(texName);
+            return new Vector2(tex != null ? tex.Width : DEFAULT_DIMENSION, tex != null ? tex.Height : DEFAULT_DIMENSION);
         }
 
         public static Level fromXML(XmlElement node, Game gameref, String campaignPath)

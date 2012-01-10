@@ -134,17 +134,23 @@ namespace BountyBanditsWorldEditor
 
         private void enemySpawnButton_Click(object sender, EventArgs e)
         {
-            GameItem item = new GameItem();
-            item.name = this.enemyTypeText.Text;
-            item.startdepth = uint.Parse(this.enemyCountBox.Text);
-            item.weight = uint.Parse(this.enemyWeightBox.Text);
-            item.loc = gameref.currentLocation;
-            gameref.CurrentLevel.items.Add(item);
+            try
+            {
+                SpawnPoint spawn = new SpawnPoint();
+                spawn.count = uint.Parse(enemyCountBox.Text);
+                spawn.name = enemyTypeText.Text;
+                spawn.weight = uint.Parse(enemyWeightBox.Text);
+                spawn.loc = gameref.currentLocation;
+                gameref.CurrentLevel.spawns.Add(spawn);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception from spawn point:\n" + ex.StackTrace);
+            }
         }
 
         private void itemSpawnButton_Click(object sender, EventArgs e)
         {
-
             try
             {
                 GameItem item = new GameItem();
@@ -167,7 +173,7 @@ namespace BountyBanditsWorldEditor
             }
             catch (Exception exceptionSpawnItem)
             {
-                MessageBox.Show("Exception from game item: " + exceptionSpawnItem.StackTrace);
+                MessageBox.Show("Exception from game item:\n" + exceptionSpawnItem.StackTrace);
             }
         }
 
@@ -235,6 +241,20 @@ namespace BountyBanditsWorldEditor
             itemDepthSlider.Value = (int)item.startdepth;
             itemWidthSlider.Value = (int)item.width;
             itemImmovableBox.Checked = item.immovable;
+        }
+
+        public void setGuiControls(SpawnPoint spawn)
+        {
+            enemyCountBox.Text = spawn.count.ToString();
+            enemyTypeText.Text = spawn.name.ToString();
+            enemyWeightBox.Text = spawn.weight.ToString();
+        }
+
+        public void setGuiControls(BackgroundItemStruct backgroundItemStruct)
+        {
+            backgroundRotationText.Text = backgroundItemStruct.rotation.ToString();
+            backgroundScaleField.Text = backgroundItemStruct.scale.ToString();
+            backgroundTextureField.Text = backgroundItemStruct.texturePath;
         }
     }
 }

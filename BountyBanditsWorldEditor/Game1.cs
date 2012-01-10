@@ -33,13 +33,17 @@ namespace BountyBanditsWorldEditor
         public string mapBackgroundPath;
         #endregion
         private MouseState previousMouseState = Mouse.GetState();
-        private GameItem movingItem;
         public Vector2 currentLocation, offset;
         public TextureManager textureManager;
         private PrimitiveLine brush;
         private Resolution resolution;
         private Options options;
         public Guid guid = Guid.Empty;
+        #region Moving items
+        private GameItem movingItem;
+        private SpawnPoint movingSpawn;
+        private BackgroundItemStruct movingBackgroundItem;
+        #endregion
 
         public Level CurrentLevel { get { return levels[selectedLevelIndex]; } }
 
@@ -110,15 +114,31 @@ namespace BountyBanditsWorldEditor
                         control.updateCurrentPositionLabel();
                         if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
                             movingItem = CurrentLevel.getGameItemAtLocation(currentLocation.X, currentLocation.Y);
+                        else if (Keyboard.GetState().IsKeyDown(Keys.LeftAlt))
+                            movingSpawn = CurrentLevel.getSpawnAtLocation(currentLocation.X, currentLocation.Y, this);
+                        else if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+                        {
+                            BackgroundItemStruct? str = CurrentLevel.getBackgroundItemAtLocation(currentLocation.X, currentLocation.Y, this);
+                            if(str.HasValue)
+                                movingBackgroundItem = str.Value;
+                        }
                     }
-                    if (ButtonState.Pressed == Mouse.GetState().LeftButton &&
-                        movingItem != null && Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
-                        movingItem.loc = currentLocation;
+                    if (ButtonState.Pressed == Mouse.GetState().LeftButton && 
+                        Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
+                    {
+                        if (movingItem != null)             movingItem.loc = currentLocation;
+                        if (movingSpawn != null)            movingSpawn.loc = currentLocation;
+                        movingBackgroundItem.location = currentLocation;
+                    }
                     if (ButtonState.Pressed != Mouse.GetState().LeftButton &&
                         ButtonState.Pressed == previousMouseState.LeftButton &&
                         Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
+                    {
                         movingItem = null;
+                        movingSpawn = null;
+                    }
                     #endregion
+                    #region Remove level item
                     if (ButtonState.Pressed == Mouse.GetState().RightButton &&
                         ButtonState.Pressed != previousMouseState.RightButton &&
                         Mouse.GetState().X > 0 && Mouse.GetState().Y > 0)
@@ -132,7 +152,26 @@ namespace BountyBanditsWorldEditor
                                 control.setGuiControls(item);
                             }
                         }
+                        if (Keyboard.GetState().IsKeyDown(Keys.LeftAlt))
+                        {
+                            SpawnPoint spawn = CurrentLevel.getSpawnAtLocation(currentLocation.X, currentLocation.Y, this);
+                            if (spawn != null)
+                            {
+                                CurrentLevel.spawns.Remove(spawn);
+                                control.setGuiControls(spawn);
+                            }
+                        }
+                        if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+                        {
+                            BackgroundItemStruct? str = CurrentLevel.getBackgroundItemAtLocation(currentLocation.X, currentLocation.Y, this);
+                            if (str.HasValue)
+                            {
+                                CurrentLevel.backgroundItems.Remove(str.Value);
+                                control.setGuiControls(str.Value);
+                            }
+                        }
                     }
+                    #endregion
                     break;
                 #endregion
                 #region Worldeditor
@@ -199,18 +238,30 @@ namespace BountyBanditsWorldEditor
             {
                 #region Leveleditor
                 case Enums.State.Leveleditor:
+                    #region Draw background items
                     foreach (BackgroundItemStruct backgroundItem in CurrentLevel.backgroundItems)
                     {
                         Texture2D texture = textureManager.getTexture(backgroundItem.texturePath);
-                        if (texture != null)
-                        {
-                            Vector2 textureDimensions = new Vector2(texture.Width, texture.Height),
-                                    scale = new Vector2(backgroundItem.scale),
-                                    origin = scale * textureDimensions / 2;
-                            spriteBatch.Draw(texture, new Vector2(backgroundItem.location.X - offset.X, resolution.ScreenHeight - (backgroundItem.location.Y-offset.Y)),
-                                null, Color.White, backgroundItem.rotation, origin, scale, SpriteEffects.None, 0f);
-                        }
+                        if (texture == null)
+                            texture = textureManager.getTexture("backgrnditem");
+                        Vector2 textureDimensions = new Vector2(texture.Width, texture.Height),
+                                scale = new Vector2(backgroundItem.scale),
+                                origin = scale * textureDimensions / 2;
+                        spriteBatch.Draw(texture, new Vector2(backgroundItem.location.X - offset.X, resolution.ScreenHeight - (backgroundItem.location.Y-offset.Y)),
+                            null, Color.White, backgroundItem.rotation, origin, scale, SpriteEffects.None, 0f);
                     }
+                    #endregion
+                    #region Draw spawns
+                    foreach (SpawnPoint spawn in CurrentLevel.spawns)
+                    {
+                        Texture2D texture = textureManager.getTexture(spawn.name);
+                        if (texture == null)
+                            texture = textureManager.getTexture("enemy");
+                        spriteBatch.Draw(texture, new Vector2(spawn.loc.X - offset.X, resolution.ScreenHeight - (spawn.loc.Y - offset.Y)),
+                            null, Color.White, 0f, new Vector2(texture.Width/2, texture.Height/2), 1f, SpriteEffects.None, 0f);
+                    }
+                    #endregion
+                    #region Draw game items
                     foreach(GameItem item in CurrentLevel.items)
                     {
                         Texture2D texture = textureManager.getTexture(item.name);
@@ -253,6 +304,7 @@ namespace BountyBanditsWorldEditor
                             }
                         }
                     }
+                    #endregion
                     break;
                 #endregion
                 #region worldeditor

@@ -63,6 +63,7 @@ namespace BountyBanditsWorldEditor
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 guid = Guid.NewGuid();
             }
         }
