@@ -21,6 +21,7 @@ namespace BountyBanditsWorldEditor
                 textWriter.WriteStartElement("level");
                 textWriter.WriteAttributeString("length", level.levelLength.ToString());
                 textWriter.WriteAttributeString("name", level.name);
+                textWriter.WriteAttributeString("autoProgress", level.autoProgress.ToString());
                 string adj = "";
                 foreach (int adjint in level.adjacent)
                 {

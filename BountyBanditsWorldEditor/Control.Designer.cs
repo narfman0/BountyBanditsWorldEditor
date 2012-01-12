@@ -96,6 +96,7 @@
             this.mapLevelTabControl = new System.Windows.Forms.TabControl();
             this.mapTab = new System.Windows.Forms.TabPage();
             this.levelTab = new System.Windows.Forms.TabPage();
+            this.autoProgressCheckBox = new System.Windows.Forms.CheckBox();
             this.mapPanel.SuspendLayout();
             this.levelEditorPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -282,6 +283,7 @@
             // levelEditorPanel
             // 
             this.levelEditorPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.levelEditorPanel.Controls.Add(this.autoProgressCheckBox);
             this.levelEditorPanel.Controls.Add(this.tabControl1);
             this.levelEditorPanel.Controls.Add(this.maxOffsetBox);
             this.levelEditorPanel.Controls.Add(this.maxoffsetLabel);
@@ -781,6 +783,16 @@
             this.levelTab.Text = "Level";
             this.levelTab.UseVisualStyleBackColor = true;
             // 
+            // autoProgressCheckBox
+            // 
+            this.autoProgressCheckBox.AutoSize = true;
+            this.autoProgressCheckBox.Location = new System.Drawing.Point(140, 4);
+            this.autoProgressCheckBox.Name = "autoProgressCheckBox";
+            this.autoProgressCheckBox.Size = new System.Drawing.Size(92, 17);
+            this.autoProgressCheckBox.TabIndex = 18;
+            this.autoProgressCheckBox.Text = "Auto Progress";
+            this.autoProgressCheckBox.UseVisualStyleBackColor = true;
+            // 
             // Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -884,5 +896,6 @@
         private System.Windows.Forms.TextBox itemRotationTextBox;
         private System.Windows.Forms.Label itemWidthLabel;
         private System.Windows.Forms.TrackBar itemWidthSlider;
+        private System.Windows.Forms.CheckBox autoProgressCheckBox;
     }
 }

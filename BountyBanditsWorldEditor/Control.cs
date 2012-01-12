@@ -20,9 +20,10 @@ namespace BountyBanditsWorldEditor
             InitializeComponent();
             this.levelEditorPanel.Visible = false;
         }
-        public void setLevelInfo(float locX, float locY, List<int> adj, List<int> prereqs, string levelName, int levelIndex)
+        public void setLevelInfo(float locX, float locY, List<int> adj, List<int> prereqs, string levelName,
+            int levelIndex, bool autoProgress)
         {
-            setLevelInfo(locX, locY, levelName, levelIndex);
+            setLevelInfo(locX, locY, levelName, levelIndex, autoProgress);
             for (int index = 0; index < prereqs.Count; index++)
             {
                 this.prereqLevelsBox.Text = this.prereqLevelsBox.Text + prereqs[index];
@@ -37,7 +38,7 @@ namespace BountyBanditsWorldEditor
             }
         }
 
-        public void setLevelInfo(float locX, float locY, string levelName, int levelIndex)
+        public void setLevelInfo(float locX, float locY, string levelName, int levelIndex, bool autoProgress)
         {
             this.levelIndexBox.Text = levelIndex.ToString();
             this.locXBox.Text = locX.ToString();
@@ -45,6 +46,7 @@ namespace BountyBanditsWorldEditor
             this.adjacentLevelsBox.Clear();
             this.prereqLevelsBox.Clear();
             this.levelNameBox.Text = levelName;
+            this.autoProgressCheckBox.Checked = autoProgress;
         }
 
         public void switchState()
@@ -72,7 +74,8 @@ namespace BountyBanditsWorldEditor
                 if(prereqstr!="")
                     prereq.Add(int.Parse(prereqstr));
 
-            gameref.updateLevel(float.Parse(this.locXBox.Text), float.Parse(this.locYBox.Text), adjacent, prereq, this.levelNameBox.Text, int.Parse(this.levelIndexBox.Text));
+            gameref.updateLevel(float.Parse(this.locXBox.Text), float.Parse(this.locYBox.Text), 
+                adjacent, prereq, this.levelNameBox.Text, int.Parse(this.levelIndexBox.Text), autoProgressCheckBox.Checked);
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -120,6 +123,7 @@ namespace BountyBanditsWorldEditor
         {
             gameref.switchState();
             mapLevelTabControl.SelectedTab = mapTab;
+            updateLevelButton_Click(sender, e);
         }
 
         private void saveButton_Click(object sender, EventArgs e)

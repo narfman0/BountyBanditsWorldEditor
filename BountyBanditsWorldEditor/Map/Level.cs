@@ -20,6 +20,7 @@ namespace BountyBanditsWorldEditor.Map
         public Vector2 loc = Vector2.Zero;
         #endregion
         #region In game specific
+        public bool autoProgress = false;
         public string horizon;
         public List<GameItem> items = new List<GameItem>();
         public List<SpawnPoint> spawns = new List<SpawnPoint>();
@@ -77,7 +78,9 @@ namespace BountyBanditsWorldEditor.Map
         public static Level fromXML(XmlElement node, Game gameref, String campaignPath)
         {
             Level newLvl = new Level();
-            newLvl.number =int.Parse(node.GetElementsByTagName("number")[0].FirstChild.Value);
+            newLvl.number = int.Parse(node.GetElementsByTagName("number")[0].FirstChild.Value);
+            if (node.HasAttribute("autoProgress"))
+                newLvl.autoProgress = bool.Parse(node.GetAttribute("autoProgress"));
             newLvl.name = node.GetAttribute("name");
             try
             {

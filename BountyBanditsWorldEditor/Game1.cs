@@ -197,7 +197,8 @@ namespace BountyBanditsWorldEditor
                         {
                             control.setLevelInfo(levels[indexOfClosestLevel].loc.X, levels[indexOfClosestLevel].loc.Y,
                                 levels[indexOfClosestLevel].adjacent, levels[indexOfClosestLevel].prereq,
-                                levels[indexOfClosestLevel].name, levels[indexOfClosestLevel].number);
+                                levels[indexOfClosestLevel].name, levels[indexOfClosestLevel].number, 
+                                levels[indexOfClosestLevel].autoProgress);
                             if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
                             {
                                 levels.RemoveAt(indexOfClosestLevel);
@@ -340,7 +341,7 @@ namespace BountyBanditsWorldEditor
             item.loc.X = Mouse.GetState().X;
             item.loc.Y = Mouse.GetState().Y;
             levels.Add(item);
-            control.setLevelInfo(item.loc.X, item.loc.Y, item.name, item.number);
+            control.setLevelInfo(item.loc.X, item.loc.Y, item.name, item.number, false);
         }
 
         public void newMap()
@@ -352,13 +353,14 @@ namespace BountyBanditsWorldEditor
             levels = new List<Level>();
         }
 
-        public void updateLevel(float locx, float locy, List<int> adjacent, List<int> prereqs, string name, int number)
+        public void updateLevel(float locx, float locy, List<int> adjacent, List<int> prereqs, string name, int number, bool autoProgress)
         {
             levels[number].loc.X = locx;
             levels[number].loc.Y = locy;
             levels[number].name = name;
             levels[number].adjacent = adjacent;
             levels[number].prereq = prereqs;
+            levels[number].autoProgress = autoProgress;
         }
 
         public void switchState()
