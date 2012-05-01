@@ -49,34 +49,39 @@ namespace BountyBanditsWorldEditor
                 foreach (GameItem item in level.items)
                 {
                     textWriter.WriteStartElement("item");
-                    if (item.name.Contains("enemies"))
+                    textWriter.WriteAttributeString("rotation", item.rotation.ToString());
+                    switch (item.polygonType)
                     {
-                        textWriter.WriteElementString("count", item.startdepth.ToString());
-                        textWriter.WriteElementString("bosses", item.width.ToString());
-                        textWriter.WriteElementString("type", item.radius.ToString());
+                        case PhysicsPolygonType.Circle:
+                            textWriter.WriteElementString("radius", item.radius.ToString());
+                            break;
+                        case PhysicsPolygonType.Rectangle:
+                            textWriter.WriteStartElement("sideLengths");
+                            textWriter.WriteElementString("x", item.sideLengths.X.ToString());
+                            textWriter.WriteElementString("y", item.sideLengths.Y.ToString());
+                            textWriter.WriteEndElement();
+                            break;
                     }
-                    else
-                    {
-                        textWriter.WriteAttributeString("rotation", item.rotation.ToString());
-                        switch (item.polygonType)
-                        {
-                            case PhysicsPolygonType.Circle:
-                                textWriter.WriteElementString("radius", item.radius.ToString());
-                                break;
-                            case PhysicsPolygonType.Rectangle:
-                                textWriter.WriteStartElement("sideLengths");
-                                textWriter.WriteElementString("x", item.sideLengths.X.ToString());
-                                textWriter.WriteElementString("y", item.sideLengths.Y.ToString());
-                                textWriter.WriteEndElement();
-                                break;
-                        }
-                        textWriter.WriteElementString("immovable", item.immovable.ToString());
-                        textWriter.WriteElementString("startdepth", item.startdepth.ToString());
-                        textWriter.WriteElementString("width", item.width.ToString());
-                    }
+                    textWriter.WriteElementString("immovable", item.immovable.ToString());
+                    textWriter.WriteElementString("startdepth", item.startdepth.ToString());
+                    textWriter.WriteElementString("width", item.width.ToString());
                     textWriter.WriteElementString("name", item.name);
                     textWriter.WriteElementString("loc", item.loc.X + "," + item.loc.Y);
                     textWriter.WriteElementString("weight", item.weight.ToString());
+                    textWriter.WriteEndElement();
+                }
+                textWriter.WriteEndElement();
+
+                textWriter.WriteStartElement("spawns");
+                foreach (SpawnPoint spawn in level.spawns)
+                {
+                    textWriter.WriteStartElement("enemy");
+                    textWriter.WriteElementString("count", spawn.count.ToString());
+                    textWriter.WriteElementString("bosses", spawn.bosses.ToString());
+                    textWriter.WriteElementString("type", spawn.type.ToString());
+                    textWriter.WriteElementString("name", spawn.name.ToString());
+                    textWriter.WriteElementString("weight", spawn.weight.ToString());
+                    textWriter.WriteElementString("loc", spawn.loc.X.ToString() + "," + spawn.loc.Y.ToString());
                     textWriter.WriteEndElement();
                 }
                 textWriter.WriteEndElement();

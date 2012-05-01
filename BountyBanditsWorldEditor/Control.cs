@@ -143,6 +143,7 @@ namespace BountyBanditsWorldEditor
                 SpawnPoint spawn = new SpawnPoint();
                 spawn.count = uint.Parse(enemyCountBox.Text);
                 spawn.name = enemyTypeText.Text;
+                spawn.type = enemyTypeText.Text;
                 spawn.weight = uint.Parse(enemyWeightBox.Text);
                 spawn.loc = gameref.currentLocation;
                 gameref.CurrentLevel.spawns.Add(spawn);
