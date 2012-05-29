@@ -255,7 +255,7 @@ namespace BountyBanditsWorldEditor
                     #region Draw spawns
                     foreach (SpawnPoint spawn in CurrentLevel.spawns)
                     {
-                        Texture2D texture = textureManager.getTexture(spawn.name);
+                        Texture2D texture = textureManager.getTexture(spawn.type);
                         if (texture == null)
                             texture = textureManager.getTexture("enemy");
                         spriteBatch.Draw(texture, new Vector2(spawn.loc.X - offset.X, resolution.ScreenHeight - (spawn.loc.Y - offset.Y)),

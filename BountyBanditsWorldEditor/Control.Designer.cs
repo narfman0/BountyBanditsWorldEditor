@@ -47,15 +47,20 @@
             this.levelNameBox = new System.Windows.Forms.TextBox();
             this.selectedLevelLabel = new System.Windows.Forms.Label();
             this.levelEditorPanel = new System.Windows.Forms.Panel();
+            this.autoProgressCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.enemyTab = new System.Windows.Forms.TabPage();
+            this.enemyTriggerWidthTextbox = new System.Windows.Forms.TextBox();
+            this.enemyTriggerWidthLabel = new System.Windows.Forms.Label();
+            this.enemyTriggerLocationTextbox = new System.Windows.Forms.TextBox();
+            this.enemyTriggerLocationLabel = new System.Windows.Forms.Label();
             this.enemyCountLabel = new System.Windows.Forms.Label();
             this.enemyCountBox = new System.Windows.Forms.TextBox();
             this.enemySpawnButton = new System.Windows.Forms.Button();
             this.enemyTypeText = new System.Windows.Forms.TextBox();
             this.enemyTypeLabel = new System.Windows.Forms.Label();
-            this.enemyWeightBox = new System.Windows.Forms.TextBox();
-            this.enemyWeightLabel = new System.Windows.Forms.Label();
+            this.enemyLevelTextfield = new System.Windows.Forms.TextBox();
+            this.enemyLevelLabel = new System.Windows.Forms.Label();
             this.itemTab = new System.Windows.Forms.TabPage();
             this.itemWidthLabel = new System.Windows.Forms.Label();
             this.itemWidthSlider = new System.Windows.Forms.TrackBar();
@@ -96,7 +101,6 @@
             this.mapLevelTabControl = new System.Windows.Forms.TabControl();
             this.mapTab = new System.Windows.Forms.TabPage();
             this.levelTab = new System.Windows.Forms.TabPage();
-            this.autoProgressCheckBox = new System.Windows.Forms.CheckBox();
             this.mapPanel.SuspendLayout();
             this.levelEditorPanel.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -300,6 +304,16 @@
             this.levelEditorPanel.Size = new System.Drawing.Size(314, 451);
             this.levelEditorPanel.TabIndex = 3;
             // 
+            // autoProgressCheckBox
+            // 
+            this.autoProgressCheckBox.AutoSize = true;
+            this.autoProgressCheckBox.Location = new System.Drawing.Point(140, 4);
+            this.autoProgressCheckBox.Name = "autoProgressCheckBox";
+            this.autoProgressCheckBox.Size = new System.Drawing.Size(92, 17);
+            this.autoProgressCheckBox.TabIndex = 18;
+            this.autoProgressCheckBox.Text = "Auto Progress";
+            this.autoProgressCheckBox.UseVisualStyleBackColor = true;
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.enemyTab);
@@ -313,13 +327,17 @@
             // 
             // enemyTab
             // 
+            this.enemyTab.Controls.Add(this.enemyTriggerWidthTextbox);
+            this.enemyTab.Controls.Add(this.enemyTriggerWidthLabel);
+            this.enemyTab.Controls.Add(this.enemyTriggerLocationTextbox);
+            this.enemyTab.Controls.Add(this.enemyTriggerLocationLabel);
             this.enemyTab.Controls.Add(this.enemyCountLabel);
             this.enemyTab.Controls.Add(this.enemyCountBox);
             this.enemyTab.Controls.Add(this.enemySpawnButton);
             this.enemyTab.Controls.Add(this.enemyTypeText);
             this.enemyTab.Controls.Add(this.enemyTypeLabel);
-            this.enemyTab.Controls.Add(this.enemyWeightBox);
-            this.enemyTab.Controls.Add(this.enemyWeightLabel);
+            this.enemyTab.Controls.Add(this.enemyLevelTextfield);
+            this.enemyTab.Controls.Add(this.enemyLevelLabel);
             this.enemyTab.Location = new System.Drawing.Point(4, 22);
             this.enemyTab.Name = "enemyTab";
             this.enemyTab.Padding = new System.Windows.Forms.Padding(3);
@@ -327,6 +345,40 @@
             this.enemyTab.TabIndex = 0;
             this.enemyTab.Text = "Enemies";
             this.enemyTab.UseVisualStyleBackColor = true;
+            // 
+            // enemyTriggerWidthTextbox
+            // 
+            this.enemyTriggerWidthTextbox.Location = new System.Drawing.Point(98, 113);
+            this.enemyTriggerWidthTextbox.Name = "enemyTriggerWidthTextbox";
+            this.enemyTriggerWidthTextbox.Size = new System.Drawing.Size(92, 20);
+            this.enemyTriggerWidthTextbox.TabIndex = 47;
+            this.enemyTriggerWidthTextbox.Text = "64";
+            // 
+            // enemyTriggerWidthLabel
+            // 
+            this.enemyTriggerWidthLabel.AutoSize = true;
+            this.enemyTriggerWidthLabel.Location = new System.Drawing.Point(6, 112);
+            this.enemyTriggerWidthLabel.Name = "enemyTriggerWidthLabel";
+            this.enemyTriggerWidthLabel.Size = new System.Drawing.Size(74, 13);
+            this.enemyTriggerWidthLabel.TabIndex = 46;
+            this.enemyTriggerWidthLabel.Text = "Trigger Width:";
+            // 
+            // enemyTriggerLocationTextbox
+            // 
+            this.enemyTriggerLocationTextbox.Location = new System.Drawing.Point(98, 86);
+            this.enemyTriggerLocationTextbox.Name = "enemyTriggerLocationTextbox";
+            this.enemyTriggerLocationTextbox.Size = new System.Drawing.Size(92, 20);
+            this.enemyTriggerLocationTextbox.TabIndex = 45;
+            this.enemyTriggerLocationTextbox.Text = "100,1";
+            // 
+            // enemyTriggerLocationLabel
+            // 
+            this.enemyTriggerLocationLabel.AutoSize = true;
+            this.enemyTriggerLocationLabel.Location = new System.Drawing.Point(6, 86);
+            this.enemyTriggerLocationLabel.Name = "enemyTriggerLocationLabel";
+            this.enemyTriggerLocationLabel.Size = new System.Drawing.Size(87, 13);
+            this.enemyTriggerLocationLabel.TabIndex = 44;
+            this.enemyTriggerLocationLabel.Text = "Trigger Location:";
             // 
             // enemyCountLabel
             // 
@@ -339,7 +391,7 @@
             // 
             // enemyCountBox
             // 
-            this.enemyCountBox.Location = new System.Drawing.Point(73, 59);
+            this.enemyCountBox.Location = new System.Drawing.Point(98, 59);
             this.enemyCountBox.Name = "enemyCountBox";
             this.enemyCountBox.Size = new System.Drawing.Size(92, 20);
             this.enemyCountBox.TabIndex = 42;
@@ -347,7 +399,7 @@
             // 
             // enemySpawnButton
             // 
-            this.enemySpawnButton.Location = new System.Drawing.Point(73, 85);
+            this.enemySpawnButton.Location = new System.Drawing.Point(98, 139);
             this.enemySpawnButton.Name = "enemySpawnButton";
             this.enemySpawnButton.Size = new System.Drawing.Size(92, 23);
             this.enemySpawnButton.TabIndex = 41;
@@ -357,7 +409,7 @@
             // 
             // enemyTypeText
             // 
-            this.enemyTypeText.Location = new System.Drawing.Point(73, 6);
+            this.enemyTypeText.Location = new System.Drawing.Point(98, 6);
             this.enemyTypeText.Name = "enemyTypeText";
             this.enemyTypeText.Size = new System.Drawing.Size(92, 20);
             this.enemyTypeText.TabIndex = 29;
@@ -372,22 +424,22 @@
             this.enemyTypeLabel.TabIndex = 29;
             this.enemyTypeLabel.Text = "Type: ";
             // 
-            // enemyWeightBox
+            // enemyLevelTextfield
             // 
-            this.enemyWeightBox.Location = new System.Drawing.Point(73, 32);
-            this.enemyWeightBox.Name = "enemyWeightBox";
-            this.enemyWeightBox.Size = new System.Drawing.Size(92, 20);
-            this.enemyWeightBox.TabIndex = 29;
-            this.enemyWeightBox.Text = "10";
+            this.enemyLevelTextfield.Location = new System.Drawing.Point(98, 32);
+            this.enemyLevelTextfield.Name = "enemyLevelTextfield";
+            this.enemyLevelTextfield.Size = new System.Drawing.Size(92, 20);
+            this.enemyLevelTextfield.TabIndex = 29;
+            this.enemyLevelTextfield.Text = "10";
             // 
-            // enemyWeightLabel
+            // enemyLevelLabel
             // 
-            this.enemyWeightLabel.AutoSize = true;
-            this.enemyWeightLabel.Location = new System.Drawing.Point(6, 32);
-            this.enemyWeightLabel.Name = "enemyWeightLabel";
-            this.enemyWeightLabel.Size = new System.Drawing.Size(44, 13);
-            this.enemyWeightLabel.TabIndex = 26;
-            this.enemyWeightLabel.Text = "Weight:";
+            this.enemyLevelLabel.AutoSize = true;
+            this.enemyLevelLabel.Location = new System.Drawing.Point(6, 32);
+            this.enemyLevelLabel.Name = "enemyLevelLabel";
+            this.enemyLevelLabel.Size = new System.Drawing.Size(36, 13);
+            this.enemyLevelLabel.TabIndex = 26;
+            this.enemyLevelLabel.Text = "Level:";
             // 
             // itemTab
             // 
@@ -783,16 +835,6 @@
             this.levelTab.Text = "Level";
             this.levelTab.UseVisualStyleBackColor = true;
             // 
-            // autoProgressCheckBox
-            // 
-            this.autoProgressCheckBox.AutoSize = true;
-            this.autoProgressCheckBox.Location = new System.Drawing.Point(140, 4);
-            this.autoProgressCheckBox.Name = "autoProgressCheckBox";
-            this.autoProgressCheckBox.Size = new System.Drawing.Size(92, 17);
-            this.autoProgressCheckBox.TabIndex = 18;
-            this.autoProgressCheckBox.Text = "Auto Progress";
-            this.autoProgressCheckBox.UseVisualStyleBackColor = true;
-            // 
             // Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -860,8 +902,8 @@
         private System.Windows.Forms.TabPage enemyTab;
         private System.Windows.Forms.TextBox enemyTypeText;
         private System.Windows.Forms.Label enemyTypeLabel;
-        private System.Windows.Forms.TextBox enemyWeightBox;
-        private System.Windows.Forms.Label enemyWeightLabel;
+        private System.Windows.Forms.TextBox enemyLevelTextfield;
+        private System.Windows.Forms.Label enemyLevelLabel;
         private System.Windows.Forms.TabPage itemTab;
         private System.Windows.Forms.TrackBar itemDepthSlider;
         private System.Windows.Forms.Button itemSpawnButton;
@@ -897,5 +939,9 @@
         private System.Windows.Forms.Label itemWidthLabel;
         private System.Windows.Forms.TrackBar itemWidthSlider;
         private System.Windows.Forms.CheckBox autoProgressCheckBox;
+        private System.Windows.Forms.TextBox enemyTriggerWidthTextbox;
+        private System.Windows.Forms.Label enemyTriggerWidthLabel;
+        private System.Windows.Forms.TextBox enemyTriggerLocationTextbox;
+        private System.Windows.Forms.Label enemyTriggerLocationLabel;
     }
 }

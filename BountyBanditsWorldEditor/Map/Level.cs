@@ -49,7 +49,7 @@ namespace BountyBanditsWorldEditor.Map
         {
             foreach (SpawnPoint spawn in spawns)
             {
-                Vector2 dimensions = getDimensions(spawn.name, gameref);
+                Vector2 dimensions = getDimensions(spawn.type, gameref);
                 if (x < spawn.loc.X + dimensions.X && x > spawn.loc.X - dimensions.X &&
                     y < spawn.loc.Y + dimensions.Y && y > spawn.loc.Y - dimensions.Y)
                     return spawn;
@@ -82,36 +82,25 @@ namespace BountyBanditsWorldEditor.Map
             if (node.HasAttribute("autoProgress"))
                 newLvl.autoProgress = bool.Parse(node.GetAttribute("autoProgress"));
             newLvl.name = node.GetAttribute("name");
-            try
-            {
-                foreach (string singleAdj in node.GetElementsByTagName("adj")[0].FirstChild.Value.Split(','))
-                    newLvl.adjacent.Add(Int32.Parse(singleAdj));
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("No adjacent levels. Exception: " + e.StackTrace);
-            }
+            foreach (string singleAdj in node.GetElementsByTagName("adj")[0].FirstChild.Value.Split(','))
+                newLvl.adjacent.Add(Int32.Parse(singleAdj));
             XmlNodeList list = node.GetElementsByTagName("prereq");
             if (list.Count > 0 && list[0].FirstChild != null)
                 foreach (string singlePrereq in node.GetElementsByTagName("prereq")[0].FirstChild.Value.Split(','))
                     newLvl.prereq.Add(Int32.Parse(singlePrereq));
             newLvl.loc = XMLUtil.fromXMLVector2(node.GetElementsByTagName("location")[0]);
-            newLvl.horizon = node.GetElementsByTagName("horizonPath")[0].FirstChild.Value;
-            foreach (XmlElement item in node.GetElementsByTagName("items")[0].ChildNodes)
-            {
-                string name = "";
-                foreach (XmlNode itemChild in item.ChildNodes)
-                    if (itemChild.Name.Equals("name"))
-                        name = itemChild.FirstChild.Value;
-                if (name.Equals("enemies"))
-                    newLvl.spawns.Add(SpawnPoint.fromXML(item));
-                else
+            if (node.GetElementsByTagName("horizonPath").Count > 0)
+                newLvl.horizon = node.GetElementsByTagName("horizonPath")[0].FirstChild.Value;
+            if (node.GetElementsByTagName("items").Count > 0)
+                foreach (XmlElement item in node.GetElementsByTagName("items")[0].ChildNodes)
                     newLvl.items.Add(GameItem.fromXML(item));
-            }
-            //XmlNodeList storyNodes = node.GetElementsByTagName("story");
-            //if(storyNodes.Count>0 && storyNodes[0].ChildNodes.Count>0)
-            //    foreach (XmlNode item in storyNodes[0].ChildNodes)
-            //        newLvl.storyElements.Add(StoryElement.fromXML(item, gameref));
+            if (node.GetElementsByTagName("spawns").Count > 0)
+                foreach (XmlElement item in node.GetElementsByTagName("spawns")[0].ChildNodes)
+                    newLvl.spawns.Add(SpawnPoint.fromXML(item));
+            /*XmlNodeList storyNodes = node.GetElementsByTagName("story");
+            if (storyNodes.Count > 0 && storyNodes[0].ChildNodes.Count > 0)
+                foreach (XmlNode item in storyNodes[0].ChildNodes)
+                    newLvl.storyElements.Add(StoryElement.fromXML(item, gameref));*/
             newLvl.levelLength = int.Parse(node.GetAttribute("length"));
             foreach (XmlElement graphic in node.GetElementsByTagName("graphic"))
                 newLvl.backgroundItems.Add(BackgroundItemStruct.fromXML(graphic));

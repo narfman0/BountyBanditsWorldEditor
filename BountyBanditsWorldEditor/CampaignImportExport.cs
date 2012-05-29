@@ -30,7 +30,8 @@ namespace BountyBanditsWorldEditor
                         adj += ",";
                 }
                 textWriter.WriteElementString("adj", adj.ToString());
-                textWriter.WriteElementString("horizonPath", level.horizon);
+                if(level.horizon != null && !level.horizon.Equals(""))
+                    textWriter.WriteElementString("horizonPath", level.horizon);
                 textWriter.WriteStartElement("background");
                 foreach (BackgroundItemStruct str in level.backgroundItems)
                 {
@@ -79,9 +80,10 @@ namespace BountyBanditsWorldEditor
                     textWriter.WriteElementString("count", spawn.count.ToString());
                     textWriter.WriteElementString("bosses", spawn.bosses.ToString());
                     textWriter.WriteElementString("type", spawn.type.ToString());
-                    textWriter.WriteElementString("name", spawn.name.ToString());
-                    textWriter.WriteElementString("weight", spawn.weight.ToString());
+                    textWriter.WriteElementString("level", spawn.level.ToString());
                     textWriter.WriteElementString("loc", spawn.loc.X.ToString() + "," + spawn.loc.Y.ToString());
+                    textWriter.WriteElementString("triggerLocation", spawn.triggerLocation.X.ToString() + "," + spawn.triggerLocation.Y.ToString());
+                    textWriter.WriteElementString("triggerWidth", spawn.triggerWidth.ToString());
                     textWriter.WriteEndElement();
                 }
                 textWriter.WriteEndElement();

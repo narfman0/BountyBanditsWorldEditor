@@ -140,12 +140,14 @@ namespace BountyBanditsWorldEditor
         {
             try
             {
+                string[] locStr = enemyTriggerLocationTextbox.Text.Split(',');
                 SpawnPoint spawn = new SpawnPoint();
                 spawn.count = uint.Parse(enemyCountBox.Text);
-                spawn.name = enemyTypeText.Text;
                 spawn.type = enemyTypeText.Text;
-                spawn.weight = uint.Parse(enemyWeightBox.Text);
+                spawn.level = uint.Parse(enemyLevelTextfield.Text);
                 spawn.loc = gameref.currentLocation;
+                spawn.triggerLocation = new Vector2(float.Parse(locStr[0]), float.Parse(locStr[1]));
+                spawn.triggerWidth = uint.Parse(enemyTriggerWidthTextbox.Text);
                 gameref.CurrentLevel.spawns.Add(spawn);
             }
             catch (Exception ex)
@@ -251,8 +253,8 @@ namespace BountyBanditsWorldEditor
         public void setGuiControls(SpawnPoint spawn)
         {
             enemyCountBox.Text = spawn.count.ToString();
-            enemyTypeText.Text = spawn.name.ToString();
-            enemyWeightBox.Text = spawn.weight.ToString();
+            enemyTypeText.Text = spawn.type.ToString();
+            enemyLevelTextfield.Text = spawn.level.ToString();
         }
 
         public void setGuiControls(BackgroundItemStruct backgroundItemStruct)
